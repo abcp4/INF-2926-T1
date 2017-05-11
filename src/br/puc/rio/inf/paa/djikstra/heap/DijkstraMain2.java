@@ -1,7 +1,12 @@
-package br.puc.rio.inf.paa.djikstra.array;
+package br.puc.rio.inf.paa.djikstra.heap;
 
 import java.util.*;
-public class DijkstraMain {
+
+import br.puc.rio.inf.paa.djikstra.array.DijkstraSolution;
+import br.puc.rio.inf.paa.djikstra.array.DijkstraStore;
+import br.puc.rio.inf.paa.djikstra.array.Edge;
+import br.puc.rio.inf.paa.djikstra.array.GraphInstance;
+public class DijkstraMain2 {
 	
 	public static void main(String[] args){
 		
@@ -13,14 +18,14 @@ public class DijkstraMain {
 		
 		
 	    graph.put(1, Arrays.asList(e1, e2));//1 --> 7, 3
-	    graph.put(7, Arrays.asList(e2, e3));//7 --> 3, 4
+	    graph.put(2, Arrays.asList(e2, e3));//7 --> 3, 4
 	    graph.put(3, Arrays.asList());
 	    graph.put(4, Arrays.asList());
 
 	    GraphInstance instance = new GraphInstance(graph);
-	    DijkstraStore vectorStore = new DijkstraVectorStore();
+	    DijkstraStore vectorStore = new DijkstraFibonacciStore();
 	    
-	    DijkstraSolution solution = instance.dijkstra(1,  vectorStore);
+	    DijkstraSolution solution = instance.dijkstra(1, vectorStore);
 	    
 	    
 	    for(int i = 0; i< vectorStore.marked.length; i++){
