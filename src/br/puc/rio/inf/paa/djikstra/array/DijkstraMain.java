@@ -1,6 +1,10 @@
 package br.puc.rio.inf.paa.djikstra.array;
 
+import java.time.Duration;
+import java.time.Instant;
 import java.util.*;
+
+import br.puc.rio.inf.paa.file.ReadFile;
 public class DijkstraMain {
 	
 	public static void main(String[] args){
@@ -20,9 +24,39 @@ public class DijkstraMain {
 	    GraphInstance instance = new GraphInstance(graph);
 	    DijkstraVectorStore vectorStore = new DijkstraVectorStore();
 	    
-	    DijkstraSolution solution = instance.dijkstra(1,  vectorStore);
-	    
-	    
+        
+	    String file =  "../INF-2926/input/alue2087.stp";
+		
+		ReadFile readFile = new ReadFile(file);
+		GraphInstance graphInstance = readFile.CreateInstance();
+	   
+	    Instant start = Instant.now(); 
+	    long timeout = Duration.between(start , start).getSeconds() + 5;
+		long durationTime = Duration.between(start, start).getSeconds();  
+	    long count = 0;
+		while(true){
+	    	
+	    	
+            if(durationTime > timeout){
+            	break;
+            }
+                
+             
+	    	DijkstraSolution solution = graphInstance.dijkstra(1,  vectorStore);
+	    	
+	    	Instant stop = Instant.now(); 
+	    	System.out.println("stop" + stop);
+	        
+	    	durationTime = Duration.between( start , stop).getSeconds();
+	        System.out.println("durationTime" + durationTime);
+            count ++;
+	    }
+		
+		
+		 
+		System.out.println("Quantidade de vezes: " + count);
+		System.out.println("Tempo medio: " + String.format("%.4f", (double)(durationTime/count)) );
+		
 	    for(int i = 0; i< vectorStore.marked.length; i++){
 	    	
 	 	    if(vectorStore.marked[i]){
