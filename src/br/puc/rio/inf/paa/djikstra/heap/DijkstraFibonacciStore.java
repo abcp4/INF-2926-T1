@@ -97,4 +97,10 @@ public class DijkstraFibonacciStore extends DijkstraStore {
 
 	}
 
+	@Override
+	public int getMin(GraphInstance g) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }

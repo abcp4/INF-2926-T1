@@ -13,6 +13,8 @@ public abstract class DijkstraStore{
 	//Get the node with min cost 
 	public abstract int getMin();
 	
+	public abstract int getMin(GraphInstance g);
+	
 	//Relax edge (v, w)
 	public abstract void relax(int v, int w, int lvw);
 	
