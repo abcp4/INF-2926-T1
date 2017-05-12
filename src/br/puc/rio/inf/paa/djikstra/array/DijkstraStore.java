@@ -3,7 +3,7 @@ package br.puc.rio.inf.paa.djikstra.array;
 public abstract class DijkstraStore{ 
 	
 	//Return the list of dj
-	int[] costs;
+	protected int[] costs;
 	
 	//Return the mct 
 	int[] tree; 

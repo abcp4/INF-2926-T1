@@ -1,50 +1,56 @@
 package br.puc.rio.inf.paa.djikstra.heap;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.LinkedList;
+import java.util.HashMap;
 import java.util.List;
-
 
 import br.puc.rio.inf.paa.djikstra.array.DijkstraStore;
 import br.puc.rio.inf.paa.djikstra.array.GraphInstance;
 import br.puc.rio.inf.paa.djikstra.heap.FibonacciHeap.Entry;
 
-
 public class DijkstraFibonacciStore extends DijkstraStore {
 
 	FibonacciHeap<FibonacciNodeValue> heap;
-	List<Entry<FibonacciNodeValue>> nodesRef;
+	HashMap<Integer, FibonacciNodeValue> nodesRef;
+	//Entry<FibonacciNodeValue>[] nodesRef;
+	int costs[];
 	int[] tree;
 	int nodesMarked = 0;
-	
-	
+
+	public DijkstraFibonacciStore() {
+		heap = new FibonacciHeap<FibonacciNodeValue>();
+	}
+
 	public void buildStore(GraphInstance g, int start) {
 		tree = new int[g.graph.size()];
-		heap = new FibonacciHeap<>();
-		nodesRef = new ArrayList<Entry<FibonacciNodeValue>>(Collections.nCopies(g.graph.size()+1,null));
-	
+		costs = new int[g.graph.size()];
+		nodesRef = new HashMap(g.graph.size());
+		
 		for (int item : g.graph.keySet()) {
-			System.out.println(nodesRef.size());
+			// System.out.println(nodesRef.size());
 
-	         if (item != start){
-                FibonacciNodeValue node = new FibonacciNodeValue(Integer.MAX_VALUE, item);
-               // System.out.println(node.distance);
-               // System.out.println(heap.enqueue(node,Integer.MAX_VALUE).getValue().node);	
-                Entry<FibonacciNodeValue> parent = heap.enqueue(node,Integer.MAX_VALUE);
-              //  System.out.println(nodesRef.size());
-                nodesRef.set(item, parent);
-               
-                }else{
-                FibonacciNodeValue node = new FibonacciNodeValue(0, start);
-                Entry<FibonacciNodeValue> parent = heap.enqueue(node, 0);
-                tree[start] = -1;
-                nodesRef.set(start, parent);
-            }
-        }
-		
-		
+			if (item != start) {
+
+				FibonacciNodeValue node = new FibonacciNodeValue(Integer.MAX_VALUE, item);
+				Entry<FibonacciNodeValue> parent = heap.enqueue(node, Integer.MAX_VALUE);
+				
+				
+				nodesRef[item] = parent;
+				costs[item] = Integer.MAX_VALUE;
+				// FibonacciNodeValue node = new
+				// FibonacciNodeValue(Integer.MAX_VALUE, item);
+				// Entry<FibonacciNodeValue> parent =
+				// heap.enqueue(node,Integer.MAX_VALUE);
+				// nodesRef.set(item, parent);
+
+			} else {
+				FibonacciNodeValue node = new FibonacciNodeValue(0, start);
+				Entry<FibonacciNodeValue> parent = heap.enqueue(node, 0);
+				tree[start] = -1;
+				nodesRef[start] = parent;
+			}
+		}
+
 	}
 
 	public int getMin() {
@@ -53,27 +59,25 @@ public class DijkstraFibonacciStore extends DijkstraStore {
 	}
 
 	public void relax(int v, int w, int lvw) {
-		if (nodesRef.get(v).getValue().distance != Integer.MAX_VALUE
-				&& nodesRef.get(v).getValue().distance + lvw < nodesRef.get(w).getValue().distance) {
-			
-			nodesRef.get(w).getValue().distance = nodesRef.get(v).getValue().distance + lvw;
+		if (nodesRef[v].getValue().distance != Integer.MAX_VALUE
+				&& nodesRef[v].getValue().distance + lvw < nodesRef[w].getValue().distance) {
+
+			nodesRef[w].getValue().distance = nodesRef[v].getValue().distance + lvw;
 			tree[w] = v;
-            Entry<FibonacciNodeValue> result = nodesRef.get(w);
-            result.setValue(new FibonacciNodeValue(nodesRef.get(w).getValue().distance, nodesRef.get(w).getValue().node));
+			Entry<FibonacciNodeValue> result = nodesRef[w];
+			result.setValue(
+					new FibonacciNodeValue(nodesRef[w].getValue().distance, nodesRef[w].getValue().node));
 
-            heap.decreaseKey(result, nodesRef.get(w).getValue().distance);
+			heap.decreaseKey(result, nodesRef[w].getValue().distance);
 
-		
-	
 		}
 	}
 
-	
 	public int[] getCosts() {
 
 		int[] costs = new int[tree.length];
-		for (int i = 0; i < nodesRef.size(); i++) {
-			costs[i] = nodesRef.get(i).getValue().distance;
+		for (int i = 0; i < nodesRef.length; i++) {
+			costs[i] = nodesRef[i].getValue().distance;
 		}
 		return costs;
 	}
