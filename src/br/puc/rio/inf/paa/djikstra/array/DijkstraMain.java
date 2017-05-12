@@ -22,7 +22,7 @@ public class DijkstraMain {
 	    graph.put(4, Arrays.asList());
 
 	    GraphInstance instance = new GraphInstance(graph);
-	    DijkstraVectorStore vectorStore = new DijkstraVectorStore();
+	    DijkstraStore vectorStore = new DijkstraVectorStore();
 	    
         
 	    String file =  "../INF-2926/input/alue2087.stp";

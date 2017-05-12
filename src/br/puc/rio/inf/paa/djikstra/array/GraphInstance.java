@@ -15,15 +15,13 @@ public class GraphInstance {
 	
 	public DijkstraSolution dijkstra(int start, DijkstraStore store) { //Initialization store.BuildStore(this, start);
 	//While there are nodes unmarked in the store 
-		int indexMinNode;
-		
 		//Initialization 
-		int indexStart = getVertex(start);
-		store.buildStore(this, indexStart);
+	
+		store.buildStore(this, start);
 		
 		while (!store.isEmpty()) { 
 			
-			indexMinNode = store.getMin();//Get node with min d[j]
+			 int indexMinNode = store.getMin();//Get node with min d[j]
 			
 			
 			if (store.costs[indexMinNode] == Integer.MAX_VALUE) { 
