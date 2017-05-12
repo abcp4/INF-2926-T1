@@ -7,13 +7,16 @@ public class DijkstraVectorStore extends DijkstraStore {
 	int nodesMarked;
 	int[] route;
 	
-	public int getMin() { 
+	public int getMin(){
+		return 0;
+	}
+	public int getMin(GraphInstance g) { 
 		int i = 0; 
 		int min = Integer.MAX_VALUE;
 		int element = -1;
 		
 		for (i = 0; i < costs.length; i++) {
-			if (!marked[i]) { // senao foi marcado 
+			if (!marked[i] && g.graph.containsKey(i)) { // senao foi marcado 
 				min = costs[i]; 
 				element = i;
 				i++; 
@@ -22,12 +25,12 @@ public class DijkstraVectorStore extends DijkstraStore {
 		}
 		
 		for (; i < costs.length; i++) {
-			if (!(marked[i]) && min > costs[i]) { 
+			if (!(marked[i]) && min > costs[i] && g.graph.containsKey(i)) { 
 				min = costs[i];
 				element = i; 
 			}
 		} 
-		
+		 
 		return element; 
 	}
 	
@@ -47,27 +50,25 @@ public class DijkstraVectorStore extends DijkstraStore {
 	
 
 	
-	public void buildStore(GraphInstance g, int indexStart) { 
+	public void buildStore(GraphInstance g, int start) { 
 				
-		costs = new int[g.graph.size()];
-		tree =  new int[g.graph.size()];
-		marked = new boolean[g.graph.size()];
+		costs = new int[g.graph.size() + 1];
+		tree =  new int[g.graph.size() + 1];
+		marked = new boolean[g.graph.size() + 1];
 		
-		List<Integer> keys = new ArrayList<>(g.graph.keySet());
-		
-		for ( int currentIndex = 0 ; currentIndex < keys.size(); currentIndex ++) { 
+		for (Integer key :  g.graph.keySet()) { 
 	        
-			if (currentIndex != indexStart) { 
-				
-				costs[currentIndex] = Integer.MAX_VALUE; 
-				
+			if (key != start) { 
+				costs[key] = Integer.MAX_VALUE; 		
 			} 
 			else { 
-				costs[currentIndex] = 0;
-				tree[currentIndex] = -1;
+				costs[key] = 0;
+				tree[key] = -1;
 				
 			}
 		}
+		
+		
 		
 		
 	}
