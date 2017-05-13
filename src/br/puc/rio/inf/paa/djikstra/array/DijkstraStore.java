@@ -6,7 +6,7 @@ public abstract class DijkstraStore{
 	protected int[] costs;
 	
 	//Return the mct 
-	int[] tree; 
+	protected int[] tree; 
 	
 	public boolean[] marked;
 	

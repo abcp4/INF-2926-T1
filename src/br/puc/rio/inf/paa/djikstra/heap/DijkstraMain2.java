@@ -12,15 +12,17 @@ public class DijkstraMain2 {
 		
 		Map<Integer, List<Edge>> graph = new LinkedHashMap<>();
 		
-		Edge e1 = new Edge(7, 10);
-		Edge e2 = new Edge(3, 15);
-		Edge e3 = new Edge(4, 20);
+		
+		Edge e1 = new Edge(1, 10);
+		Edge e2 = new Edge(2, 15);
+		Edge e3 = new Edge(3, 20);
+	//	Edge e4 = new Edge(5, 2);
 		
 		
 	    graph.put(1, Arrays.asList(e1, e2));//1 --> 7, 3
 	    graph.put(2, Arrays.asList(e2, e3));//7 --> 3, 4
-	    graph.put(3, Arrays.asList());
-	    graph.put(4, Arrays.asList());
+	    //graph.put(3, Arrays.asList(e3,e4));
+	    //graph.put(4, Arrays.asList());
 
 	    GraphInstance instance = new GraphInstance(graph);
 	    DijkstraStore vectorStore = new DijkstraFibonacciStore();
