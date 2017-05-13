@@ -25,11 +25,11 @@ public class AvlTreeNode {
 		this.keys.add(key);
 	}
 
-	public List<Integer> getNode() {
+	public List<Integer> getKeys() {
 		return keys;
 	}
 
-	public void setNode(List<Integer> keys) {
+	public void setKeys(List<Integer> keys) {
 		this.keys = keys;
 	}
 

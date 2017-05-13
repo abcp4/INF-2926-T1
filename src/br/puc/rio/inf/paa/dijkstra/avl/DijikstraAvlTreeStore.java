@@ -1,38 +1,83 @@
 package br.puc.rio.inf.paa.dijkstra.avl;
 
-import br.puc.rio.inf.paa.djikstra.array.DijkstraStore;
-import br.puc.rio.inf.paa.djikstra.array.GraphInstance;
+import br.puc.rio.inf.paa.depressao.GraphInstance;
+import br.puc.rio.inf.paa.depressao.IDijkstra;
 
-public class DijikstraAvlTreeStore extends DijkstraStore{
+public class DijikstraAvlTreeStore implements IDijkstra{
 	
-	AvlTree avlTree;
+	AvlTree avlTreeCost;
+	AvlTree avlTreeKey;
+	boolean[] marked;
+	int nodesMarked;
+	int numVertices;
 	
 	public DijikstraAvlTreeStore() {
 		
-		this.avlTree = new AvlTree();
+		this.avlTreeCost = new AvlTree();
+		this.avlTreeKey = new AvlTree();
+		
+	}
+
+	@Override
+	public void init(GraphInstance graph, int start) {
+		
+		this.numVertices = graph.graph.size();
+		
+		for(int key:graph.graph.keySet()){
+					
+			if(key != start){
+				this.avlTreeCost.insert(key, Integer.MAX_VALUE);
+				this.avlTreeKey.insert(Integer.MAX_VALUE, key);
+			}else{
+				this.avlTreeCost.insert(key, 0);
+				this.avlTreeKey.insert(0, key);
+			}
+		}
+		
+		this.marked = new boolean[graph.graph.size() + 1];
 		
 	}
 
 	@Override
 	public int getMin() {
-		return 0;
+		return this.avlTreeCost.getMin();
 	}
 
 	@Override
-	public int getMin(GraphInstance g) {
+	public int[] getCusto() {
+		int[] custos = new int[this.numVertices+1];
 		
-		return 0;
+		custos[0] = -1;
+		
+		for(int i = 1; i <= this.numVertices; i++){
+			custos[i] = this.avlTreeKey.findKey(i);
+		}
+		
+		return custos;
 	}
 
 	@Override
-	public void relax(int v, int w, int lvw) {
+	public int[] getPath() {
 		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void relax(int from, int to, int distance) {
+		
+		if(this.avlTreeKey.findKey(from) + distance < this.avlTreeKey.findKey(to) && !this.marked[to]){
+			
+			this.avlTreeCost.delete(this.avlTreeKey.findKey(to));
+			this.avlTreeCost.insert(to, this.avlTreeKey.findKey(from) + distance);
+			
+			this.avlTreeKey.findKeyAndUpdate(to, this.avlTreeKey.findKey(from) + distance);
+		}
 		
 	}
 
 	@Override
-	public void mark(int v) {
-		// TODO Auto-generated method stub
+	public void mark(int vertice) {
+		this.marked[vertice] = true;
 		
 	}
 
@@ -41,20 +86,5 @@ public class DijikstraAvlTreeStore extends DijkstraStore{
 		// TODO Auto-generated method stub
 		return false;
 	}
-
-	@Override
-	public void buildStore(GraphInstance instance, int start) {
-		
-		for(int key:instance.graph.keySet()){
-			
-			if(key != start){
-				this.avlTree.insert(key, Integer.MAX_VALUE);
-			}else{
-				this.avlTree.insert(key, 0);
-			}
-		}
-	}
-	
-	
 
 }
