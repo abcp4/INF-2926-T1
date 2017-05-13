@@ -19,10 +19,9 @@ public class GraphInstance {
 		
 		while (!store.isEmpty()) { 
 			
-			 int minNode = store.getMin(this);//Get node with min d[j]
-			
+			 int minNode = store.getMin(this);            //Get node with min d[j]
 			if(graph.containsKey(minNode)){
-				
+				//System.out.println("min");
 				if (store.costs[minNode] == Integer.MAX_VALUE) { 
 					break;
 				}
@@ -36,6 +35,7 @@ public class GraphInstance {
 				for(int i = 0; i < edges.size(); i++) {
 					
 					int adjV = edges.get(i).vertex;
+					//System.out.println(adjV);
 					store.relax(minNode, adjV, edges.get(i).distance);
 				}
 				
