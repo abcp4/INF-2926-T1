@@ -27,7 +27,7 @@ public class DijkstraMain {
 		GraphInstance instanceTest = new GraphInstance(graph);
 		DijkstraStore vectorStore = new DijkstraVectorStore();
 
-		List<GraphInstance> instances = new ReadAllFiles().creatAllInstances();
+		List<br.puc.rio.inf.paa.depressao.GraphInstance> instances = new ReadAllFiles().creatAllInstances();
 
 		int countInstance = 0;
 		long timeout = 5;
@@ -62,15 +62,6 @@ public class DijkstraMain {
 			System.out.println("Tempo medio: " + (durationTime / count));
 
 		}
-
-		// for(int i = 0; i < vectorStore.marked.length; i++){
-		//
-		// if(vectorStore.marked[i]){
-		//
-		// System.out.println(i);
-		// System.out.println(vectorStore.costs[i]);
-		// }
-		// }
 
 	}
 

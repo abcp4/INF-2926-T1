@@ -6,7 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
-import br.puc.rio.inf.paa.djikstra.array.GraphInstance;
+import br.puc.rio.inf.paa.depressao.GraphInstance;
 import br.puc.rio.inf.paa.model.Graph;
 
 public class ReadFile {

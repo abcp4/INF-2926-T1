@@ -1,6 +1,6 @@
 package br.puc.rio.inf.paa.file;
 
-import br.puc.rio.inf.paa.djikstra.array.GraphInstance;
+import br.puc.rio.inf.paa.depressao.GraphInstance;
 
 public class PrincipalTeste {
 
