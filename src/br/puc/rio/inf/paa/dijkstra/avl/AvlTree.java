@@ -3,19 +3,43 @@ package br.puc.rio.inf.paa.dijkstra.avl;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DijkstraAvlTree {
+public class AvlTree {
 	
 	private AvlTreeNode root;
 	
+	public AvlTree() {
+		this.root = null;
+	}
+	
+	public AvlTreeNode getMin(){
+		if(this.root == null){
+			return null;
+		}else{
+			AvlTreeNode node;
+			node = this.root;
+			while(true){
+				if(node.getLeft() == null){
+					return node;
+				}else{
+					node = node.getLeft();
+				}
+			}
+		}
+	}
+	
 	public boolean insert(int key, int cost) {
-        if (this.root == null)
+        
+//		Testa se a raiz é nula
+		if (this.root == null){
             this.root = new AvlTreeNode(key, cost, null);
-        else {
+        }else {
             AvlTreeNode nodeRoot = this.root;
             AvlTreeNode parent;
             while (true) {
+//            	Testa se o valor a ser inserido já está na árvore
                 if (nodeRoot.getCost() == cost){
-                    return false;
+                	nodeRoot.insertKey(key);
+                    return true;
                 }
  
                 parent = nodeRoot;
@@ -201,17 +225,7 @@ public class DijkstraAvlTree {
             System.out.printf("%s ", node.getBalance());
             printBalance(node.getRight());
         }
-    }
- 
-    public static void main(String[] args) {
-        DijkstraAvlTree tree = new DijkstraAvlTree();
- 
-        System.out.println("Inserting values 1 to 10");
-        for (int i = 1; i < 10; i++)
-            tree.insert(10, i);
- 
-        System.out.print("Printing balance: ");
-        tree.printBalance();
+        System.out.println();
     }
 
 }

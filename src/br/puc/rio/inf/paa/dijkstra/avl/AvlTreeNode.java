@@ -1,8 +1,11 @@
 package br.puc.rio.inf.paa.dijkstra.avl;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class AvlTreeNode {
 	
-	private int key;
+	private List<Integer> keys;
 	private int cost;
 	private int balance;
     private int height;
@@ -11,18 +14,23 @@ public class AvlTreeNode {
 	private AvlTreeNode right;
 	
 	
-	public AvlTreeNode(int node, int cost, AvlTreeNode parent) {
-		this.key = node;
+	public AvlTreeNode(int key, int cost, AvlTreeNode parent) {
+		this.keys = new ArrayList<Integer>();
+		this.keys.add(key);
 		this.cost = cost;
 		this.parent = parent;
 	}
-
-	public int getNode() {
-		return key;
+	
+	public void insertKey(int key){
+		this.keys.add(key);
 	}
 
-	public void setNode(int node) {
-		this.key = node;
+	public List<Integer> getNode() {
+		return keys;
+	}
+
+	public void setNode(List<Integer> keys) {
+		this.keys = keys;
 	}
 
 	public int getCost() {
