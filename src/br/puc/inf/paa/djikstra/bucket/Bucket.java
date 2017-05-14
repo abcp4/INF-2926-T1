@@ -1,4 +1,4 @@
-package br.puc.pos.paa.shortpath.bucket;
+package br.puc.inf.paa.djikstra.bucket;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
