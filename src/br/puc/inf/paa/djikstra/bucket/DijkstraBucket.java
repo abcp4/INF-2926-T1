@@ -1,5 +1,6 @@
 package br.puc.inf.paa.djikstra.bucket;
 
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
@@ -9,6 +10,7 @@ import br.puc.rio.inf.paa.djikstra.Adjacent;
 import br.puc.rio.inf.paa.djikstra.GraphInstance;
 import br.puc.rio.inf.paa.djikstra.IDijkstra;
 import br.puc.rio.inf.paa.utils.CollectionsUtils;
+import br.puc.rio.inf.paa.utils.CsvWriter;
 
 public class DijkstraBucket implements IDijkstra {
 
@@ -23,6 +25,8 @@ public class DijkstraBucket implements IDijkstra {
 	@Override
 	public void init(GraphInstance graph, int start) {
 
+	
+		
 		int maxEdge = maxCostEdge(graph);
 		bucket = new Bucket(graph.graph.size(), maxEdge);
 		

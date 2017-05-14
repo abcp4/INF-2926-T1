@@ -1,5 +1,7 @@
 package br.puc.rio.inf.paa.dijkstra.avl;
 
+import java.io.IOException;
+import java.nio.charset.Charset;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -7,6 +9,7 @@ import br.puc.rio.inf.paa.djikstra.DijkstraSolution;
 import br.puc.rio.inf.paa.djikstra.GraphInstance;
 import br.puc.rio.inf.paa.djikstra.IDijkstra;
 import br.puc.rio.inf.paa.djikstra.heap.fibonacci.DijkstraFibonacciHeap;
+import br.puc.rio.inf.paa.utils.CsvWriter;
 import br.puc.rio.inf.paa.utils.ReadAllFiles;
 import br.puc.rio.inf.paa.utils.ReadFile;
 
@@ -15,8 +18,11 @@ public class DjikstraAvlTreeMain {
 	// TODO - change timer
 	public static void main(String[] args) {
 		
-//		new DijkstraVetorMain().testDjistraReadAllInstances();
+		String nameCVSVetor = "nameCVSAVLTree.csv";
 
+		CsvWriter writer = new CsvWriter(nameCVSVetor, ',', Charset.forName("ISO-8859-1"));
+
+		
 		List<GraphInstance> instances = new ReadAllFiles().creatAllInstances();
 
 		int count = 0;
@@ -25,6 +31,18 @@ public class DjikstraAvlTreeMain {
 		int timeout = 5;
 		double temp_final = 0.0;
 		double durationEnd = 0.0;
+		
+		try {
+			writer.write("Name Instance");
+			writer.write("Number of Vertex");
+			writer.write("Number of Edge");
+			writer.write("Average time");
+
+			writer.endRecord();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	
 		for (GraphInstance instance : instances) {
 
@@ -42,7 +60,18 @@ public class DjikstraAvlTreeMain {
 			}
 			
 			numInstance++;
+			
+			try {
+				writer.write(instance.name);
+				writer.write(String.valueOf(instance.numVertex));
+				writer.write(String.valueOf(instance.numEdges));
+				writer.write(String.valueOf((durationEnd / count)));
 
+				writer.endRecord();
+
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 			System.out.println("No Instance: " + numInstance);
 			System.out.println(instance.name);
 			System.out.println("N: " + instance.numVertex + " x " + "M: " + instance.numEdges);
