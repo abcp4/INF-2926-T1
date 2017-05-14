@@ -16,7 +16,7 @@ public class ReadFile {
 		this.fileName = fileName;
 	}
 	
-	public GraphInstance CreateInstance(){
+	public GraphInstance createInstance(){
 		
 		Graph graph = null;
 		

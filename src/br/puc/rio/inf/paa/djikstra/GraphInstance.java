@@ -30,6 +30,8 @@ public class GraphInstance {
 			}
 			
 		   minVertex = dijkstra.getMin();
+		  
+		   
 		}while (minVertex != -1);
 
 		return new DijkstraSolution(dijkstra.getCusto(), dijkstra.getPath()); 

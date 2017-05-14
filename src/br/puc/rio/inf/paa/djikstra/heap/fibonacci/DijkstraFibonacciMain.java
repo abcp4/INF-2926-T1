@@ -11,6 +11,7 @@ import br.puc.rio.inf.paa.djikstra.DijkstraSolution;
 import br.puc.rio.inf.paa.djikstra.GraphInstance;
 import br.puc.rio.inf.paa.djikstra.IDijkstra;
 import br.puc.rio.inf.paa.utils.ReadAllFiles;
+import br.puc.rio.inf.paa.utils.ReadFile;
 
 
 
@@ -18,45 +19,12 @@ public class DijkstraFibonacciMain {
 
 	// TODO - change timer
 	public static void main(String[] args) {
+		
+		new DijkstraFibonacciMain().testDjikstraReadOneInstance();
+	}
 
-		/*ist<GraphInstance> instances = new ReaderAllFiles().creatAllInstances();
-
-		int count = 0;
-		int numInstance = 0;
-
-		long timeout = 5;
-		long durationTime = 0;
-		long durationEnd = 0;
-		long initTime  = 0;
-		for (GraphInstance instance : instances) {
-
-			IDijkstra iDijkstra = new DijkstraFibonacciHeap();
-			
-			long timeStart = System.currentTimeMillis();
-			initTime = TimeUnit.MILLISECONDS.toSeconds(timeStart);
-			
-			while (durationEnd - initTime < timeout) {
-
-			
-				DijkstraSolution solution = instance.dijkstra(1, iDijkstra);
-
-				long timeEnd = System.currentTimeMillis();
-				durationEnd = TimeUnit.MILLISECONDS.toSeconds(timeEnd);
-				count++;
-			}
-			
-			numInstance++;
-
-			System.out.println("No Instance: " + numInstance);
-			System.out.println("Quantidade de vezes: " + count);
-			System.out.println("Tempo medio: " + (durationEnd / count));
-			count = 0;
-			durationEnd = 0;
-		}
-
-	}*/
-
-//	public void testDjikstraSimple() {
+		
+	public void testDjikstraSimple() {
 		Map<Integer, List<Adjacent>> graph = new LinkedHashMap<>();
 
 		Adjacent e1 = new Adjacent(2, 10);
@@ -74,7 +42,7 @@ public class DijkstraFibonacciMain {
 
 		DijkstraSolution solution = instance.dijkstra(1, iDijkstra);
 
-		for (int i = 0; i < solution.costs.length; i++) {
+		for (int i = 1; i < solution.costs.length; i++) {
 			System.out.println(solution.costs[i] + " index: " + i + "path: " + solution.tree[i]);
 			// System.out.println(solution.tree[i]);
 		}
@@ -82,7 +50,14 @@ public class DijkstraFibonacciMain {
 	}
 
 	public void testDjikstraReadOneInstance() {
-
+		GraphInstance instance = new ReadFile("../INF-2926/input/teste.stp").createInstance();
+		
+		IDijkstra iDijkstra = new DijkstraFibonacciHeap();
+		DijkstraSolution solution = instance.dijkstra(1, iDijkstra);
+		
+		for(int i = 1; i < solution.costs.length; i++){
+			System.out.println(  "From: " + solution.tree[i] + " To: " + i + " Custo: " + solution.costs[i]);
+		}
 	}
 
 	public void testDjistraReadAllInstances() {

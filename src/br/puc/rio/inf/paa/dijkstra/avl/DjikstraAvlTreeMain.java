@@ -14,7 +14,7 @@ public class DjikstraAvlTreeMain {
 		
 		DijikstraAvlTreeStore store = new DijikstraAvlTreeStore();
 		
-		GraphInstance instance = new ReadFile("../INF-2926/input/teste.stp").CreateInstance();
+		GraphInstance instance = new ReadFile("../INF-2926/input/teste.stp").createInstance();
 		
 		instance.dijkstra(1, store);
 		

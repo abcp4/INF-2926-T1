@@ -6,20 +6,26 @@ import br.puc.rio.inf.paa.djikstra.IDijkstra;
 public class DijkstraFibonacciHeap implements IDijkstra {
 
 	int custo[];
+	int path[];
 	FibonacciHeap fibonacciHeap;
 	FibonacciHeap.Node[] nodeArray;
 
 	@Override
 	public void init(GraphInstance graph, int start) {
 		custo = new int[graph.graph.size() + 1];
+		path = new int[graph.graph.size() + 1];
+		
 		fibonacciHeap = new FibonacciHeap();
 		nodeArray = new FibonacciHeap.Node[graph.graph.size() + 1];
-		custo[0] = Integer.MAX_VALUE;
 
+		custo[0] = Integer.MAX_VALUE;
+		path[0] = Integer.MAX_VALUE;
+		
 		for (int vertex : graph.graph.keySet()) {
 
 			if (vertex == start) {
 				custo[vertex] = 0;
+				path[vertex] = -1;
 			} else {
 				custo[vertex] = Integer.MAX_VALUE;
 			}
@@ -34,7 +40,7 @@ public class DijkstraFibonacciHeap implements IDijkstra {
 		FibonacciHeap.Node min = fibonacciHeap.returnMin();
 
 		if (min != null) {
-			return min.getKeyValue();
+			return min.getNodeNumber();
 		} else {
 			return -1;
 		}
@@ -42,22 +48,23 @@ public class DijkstraFibonacciHeap implements IDijkstra {
 
 	@Override
 	public int[] getCusto() {
-		// TODO Auto-generated method stub
-		return null;
+		return custo;
 	}
 
 	@Override
 	public int[] getPath() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return path;
 	}
 
 	@Override
 	public void relax(int vertexA, int vertexB, int distance) {
-		
+
 		if (custo[vertexA] != Integer.MAX_VALUE && custo[vertexA] + distance < custo[vertexB]) {
 			custo[vertexB] = custo[vertexA] + distance;
 			fibonacciHeap.decreaseKey(nodeArray[vertexB], custo[vertexB]);
+			path[vertexB] = vertexA;
+
 		}
 
 	}
@@ -75,10 +82,7 @@ public class DijkstraFibonacciHeap implements IDijkstra {
 
 	@Override
 	public boolean isEmpty() {
-		// TODO Auto-generated method stub
 		return false;
 	}
-
-
 
 }

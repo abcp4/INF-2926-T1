@@ -19,7 +19,7 @@ public class ReadAllFiles {
 		List<GraphInstance> graphInstances = new ArrayList<GraphInstance>();
 		
 		for(String fileName:fileNames){
-			graphInstances.add(new ReadFile(fileName).CreateInstance());
+			graphInstances.add(new ReadFile(fileName).createInstance());
 		}
 		
 		return graphInstances;

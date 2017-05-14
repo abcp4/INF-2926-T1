@@ -13,8 +13,6 @@ import br.puc.rio.inf.paa.djikstra.IDijkstra;
 import br.puc.rio.inf.paa.utils.ReadAllFiles;
 
 
-
-
 public class DijkstraVetorMain {
 
 	// TODO - change timer
@@ -34,16 +32,12 @@ public class DijkstraVetorMain {
 			IDijkstra iDijkstra = new DijikstraVetor();
 			double temp_inicio = System.currentTimeMillis();
 			
-			while (durationEnd <= timeout) {
-				
-				
-				
+			while (durationEnd <= timeout) {	
 				DijkstraSolution solution = instance.dijkstra(1, iDijkstra);
-				 temp_final = System.currentTimeMillis();
-					
+				temp_final = System.currentTimeMillis();
+
 				durationEnd = temp_final - temp_inicio;
-				
-			//	System.out.println(durationEnd);
+
 				count++;
 			}
 			
