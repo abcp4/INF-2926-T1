@@ -9,9 +9,9 @@ import java.io.IOException;
 import br.puc.rio.inf.paa.djikstra.GraphInstance;
 
 public class ReadFile {
-
+	
 	private String fileName;
-
+	
 	public ReadFile(String fileName) {
 		this.fileName = fileName;
 	}
@@ -40,23 +40,24 @@ public class ReadFile {
 		    	   int destiny = Integer.parseInt(words[2]);
 		    	   int cost = Integer.parseInt(words[3]);
 
-					graph.addEdge(source, destiny, cost);
-				}
-
-			}
+		    	   graph.addEdge(source, destiny, cost);
+		       }
+		       
+		    } 
 		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-
 		
 		GraphInstance instance = new GraphInstance(graph.getVertices());
 		instance.numEdges = numEdges;
 		
 		return instance;
 	
+		
 	}
-
+	
 }
