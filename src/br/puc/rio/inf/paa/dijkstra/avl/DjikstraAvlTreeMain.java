@@ -2,11 +2,11 @@ package br.puc.rio.inf.paa.dijkstra.avl;
 
 import java.util.List;
 
-import br.puc.rio.inf.paa.depressao.GraphInstance;
-import br.puc.rio.inf.paa.file.ReadAllFiles;
-import br.puc.rio.inf.paa.file.ReadFile;
+import br.puc.rio.inf.paa.djikstra.GraphInstance;
+import br.puc.rio.inf.paa.utils.ReadAllFiles;
+import br.puc.rio.inf.paa.utils.ReadFile;
 
-public class TestAvlTree {
+public class DjikstraAvlTreeMain {
 
 	public static void main(String[] args) {
 		

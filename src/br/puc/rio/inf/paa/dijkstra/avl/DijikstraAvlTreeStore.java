@@ -1,7 +1,7 @@
 package br.puc.rio.inf.paa.dijkstra.avl;
 
-import br.puc.rio.inf.paa.depressao.GraphInstance;
-import br.puc.rio.inf.paa.depressao.IDijkstra;
+import br.puc.rio.inf.paa.djikstra.GraphInstance;
+import br.puc.rio.inf.paa.djikstra.IDijkstra;
 
 public class DijikstraAvlTreeStore implements IDijkstra{
 	

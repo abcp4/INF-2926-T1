@@ -1,12 +1,12 @@
-package br.puc.rio.inf.paa.model;
+package br.puc.rio.inf.paa.utils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import br.puc.rio.inf.paa.depressao.Adjacent;
-import br.puc.rio.inf.paa.djikstra.array.Edge;
+import br.puc.rio.inf.paa.djikstra.Adjacent;
+
 
 public class Graph {
 	

@@ -1,4 +1,4 @@
-package br.puc.rio.inf.paa.file;
+package br.puc.rio.inf.paa.utils;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
-import br.puc.rio.inf.paa.depressao.GraphInstance;
+import br.puc.rio.inf.paa.djikstra.GraphInstance;
 
 public class ReadAllFiles {
 	

@@ -1,4 +1,4 @@
-package br.puc.rio.inf.paa.file;
+package br.puc.rio.inf.paa.utils;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -6,8 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
-import br.puc.rio.inf.paa.depressao.GraphInstance;
-import br.puc.rio.inf.paa.model.Graph;
+import br.puc.rio.inf.paa.djikstra.GraphInstance;
 
 public class ReadFile {
 	

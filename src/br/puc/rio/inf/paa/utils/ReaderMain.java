@@ -1,8 +1,8 @@
-package br.puc.rio.inf.paa.file;
+package br.puc.rio.inf.paa.utils;
 
-import br.puc.rio.inf.paa.depressao.GraphInstance;
+import br.puc.rio.inf.paa.djikstra.GraphInstance;
 
-public class PrincipalTeste {
+public class ReaderMain {
 
 	public static void main(String[] args) {
 		

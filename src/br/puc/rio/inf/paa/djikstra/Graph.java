@@ -1,4 +1,4 @@
-package br.puc.rio.inf.paa.depressao;
+package br.puc.rio.inf.paa.djikstra;
 
 import java.util.ArrayList;
 import java.util.HashMap;
