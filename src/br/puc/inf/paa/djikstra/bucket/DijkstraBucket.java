@@ -8,11 +8,12 @@ import java.util.List;
 import br.puc.rio.inf.paa.djikstra.Adjacent;
 import br.puc.rio.inf.paa.djikstra.GraphInstance;
 import br.puc.rio.inf.paa.djikstra.IDijkstra;
+import br.puc.rio.inf.paa.utils.CollectionsUtils;
 
 public class DijkstraBucket implements IDijkstra {
 
 	Bucket bucket;
-	List<LinkedList<Integer>> nodesRef;
+	List<LinkedListNode> nodesRef;
 	LinkedList<Integer> costInfinity;
 	int path[];
 	int costs[];
@@ -30,24 +31,25 @@ public class DijkstraBucket implements IDijkstra {
 
 		pos_index = 0;
 
-		nodesRef = new ArrayList<LinkedList<Integer>>();
-	
+		nodesRef = new LinkedList<LinkedListNode>(CollectionsUtils.setSize(graph.graph.size() + 1));
 	
 		costInfinity = new LinkedList<>();
 
 		for (int vertex : graph.graph.keySet()) {
 			if (vertex != start) {
 				costs[vertex] = Integer.MAX_VALUE;
-				LinkedList<Integer> newNode = new LinkedList<Integer>(Collections.nCopies(vertex, 0));
+				
+				LinkedList<Integer> newNode = new LinkedList<Integer>(CollectionsUtils.setSize(vertex));
 				costInfinity.addLast(vertex);
-				nodesRef.add(vertex, newNode);
+				nodesRef.add(vertex, new LinkedListNode(newNode));
 				
 			}else{
 				costs[start] = 0;
-				LinkedList<Integer> newNode = new LinkedList<Integer>(Collections.nCopies(start, 0));
+				
+				LinkedList<Integer> newNode = new LinkedList<Integer>(CollectionsUtils.setSize(vertex));
 				bucket.add(newNode, 0);
 				path[start] = -1;
-				nodesRef.add(vertex, newNode);
+				nodesRef.add(vertex,  new LinkedListNode(newNode));
 				
 			}
 
@@ -131,7 +133,7 @@ public class DijkstraBucket implements IDijkstra {
 			bucket.buckets.get(costs[v]).remove(nodesRef.get(v));
 		}
 		costs[v] = distance;
-		bucket.buckets.get(distance).addAll(nodesRef.get(v));
+		//bucket.buckets.get(distance).addAll(nodesRef.get(v));
 	}
 	
 	

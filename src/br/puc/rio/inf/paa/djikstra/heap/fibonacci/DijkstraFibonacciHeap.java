@@ -13,9 +13,6 @@ public class DijkstraFibonacciHeap implements IDijkstra {
 	@Override
 	public void init(GraphInstance graph, int start) {
 		custo = new int[graph.graph.size() + 1];
-		path = new int[graph.graph.size() + 1];
-		
-		fibonacciHeap = new FibonacciHeap();
 		nodeArray = new FibonacciHeap.Node[graph.graph.size() + 1];
 
 		custo[0] = Integer.MAX_VALUE;
