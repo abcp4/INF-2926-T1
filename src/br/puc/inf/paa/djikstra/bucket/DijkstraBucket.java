@@ -1,7 +1,7 @@
 package br.puc.inf.paa.djikstra.bucket;
 
 import java.util.ArrayList;
-
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -13,7 +13,7 @@ public class DijkstraBucket implements IDijkstra {
 
 	Bucket bucket;
 	List<LinkedList<Integer>> nodesRef;
-	List<LinkedList<Integer>> costInfinity;
+	LinkedList<Integer> costInfinity;
 	int path[];
 	int costs[];
 	int pos_index;
@@ -24,61 +24,79 @@ public class DijkstraBucket implements IDijkstra {
 
 		int maxEdge = maxCostEdge(graph);
 		bucket = new Bucket(graph.graph.size(), maxEdge);
-
+		
 		costs = new int[graph.graph.size() + 1];
 		path = new int[graph.graph.size() + 1];
 
 		pos_index = 0;
 
-		nodesRef = new ArrayList<LinkedList<Integer>>(graph.graph.size());
-		costInfinity = new ArrayList<LinkedList<Integer>>(graph.graph.size());
+		nodesRef = new ArrayList<LinkedList<Integer>>();
+	
+	
+		costInfinity = new LinkedList<>();
+
+		for (int vertex : graph.graph.keySet()) {
+			if (vertex != start) {
+				costs[vertex] = Integer.MAX_VALUE;
+				LinkedList<Integer> newNode = new LinkedList<Integer>(Collections.nCopies(vertex, 0));
+				costInfinity.addLast(vertex);
+				nodesRef.add(vertex, newNode);
+				
+			}else{
+				costs[start] = 0;
+				LinkedList<Integer> newNode = new LinkedList<Integer>(Collections.nCopies(start, 0));
+				bucket.add(newNode, 0);
+				path[start] = -1;
+				nodesRef.add(vertex, newNode);
+				
+			}
+
+		}
 
 	}
 
 	@Override
 	public int getMin() {
 		for (int i = pos_index; i < bucket.buckets.size(); i++) {
-			int temp = bucket.buckets.get(i).getFirst();
-			bucket.buckets.get(i).removeFirst();
+			if (bucket.buckets.get(i).size() > 0) {
+				int temp = bucket.buckets.get(i).getFirst();
+				bucket.buckets.get(i).removeFirst();
+				pos_index = i;
+				return temp;
 
-			pos_index = i;
-			return temp;
+			}
+
 		}
 
-		LinkedList<Integer> costInfinityAux = costInfinity.get(0); // TODO - fix
-																	// this
-		costInfinity.remove(0);
-
-		return costInfinityAux.get(0);
+		int aux = costInfinity.getFirst();
+		costInfinity.remove(aux);
+		return aux;
 
 	}
 
 	@Override
 	public int[] getCusto() {
-		// TODO Auto-generated method stub
-		return null;
+		return costs;
 	}
 
 	@Override
 	public int[] getPath() {
-		// TODO Auto-generated method stub
-		return null;
+		return path;
 	}
 
 	@Override
 	public void relax(int from, int to, int distance) {
-		// TODO Auto-generated method stub
 
 		if (costs[from] != Integer.MAX_VALUE && costs[from] + distance < costs[to]) {
 			costs[to] = costs[from] + distance;
 			path[to] = from;
+			clearCosts(to, costs[to]);
 		}
 
 	}
 
 	@Override
 	public void mark(int vertice) {
-		// TODO Auto-generated method stub
 		nodesMarked++;
 	}
 
@@ -88,7 +106,7 @@ public class DijkstraBucket implements IDijkstra {
 		return false;
 	}
 
-	// TODO TERMINAR ESTE MÉTODO
+
 	public int maxCostEdge(GraphInstance graphInstance) {
 		int maxCost = Integer.MIN_VALUE;
 
@@ -102,4 +120,20 @@ public class DijkstraBucket implements IDijkstra {
 		return maxCost;
 
 	}
+	
+	
+	public void clearCosts(int v, int distance){
+		if (costs[v] == Integer.MAX_VALUE){
+			
+			costInfinity.remove(nodesRef.get(v));
+		}
+		else{
+			bucket.buckets.get(costs[v]).remove(nodesRef.get(v));
+		}
+		costs[v] = distance;
+		bucket.buckets.get(distance).addAll(nodesRef.get(v));
+	}
+	
+	
+	
 }
