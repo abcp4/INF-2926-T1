@@ -1,3 +1,4 @@
+
 package br.puc.pos.paa.shortpath.bucket;
 
 import java.util.ArrayList;
