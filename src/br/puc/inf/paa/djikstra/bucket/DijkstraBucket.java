@@ -2,6 +2,7 @@ package br.puc.inf.paa.djikstra.bucket;
 
 import java.util.LinkedList;
 
+import javax.swing.plaf.synth.SynthSeparatorUI;
 
 import br.puc.rio.inf.paa.djikstra.Adjacent;
 import br.puc.rio.inf.paa.djikstra.GraphInstance;
@@ -33,6 +34,8 @@ public class DijkstraBucket implements IDijkstra {
 	
 		costInfinity = new LinkedList<Integer>(CollectionsUtils.setSize(graph.graph.size() + 1));
 		
+	//	System.out.println("size - Custo1: " + costInfinity.size());
+		
 		costs[0] = Integer.MAX_VALUE;
 		path[0] = Integer.MAX_VALUE;
 		
@@ -40,17 +43,22 @@ public class DijkstraBucket implements IDijkstra {
 			if (vertex != start) {
 				costs[vertex] = Integer.MAX_VALUE;
 				
-				LinkedList<Integer> newNode = new LinkedList<Integer>(CollectionsUtils.setSize(vertex));
-				costInfinity.addLast(vertex);
+				LinkedList<Integer> newNode = new LinkedList<Integer>();
+				newNode.add(vertex);
+				
+				costInfinity.set(vertex, vertex);
 				nodesRef.add(vertex, newNode);
 				
 				
 			}else{
 				costs[start] = 0;
 				
-				LinkedList<Integer> newNode = new LinkedList<Integer>(CollectionsUtils.setSize(start));
+				LinkedList<Integer> newNode = new LinkedList<Integer>();
+				newNode.add(start);
+				
 				bucket.add(0, newNode);
 				path[start] = -1;
+				
 				nodesRef.add(start,  newNode);
 				
 			}
@@ -58,52 +66,38 @@ public class DijkstraBucket implements IDijkstra {
 
 		}
 
+//		System.out.println("size - Custo: " + costInfinity.size());
 	}
 
 	@Override
 	public int getMin() {
 		
+		System.out.println(costInfinity.size());
+		
 		int min = -1;
 		for (int i = pos_index; i < bucket.buckets.size(); i++) {
-			
-			//min1: 1-0p, min2: 2-5p;
+				
 			if (bucket.buckets.get(i).size() > 0) {
 				
-//				int temp = bucket.buckets.get(i).getFirst();
-//				
-				min = bucket.buckets.get(i).size();
-				
-				System.out.println("Vertex: " + min + " Cost: " + i);
-				System.out.println(min);
-				
-				if(i == 19){
-					System.out.println(costs[min]);
-					System.out.println(bucket.buckets.get(costs[min]));
-					System.out.println(nodesRef.get(min));
-					break;				
+				min = bucket.buckets.get(i).getFirst();
+				bucket.buckets.get(i).removeFirst();
 
-				}
-				
-				if(bucket.buckets.get(i).isEmpty()){
-					
-					bucket.buckets.get(i).removeFirst();
-					
-				}
-				
 				pos_index = i;
-				
 				return min;
-
 			}
-
-		}
-		if(costInfinity.size() > 0){
-			min = costInfinity.getFirst();
-			costInfinity.removeFirst();
+				
 		}
 		
-		return min;
+		if(costInfinity.size() > 0){
 
+			min = costInfinity.getFirst();	
+			costInfinity.removeFirst();
+            return min;
+		}
+		
+		
+		return min;
+		
 	}
 
 	@Override
@@ -120,11 +114,12 @@ public class DijkstraBucket implements IDijkstra {
 	public void relax(int from, int to, int distance) {
         //r1: 1-2, 1-4 
 		if (costs[from] != Integer.MAX_VALUE && costs[from] + distance < costs[to]) {
-			
-		//	System.out.println("From: " + from + " To: " + to);
-			
+				
 			path[to] = from;
 	
+			if(distance == 2147483647){
+				System.out.println("From: " + from + " To: " + to);
+			}
 			setCosts(from, to, costs[from] + distance);
 		}
 
@@ -160,29 +155,27 @@ public class DijkstraBucket implements IDijkstra {
 	
 	public void setCosts(int from, int to, int totalDistanceToVertex){
 		if (costs[to] == Integer.MAX_VALUE){
-			costInfinity.remove(to);
+			//System.out.println("remove: " + to);
+		 	System.out.println("size infinity1 "+ costInfinity.size());
+			
+			costInfinity.remove(new Integer(to));
+			
+			System.out.println("size infinity "+ costInfinity.size());
 		}
 		else{
 			//Removed old costs of bucket of vertex
-			bucket.buckets.get(costs[to]).removeAll(nodesRef.get(to));
+			bucket.buckets.get(costs[to]).remove(to);
 			
 		}
-		//Remove old min
-		bucket.buckets.get(costs[from]).removeAll(nodesRef.get(from));
-	
-		
-		System.out.println("Size de bucket - Old Min: " + bucket.buckets.get(costs[from]).size());
-		
 		
 		//Replace to new costs
 		costs[to] = totalDistanceToVertex;
-		System.out.println("TotalDistance: " + totalDistanceToVertex + " To: " +  to);
 		
-		nodesRef.set(to, new LinkedList<>(CollectionsUtils.setSize(to)));
+	//	System.out.println("TotalDistance: " + totalDistanceToVertex + " To: " +  to);
 		
-		bucket.buckets.add(totalDistanceToVertex, nodesRef.get(to));
+		bucket.buckets.get(totalDistanceToVertex).add(to);
 		
-		System.out.println("Size de bucket - new bucket: " + bucket.buckets.get(totalDistanceToVertex).size());
+  //		System.out.println("Size de bucket - new bucket: " + bucket.buckets.get(totalDistanceToVertex).size());
 		
 	}
 	

@@ -21,7 +21,7 @@ public class DijkstraBucketMain {
 	
 		public static void main(String[] args) {
 
-			new DijkstraBucketMain().testDjikstraSimple();
+			 new DijkstraBucketMain().testDjikstraSimple();
 //			String nameCVSVetor = "nameCSVBucket.csv";
 //
 //			CsvWriter writer = new CsvWriter(nameCVSVetor, ',', Charset.forName("ISO-8859-1"));
@@ -32,7 +32,7 @@ public class DijkstraBucketMain {
 //			int count = 0;
 //			int numInstance = 0;
 //
-//			int timeout = 5;d
+//			int timeout = 5;
 //			double temp_final = 0.0;
 //			double durationEnd = 0.0;
 //			
@@ -96,10 +96,10 @@ public class DijkstraBucketMain {
 			IDijkstra iDijkstra = new DijkstraBucket();
 			DijkstraSolution solution = instance.dijkstra(1, iDijkstra);
 
-			for (int i = 1; i < solution.costs.length; i++) {
-				
-				System.out.println( " To: " + i + " Custo: " + solution.costs[i]);
-			}
+//			for (int i = 1; i < solution.costs.length; i++) {
+//				
+//				System.out.println( " To: " + i + " Custo: " + solution.costs[i]);
+//			}
 
 		}
 
