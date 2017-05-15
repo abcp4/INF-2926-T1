@@ -22,7 +22,7 @@ public class DijkstraBucketMain {
 		public static void main(String[] args) {
 
 			new DijkstraBucketMain().testDjikstraSimple();
-//			String nameCVSVetor = "nameCVSAVLTree.csv";
+//			String nameCVSVetor = "nameCSVBucket.csv";
 //
 //			CsvWriter writer = new CsvWriter(nameCVSVetor, ',', Charset.forName("ISO-8859-1"));
 //
@@ -91,7 +91,7 @@ public class DijkstraBucketMain {
 		}
 
 		public void testDjikstraSimple() {
-			GraphInstance instance = new ReadFile("../INF-2926/input/teste.stp").createInstance();
+			GraphInstance instance = new ReadFile("../INF-2926/input/alue2087.stp").createInstance();
 
 			IDijkstra iDijkstra = new DijkstraBucket();
 			DijkstraSolution solution = instance.dijkstra(1, iDijkstra);
