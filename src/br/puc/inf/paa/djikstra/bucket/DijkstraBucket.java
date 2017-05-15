@@ -15,7 +15,7 @@ import br.puc.rio.inf.paa.utils.CsvWriter;
 public class DijkstraBucket implements IDijkstra {
 
 	Bucket bucket;
-	List<LinkedListNode> nodesRef;
+	LinkedList<LinkedList<Integer>> nodesRef;
 	LinkedList<Integer> costInfinity;
 	int path[];
 	int costs[];
@@ -25,8 +25,6 @@ public class DijkstraBucket implements IDijkstra {
 	@Override
 	public void init(GraphInstance graph, int start) {
 
-	
-		
 		int maxEdge = maxCostEdge(graph);
 		bucket = new Bucket(graph.graph.size(), maxEdge);
 		
@@ -35,27 +33,32 @@ public class DijkstraBucket implements IDijkstra {
 
 		pos_index = 0;
 
-		nodesRef = new LinkedList<LinkedListNode>(CollectionsUtils.setSize(graph.graph.size() + 1));
+		nodesRef = new LinkedList<LinkedList<Integer>>(CollectionsUtils.setSize(graph.graph.size() + 1));
 	
-		costInfinity = new LinkedList<>();
-
+		costInfinity = new LinkedList<Integer>(CollectionsUtils.setSize(graph.graph.size() + 1));
+		
+		costs[0] = Integer.MAX_VALUE;
+		path[0] = Integer.MAX_VALUE;
+		
 		for (int vertex : graph.graph.keySet()) {
 			if (vertex != start) {
 				costs[vertex] = Integer.MAX_VALUE;
 				
 				LinkedList<Integer> newNode = new LinkedList<Integer>(CollectionsUtils.setSize(vertex));
 				costInfinity.addLast(vertex);
-				nodesRef.add(vertex, new LinkedListNode(newNode));
+				nodesRef.add(vertex, newNode);
+				
 				
 			}else{
 				costs[start] = 0;
 				
-				LinkedList<Integer> newNode = new LinkedList<Integer>(CollectionsUtils.setSize(vertex));
-				bucket.add(newNode, 0);
+				LinkedList<Integer> newNode = new LinkedList<Integer>(CollectionsUtils.setSize(start));
+				bucket.add(0, newNode);
 				path[start] = -1;
-				nodesRef.add(vertex,  new LinkedListNode(newNode));
+				nodesRef.add(start,  newNode);
 				
 			}
+			
 
 		}
 
@@ -63,20 +66,33 @@ public class DijkstraBucket implements IDijkstra {
 
 	@Override
 	public int getMin() {
+		
+		int min = -1;
 		for (int i = pos_index; i < bucket.buckets.size(); i++) {
+			
+			//min1: 1-0p, min2: 2-5p;
 			if (bucket.buckets.get(i).size() > 0) {
+				
 				int temp = bucket.buckets.get(i).getFirst();
+				
+				min = bucket.buckets.get(i).size();
+				
+				System.out.println("Vertex: " + min + " Cost: " + temp);
+				
 				bucket.buckets.get(i).removeFirst();
 				pos_index = i;
-				return temp;
+				
+				return min;
 
 			}
 
 		}
-
-		int aux = costInfinity.getFirst();
-		costInfinity.remove(aux);
-		return aux;
+		if(costInfinity.size() > 0){
+			min = costInfinity.getFirst();
+			costInfinity.removeFirst();
+		}
+		
+		return min;
 
 	}
 
@@ -92,18 +108,21 @@ public class DijkstraBucket implements IDijkstra {
 
 	@Override
 	public void relax(int from, int to, int distance) {
-
+        //r1: 1-2, 1-4 
 		if (costs[from] != Integer.MAX_VALUE && costs[from] + distance < costs[to]) {
-			costs[to] = costs[from] + distance;
+			
+			System.out.println("From: " + from + " To: " + to);
+			
 			path[to] = from;
-			clearCosts(to, costs[to]);
+	
+			setCosts(from, to, costs[from] + distance);
 		}
 
 	}
 
 	@Override
 	public void mark(int vertice) {
-		nodesMarked++;
+		nodesMarked ++;
 	}
 
 	@Override
@@ -119,7 +138,8 @@ public class DijkstraBucket implements IDijkstra {
 		for (int vertex : graphInstance.graph.keySet()) {
 			for (Adjacent edge : graphInstance.graph.get(vertex)) {
 				if (edge.distance > maxCost) {
-					maxCost = edge.distance;
+					maxCost = 
+							edge.distance;
 				}
 			}
 		}
@@ -128,16 +148,25 @@ public class DijkstraBucket implements IDijkstra {
 	}
 	
 	
-	public void clearCosts(int v, int distance){
-		if (costs[v] == Integer.MAX_VALUE){
+	public void setCosts(int from, int to, int totalDistanceToVertex){
+		if (costs[to] == Integer.MAX_VALUE){
 			
-			costInfinity.remove(nodesRef.get(v));
+			costInfinity.remove(to);
 		}
 		else{
-			bucket.buckets.get(costs[v]).remove(nodesRef.get(v));
+			//Removed old costs of bucket of vertex
+			bucket.buckets.get(costs[to]).remove(nodesRef.get(to));
+			
 		}
-		costs[v] = distance;
-		//bucket.buckets.get(distance).addAll(nodesRef.get(v));
+		//Remove old min
+		bucket.buckets.get(costs[from]).remove(nodesRef.get(from));
+		System.out.println("Size de bucket: " + costs[from] + bucket.buckets.get(costs[from]).size());
+		
+		
+		//Replace to new costs
+		costs[to] = totalDistanceToVertex;
+		System.out.println("TotalDistance: " + totalDistanceToVertex + " To: " +  to);
+		bucket.buckets.add(totalDistanceToVertex, nodesRef.get(to));
 	}
 	
 	

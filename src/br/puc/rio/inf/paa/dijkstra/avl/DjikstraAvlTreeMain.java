@@ -5,6 +5,7 @@ import java.nio.charset.Charset;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import br.puc.inf.paa.djikstra.bucket.DijkstraBucketMain;
 import br.puc.rio.inf.paa.djikstra.DijkstraSolution;
 import br.puc.rio.inf.paa.djikstra.GraphInstance;
 import br.puc.rio.inf.paa.djikstra.IDijkstra;
@@ -15,11 +16,10 @@ import br.puc.rio.inf.paa.utils.ReadFile;
 
 public class DjikstraAvlTreeMain {
 
-	// TODO - change timer
 	public static void main(String[] args) {
 		
 		String nameCVSVetor = "nameCVSAVLTree.csv";
-
+	
 		CsvWriter writer = new CsvWriter(nameCVSVetor, ',', Charset.forName("ISO-8859-1"));
 
 		

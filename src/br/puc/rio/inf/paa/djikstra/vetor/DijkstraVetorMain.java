@@ -13,7 +13,6 @@ import br.puc.rio.inf.paa.utils.ReadFile;
 
 public class DijkstraVetorMain {
 
-	// TODO - change timer
 	public static void main(String[] args) {
 
 		String nameCVSVetor = "nameCVSVetor.csv";
