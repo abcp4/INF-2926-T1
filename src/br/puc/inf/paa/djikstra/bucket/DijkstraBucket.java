@@ -1,16 +1,12 @@
 package br.puc.inf.paa.djikstra.bucket;
 
-import java.nio.charset.Charset;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.LinkedList;
-import java.util.List;
+
 
 import br.puc.rio.inf.paa.djikstra.Adjacent;
 import br.puc.rio.inf.paa.djikstra.GraphInstance;
 import br.puc.rio.inf.paa.djikstra.IDijkstra;
 import br.puc.rio.inf.paa.utils.CollectionsUtils;
-import br.puc.rio.inf.paa.utils.CsvWriter;
 
 public class DijkstraBucket implements IDijkstra {
 
@@ -73,13 +69,27 @@ public class DijkstraBucket implements IDijkstra {
 			//min1: 1-0p, min2: 2-5p;
 			if (bucket.buckets.get(i).size() > 0) {
 				
-				int temp = bucket.buckets.get(i).getFirst();
-				
+//				int temp = bucket.buckets.get(i).getFirst();
+//				
 				min = bucket.buckets.get(i).size();
 				
-				System.out.println("Vertex: " + min + " Cost: " + temp);
+				System.out.println("Vertex: " + min + " Cost: " + i);
+				System.out.println(min);
 				
-				bucket.buckets.get(i).removeFirst();
+				if(i == 19){
+					System.out.println(costs[min]);
+					System.out.println(bucket.buckets.get(costs[min]));
+					System.out.println(nodesRef.get(min));
+					break;				
+
+				}
+				
+				if(bucket.buckets.get(i).isEmpty()){
+					
+					bucket.buckets.get(i).removeFirst();
+					
+				}
+				
 				pos_index = i;
 				
 				return min;
@@ -111,7 +121,7 @@ public class DijkstraBucket implements IDijkstra {
         //r1: 1-2, 1-4 
 		if (costs[from] != Integer.MAX_VALUE && costs[from] + distance < costs[to]) {
 			
-			System.out.println("From: " + from + " To: " + to);
+		//	System.out.println("From: " + from + " To: " + to);
 			
 			path[to] = from;
 	
@@ -150,23 +160,30 @@ public class DijkstraBucket implements IDijkstra {
 	
 	public void setCosts(int from, int to, int totalDistanceToVertex){
 		if (costs[to] == Integer.MAX_VALUE){
-			
 			costInfinity.remove(to);
 		}
 		else{
 			//Removed old costs of bucket of vertex
-			bucket.buckets.get(costs[to]).remove(nodesRef.get(to));
+			bucket.buckets.get(costs[to]).removeAll(nodesRef.get(to));
 			
 		}
 		//Remove old min
-		bucket.buckets.get(costs[from]).remove(nodesRef.get(from));
-		System.out.println("Size de bucket: " + costs[from] + bucket.buckets.get(costs[from]).size());
+		bucket.buckets.get(costs[from]).removeAll(nodesRef.get(from));
+	
+		
+		System.out.println("Size de bucket - Old Min: " + bucket.buckets.get(costs[from]).size());
 		
 		
 		//Replace to new costs
 		costs[to] = totalDistanceToVertex;
 		System.out.println("TotalDistance: " + totalDistanceToVertex + " To: " +  to);
+		
+		nodesRef.set(to, new LinkedList<>(CollectionsUtils.setSize(to)));
+		
 		bucket.buckets.add(totalDistanceToVertex, nodesRef.get(to));
+		
+		System.out.println("Size de bucket - new bucket: " + bucket.buckets.get(totalDistanceToVertex).size());
+		
 	}
 	
 	
