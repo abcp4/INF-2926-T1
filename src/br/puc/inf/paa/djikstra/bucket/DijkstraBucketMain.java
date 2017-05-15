@@ -32,7 +32,7 @@ public class DijkstraBucketMain {
 //			int count = 0;
 //			int numInstance = 0;
 //
-//			int timeout = 5;
+//			int timeout = 5;d
 //			double temp_final = 0.0;
 //			double durationEnd = 0.0;
 //			
