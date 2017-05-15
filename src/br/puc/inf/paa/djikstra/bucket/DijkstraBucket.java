@@ -13,7 +13,7 @@ public class DijkstraBucket implements IDijkstra {
 
 	Bucket bucket;
 	LinkedList<LinkedList<Integer>> nodesRef;
-	LinkedList<Integer> costInfinity;
+	
 	int path[];
 	int costs[];
 	int pos_index;
@@ -32,21 +32,20 @@ public class DijkstraBucket implements IDijkstra {
 
 		nodesRef = new LinkedList<LinkedList<Integer>>(CollectionsUtils.setSize(graph.graph.size() + 1));
 	
-		costInfinity = new LinkedList<Integer>(CollectionsUtils.setSize(graph.graph.size() + 1));
 		
 	//	System.out.println("size - Custo1: " + costInfinity.size());
 		
-		costs[0] = Integer.MAX_VALUE;
-		path[0] = Integer.MAX_VALUE;
+		costs[0] = bucket.MAX_WEIGHT;
+		path[0] = bucket.MAX_WEIGHT;
 		
 		for (int vertex : graph.graph.keySet()) {
 			if (vertex != start) {
-				costs[vertex] = Integer.MAX_VALUE;
+				costs[vertex] = bucket.MAX_WEIGHT;
 				
 				LinkedList<Integer> newNode = new LinkedList<Integer>();
 				newNode.add(vertex);
 				
-				costInfinity.set(vertex, vertex);
+				bucket.add(bucket.MAX_WEIGHT, newNode);
 				nodesRef.add(vertex, newNode);
 				
 				
@@ -54,9 +53,10 @@ public class DijkstraBucket implements IDijkstra {
 				costs[start] = 0;
 				
 				LinkedList<Integer> newNode = new LinkedList<Integer>();
-				newNode.add(start);
 				
+				newNode.add(start);
 				bucket.add(0, newNode);
+				
 				path[start] = -1;
 				
 				nodesRef.add(start,  newNode);
@@ -72,7 +72,6 @@ public class DijkstraBucket implements IDijkstra {
 	@Override
 	public int getMin() {
 		
-		System.out.println(costInfinity.size());
 		
 		int min = -1;
 		for (int i = pos_index; i < bucket.buckets.size(); i++) {
@@ -83,15 +82,17 @@ public class DijkstraBucket implements IDijkstra {
 				bucket.buckets.get(i).removeFirst();
 
 				pos_index = i;
+				
 				return min;
 			}
 				
 		}
 		
-		if(costInfinity.size() > 0){
+		if(bucket.buckets.get(bucket.MAX_WEIGHT).size() > 0){
 
-			min = costInfinity.getFirst();	
-			costInfinity.removeFirst();
+			min = bucket.buckets.get(bucket.MAX_WEIGHT).getFirst();	
+			bucket.buckets.get(bucket.MAX_WEIGHT).removeFirst();
+			
             return min;
 		}
 		
@@ -113,7 +114,7 @@ public class DijkstraBucket implements IDijkstra {
 	@Override
 	public void relax(int from, int to, int distance) {
         //r1: 1-2, 1-4 
-		if (costs[from] != Integer.MAX_VALUE && costs[from] + distance < costs[to]) {
+		if (costs[from] != bucket.MAX_WEIGHT  && costs[from] + distance < costs[to]) {
 				
 			path[to] = from;
 	
@@ -154,17 +155,17 @@ public class DijkstraBucket implements IDijkstra {
 	
 	
 	public void setCosts(int from, int to, int totalDistanceToVertex){
-		if (costs[to] == Integer.MAX_VALUE){
+		if (costs[to] == bucket.MAX_WEIGHT){
 			//System.out.println("remove: " + to);
-		 	System.out.println("size infinity1 "+ costInfinity.size());
+		 //	System.out.println("size infinity1 "+ costInfinity.size());
 			
-			costInfinity.remove(new Integer(to));
+			bucket.buckets.get(bucket.MAX_WEIGHT).remove(new Integer(to));
 			
-			System.out.println("size infinity "+ costInfinity.size());
+			//System.out.println("size infinity "+ costInfinity.size());
 		}
 		else{
 			//Removed old costs of bucket of vertex
-			bucket.buckets.get(costs[to]).remove(to);
+			bucket.buckets.get(costs[to]).remove(new Integer(to));
 			
 		}
 		

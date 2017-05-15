@@ -10,15 +10,18 @@ import br.puc.rio.inf.paa.utils.CollectionsUtils;
 public class Bucket {
 
 	public LinkedList<LinkedList<Integer>> buckets;
+	int MAX_WEIGHT;
 
-
+	//-XX:MaxPermSize=1024m
 	public Bucket(int numVertex, int maxCostEdge) {
 		buckets = new LinkedList<LinkedList<Integer>>(CollectionsUtils.setSize(numVertex*maxCostEdge + 1));
+		MAX_WEIGHT = numVertex*maxCostEdge;
 	
+		
 		for (int i = 0; i < buckets.size(); i++) {
 			
 			buckets.set(i, new LinkedList<Integer>());
-			
+		//	System.out.println(i);	
 		}
 	}
 	

@@ -49,6 +49,7 @@ public class DijikstraVetor implements IDijkstra {
 		return element;
 	}
 
+	
 	@Override
 	public void relax(int vertexA, int vertexB, int distance) {
 
