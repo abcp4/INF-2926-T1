@@ -16,14 +16,19 @@ public class ReadAllFiles {
 	public List<GraphInstance> creatAllInstances(){
 		
 		List<String> fileNames = this.getAllFileNames();
+		
 		List<GraphInstance> graphInstances = new ArrayList<GraphInstance>();
 		
 		for(String fileName:fileNames){
-			graphInstances.add(new ReadFile(fileName).createInstance());
+			
+			GraphInstance instance = new ReadFile(fileName).createInstance();
+			instance.name = getNameInstance(fileName);
+			graphInstances.add(instance);
 		}
 		
 		return graphInstances;
 	}
+	
 	
 	public List<String> getAllFileNames(){
 		
@@ -43,5 +48,12 @@ public class ReadAllFiles {
 		return fileNames;
 		
 	}
-
+	
+	public String getNameInstance(String fileName){
+	   
+		int indexLastSeparator = fileName.lastIndexOf("\\");
+	    int sizeName = fileName.length();
+	    
+	    return fileName.substring(indexLastSeparator + 1, sizeName);
+	}
 }

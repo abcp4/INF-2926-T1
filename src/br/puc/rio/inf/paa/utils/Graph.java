@@ -11,6 +11,7 @@ import br.puc.rio.inf.paa.djikstra.Adjacent;
 public class Graph {
 	
 	private Map<Integer, List<Adjacent>> vertices;
+	public int numEdges;
 	
 	public Graph(int numNodes){
 		
