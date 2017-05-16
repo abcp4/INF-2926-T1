@@ -7,8 +7,7 @@ public class AlphaTreeNode {
 	
 	private List<Integer> keys;
 	private int cost;
-	private float balance;
-	private int numNode;
+	private int size;
 	private AlphaTreeNode parent;
 	private AlphaTreeNode left;
 	private AlphaTreeNode right;
@@ -18,13 +17,36 @@ public class AlphaTreeNode {
 		this.keys.add(key);
 		this.cost = cost;
 		this.parent = parent;
-		this.numNode = 1;
+		this.size = 1;
 	}
 	
-	public void increaseNumNode(){
-		this.numNode++;
+	public AlphaTreeNode(AlphaTreeNode node){
+		this.setCost(node.getCost());
+		this.setKeys(node.getKeys());
 	}
 	
+//	public AlphaTreeNode() {
+//		// TODO Auto-generated constructor stub
+//	}
+
+	public void increraseSize(){
+		this.size++;
+	}
+	
+	public void decreraseSize(){
+		this.size--;
+	}
+	
+	public int getSizeRight(){
+		if(this.getRight() == null) return 0;
+		else return this.getRight().size;
+	}
+	
+	public int getSizeLeft(){
+		if(this.getLeft() == null) return 0;
+		else return this.getLeft().size;
+	}
+		
 	public void insertKey(int key){
 		this.keys.add(key);
 	}
@@ -60,19 +82,12 @@ public class AlphaTreeNode {
 		this.right = right;
 	}
 
-	public float getBalance() {
-		return balance;
+	public int getSize() {
+		return size;
 	}
 
-	public void setBalance(float balance) {
-		this.balance = balance;
-	}
-	public int getNumNode() {
-		return numNode;
-	}
-
-	public void setNumNode(int numNode) {
-		this.numNode = numNode;
+	public void setSize(int size) {
+		this.size = size;
 	}
 	
 }

@@ -12,10 +12,8 @@ public class DijikstraAvlTreeStore implements IDijkstra{
 	int numVertices;
 	
 	public DijikstraAvlTreeStore() {
-		
 		this.avlTreeCost = new AvlTree();
 		this.avlTreeKey = new AvlTree();
-		
 	}
 
 	@Override
@@ -72,6 +70,10 @@ public class DijikstraAvlTreeStore implements IDijkstra{
 			
 			this.avlTreeKey.findKeyAndUpdate(to, this.avlTreeKey.findKey(from) + distance);
 		}
+		
+//		System.out.println("Raiz: "+avlTreeCost.getRoot().getCost());
+		avlTreeCost.printCost();
+		avlTreeCost.printBalance();
 		
 	}
 

@@ -278,5 +278,26 @@ public class AvlTree {
 			printBalance(node.getRight());
 		}
 	}
+	
+	public void printCost() {
+		printCost(this.root);
+		System.out.println();
+	}
+
+	private void printCost(AvlTreeNode node) {
+		if (node != null) {
+			printCost(node.getLeft());
+			System.out.printf("%s ", node.getCost());
+			printCost(node.getRight());
+		}
+	}
+	
+	public AvlTreeNode getRoot() {
+		return root;
+	}
+
+	public void setRoot(AvlTreeNode root) {
+		this.root = root;
+	}
 
 }

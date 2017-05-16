@@ -1,21 +1,23 @@
 package br.puc.rio.inf.paa.dijkstra.alphatree;
 
+import br.puc.rio.inf.paa.djikstra.GraphInstance;
+import br.puc.rio.inf.paa.utils.ReadAllFiles;
+import br.puc.rio.inf.paa.utils.ReadFile;
+
 public class TestAlphaTree {
 	
 	public static void main(String[] args) {
 		
-		AlphaTree tree = new AlphaTree();
+		ReadAllFiles readAllFiles = new ReadAllFiles();
 		
-		tree.inserir(1, 15);
-		tree.printNumNodes();
-		tree.inserir(2, 10);
-		tree.printNumNodes();
-		tree.inserir(3, 8);
-		tree.printNumNodes();
-		tree.inserir(5, 25);
-		tree.printNumNodes();
-		tree.inserir(6, 11);
-		tree.printNumNodes();
+		DijkstraAlphaTree store = new DijkstraAlphaTree();
 		
+		GraphInstance instance = new ReadFile("../INF-2926/input/teste.stp").createInstance();
+		
+		instance.dijkstra(1, store);
+		
+		for(int i = 1; i <= store.numVertices; i++){
+			System.out.println("Vertice: "+i+" , Custo: "+store.getCusto()[i]);
+		}
 	}
 }
