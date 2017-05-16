@@ -50,7 +50,7 @@ public class AlphaTree {
 		while(node != null){
 			node.increraseSize();
 			if(!(node.getSizeLeft() <= alpha*node.getSize() && node.getSizeRight() <= alpha*node.getSize())){
-				System.out.println("Detectou :"+node.getCost());
+//				System.out.println("Detectou :"+node.getCost());
 				nodeNotBalance = node;
 			}
 			node = node.getParent();
@@ -74,7 +74,7 @@ public class AlphaTree {
 	public void rebuidTree(AlphaTreeNode nodeRoot){
 		if(nodeRoot != null){
 			
-			System.out.println("Nó desbalanceado: "+nodeRoot.getCost());
+//			System.out.println("Nó desbalanceado: "+nodeRoot.getCost());
 			
 			AlphaTreeNode[] array = null;
 			
@@ -201,8 +201,8 @@ public class AlphaTree {
 			node = child;
 			child = delCost >= node.getCost() ? node.getRight() : node.getLeft();
 			if (delCost == node.getCost()) {
-				this.updateSizesDelete(node);
 				this.delete(node);
+				this.updateSizesDelete(node);
 				return;
 			}
 		}
