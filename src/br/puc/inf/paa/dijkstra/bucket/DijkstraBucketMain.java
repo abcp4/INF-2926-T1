@@ -1,4 +1,4 @@
-package br.puc.inf.paa.djikstra.bucket;
+package br.puc.inf.paa.dijkstra.bucket;
 
 import java.io.IOException;
 import java.nio.charset.Charset;
@@ -7,12 +7,12 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import br.puc.rio.inf.paa.dijkstra.avl.DijikstraAvlTreeStore;
-import br.puc.rio.inf.paa.dijkstra.avl.DjikstraAvlTreeMain;
-import br.puc.rio.inf.paa.djikstra.Adjacent;
-import br.puc.rio.inf.paa.djikstra.DijkstraSolution;
-import br.puc.rio.inf.paa.djikstra.GraphInstance;
-import br.puc.rio.inf.paa.djikstra.IDijkstra;
+import br.puc.rio.inf.paa.dijkstra.Adjacent;
+import br.puc.rio.inf.paa.dijkstra.DijkstraSolution;
+import br.puc.rio.inf.paa.dijkstra.GraphInstance;
+import br.puc.rio.inf.paa.dijkstra.IDijkstra;
+import br.puc.rio.inf.paa.dijkstra.avl.DijkstraAvlTreeStore;
+import br.puc.rio.inf.paa.dijkstra.avl.DijkstraAvlTreeMain;
 import br.puc.rio.inf.paa.utils.CsvWriter;
 import br.puc.rio.inf.paa.utils.ReadAllFiles;
 import br.puc.rio.inf.paa.utils.ReadFile;

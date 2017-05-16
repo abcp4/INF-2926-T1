@@ -4,15 +4,15 @@ import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.List;
 
-import br.puc.rio.inf.paa.dijkstra.avl.DijikstraAvlTreeStore;
-import br.puc.rio.inf.paa.djikstra.DijkstraSolution;
-import br.puc.rio.inf.paa.djikstra.GraphInstance;
-import br.puc.rio.inf.paa.djikstra.IDijkstra;
+import br.puc.rio.inf.paa.dijkstra.DijkstraSolution;
+import br.puc.rio.inf.paa.dijkstra.GraphInstance;
+import br.puc.rio.inf.paa.dijkstra.IDijkstra;
+import br.puc.rio.inf.paa.dijkstra.avl.DijkstraAvlTreeStore;
 import br.puc.rio.inf.paa.utils.CsvWriter;
 import br.puc.rio.inf.paa.utils.ReadAllFiles;
 import br.puc.rio.inf.paa.utils.ReadFile;
 
-public class DjikstraAlphaTreeMain {
+public class DijkstraAlphaTreeMain {
 	
 	public static void main(String[] args) {
 			

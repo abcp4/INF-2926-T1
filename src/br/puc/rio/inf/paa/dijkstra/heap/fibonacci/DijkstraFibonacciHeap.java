@@ -1,7 +1,7 @@
-package br.puc.rio.inf.paa.djikstra.heap.fibonacci;
+package br.puc.rio.inf.paa.dijkstra.heap.fibonacci;
 
-import br.puc.rio.inf.paa.djikstra.GraphInstance;
-import br.puc.rio.inf.paa.djikstra.IDijkstra;
+import br.puc.rio.inf.paa.dijkstra.GraphInstance;
+import br.puc.rio.inf.paa.dijkstra.IDijkstra;
 
 public class DijkstraFibonacciHeap implements IDijkstra {
 
@@ -34,7 +34,7 @@ public class DijkstraFibonacciHeap implements IDijkstra {
 	}
 
 	@Override
-	public int getMin() {
+	public int extractMin() {
 
 		FibonacciHeap.Node min = fibonacciHeap.returnMin();
 
@@ -69,7 +69,7 @@ public class DijkstraFibonacciHeap implements IDijkstra {
 	}
 
 	@Override
-	public void mark(int vertice) {
+	public void setVisited(int vertice) {
 		try {
 			fibonacciHeap.removeMin();
 		} catch (Exception e) {

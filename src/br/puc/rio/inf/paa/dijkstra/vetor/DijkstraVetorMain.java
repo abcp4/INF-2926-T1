@@ -1,12 +1,12 @@
-package br.puc.rio.inf.paa.djikstra.vetor;
+package br.puc.rio.inf.paa.dijkstra.vetor;
 
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.List;
 
-import br.puc.rio.inf.paa.djikstra.DijkstraSolution;
-import br.puc.rio.inf.paa.djikstra.GraphInstance;
-import br.puc.rio.inf.paa.djikstra.IDijkstra;
+import br.puc.rio.inf.paa.dijkstra.DijkstraSolution;
+import br.puc.rio.inf.paa.dijkstra.GraphInstance;
+import br.puc.rio.inf.paa.dijkstra.IDijkstra;
 import br.puc.rio.inf.paa.utils.CsvWriter;
 import br.puc.rio.inf.paa.utils.ReadAllFiles;
 import br.puc.rio.inf.paa.utils.ReadFile;
@@ -44,7 +44,7 @@ public class DijkstraVetorMain {
 		
 		for (GraphInstance instance : instances) {
 
-			IDijkstra iDijkstra = new DijikstraVetor();
+			IDijkstra iDijkstra = new DijkstraVetor();
 			double temp_inicio = System.currentTimeMillis();
 			DijkstraSolution solution = null;
 
@@ -86,7 +86,7 @@ public class DijkstraVetorMain {
 	public void testDjikstraSimple() {
 		GraphInstance instance = new ReadFile("../INF-2926/input/teste.stp").createInstance();
 
-		IDijkstra iDijkstra = new DijikstraVetor();
+		IDijkstra iDijkstra = new DijkstraVetor();
 		DijkstraSolution solution = instance.dijkstra(1, iDijkstra);
 
 		for (int i = 1; i < solution.costs.length; i++) {
@@ -100,7 +100,7 @@ public class DijkstraVetorMain {
 
 		List<GraphInstance> instances = new ReadAllFiles().creatAllInstances();
 		int count = 0;
-		IDijkstra iDijkstra = new DijikstraVetor();
+		IDijkstra iDijkstra = new DijkstraVetor();
 		for (GraphInstance graphInstance : instances) {
 
 			DijkstraSolution solution = graphInstance.dijkstra(1, iDijkstra);

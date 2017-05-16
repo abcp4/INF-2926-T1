@@ -1,4 +1,4 @@
-package br.puc.rio.inf.paa.djikstra;
+package br.puc.rio.inf.paa.dijkstra;
 
 public class DijkstraSolution {
 	

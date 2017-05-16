@@ -1,13 +1,13 @@
-package br.puc.rio.inf.paa.djikstra.heap.fibonacci;
+package br.puc.rio.inf.paa.dijkstra.heap.fibonacci;
 
 import java.io.IOException;
 import java.nio.charset.Charset;
 
 import java.util.List;
 
-import br.puc.rio.inf.paa.djikstra.DijkstraSolution;
-import br.puc.rio.inf.paa.djikstra.GraphInstance;
-import br.puc.rio.inf.paa.djikstra.IDijkstra;
+import br.puc.rio.inf.paa.dijkstra.DijkstraSolution;
+import br.puc.rio.inf.paa.dijkstra.GraphInstance;
+import br.puc.rio.inf.paa.dijkstra.IDijkstra;
 import br.puc.rio.inf.paa.utils.CsvWriter;
 import br.puc.rio.inf.paa.utils.ReadAllFiles;
 import br.puc.rio.inf.paa.utils.ReadFile;

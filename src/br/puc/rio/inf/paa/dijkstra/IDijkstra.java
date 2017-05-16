@@ -1,10 +1,10 @@
-package br.puc.rio.inf.paa.djikstra;
+package br.puc.rio.inf.paa.dijkstra;
 
 public interface IDijkstra {
 
 	public void init(GraphInstance graph, int start);
 
-	public int getMin();
+	public int extractMin();
 
 	public int[] getCusto();
 
@@ -12,7 +12,7 @@ public interface IDijkstra {
 
 	public void relax(int from, int to, int distance);
 	
-	public void mark(int vertice);
+	public void setVisited(int vertice);
 	
 	public boolean isEmpty();
 

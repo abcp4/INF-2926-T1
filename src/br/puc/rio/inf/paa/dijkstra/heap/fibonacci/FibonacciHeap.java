@@ -1,4 +1,4 @@
-package br.puc.rio.inf.paa.djikstra.heap.fibonacci;
+package br.puc.rio.inf.paa.dijkstra.heap.fibonacci;
 
 /**
  * @author Sakthivel Manikam Arunachalam

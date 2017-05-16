@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import br.puc.rio.inf.paa.djikstra.Adjacent;
+import br.puc.rio.inf.paa.dijkstra.Adjacent;
 
 
 public class Graph {

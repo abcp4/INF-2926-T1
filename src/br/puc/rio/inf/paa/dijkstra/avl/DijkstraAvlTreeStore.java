@@ -1,9 +1,9 @@
 package br.puc.rio.inf.paa.dijkstra.avl;
 
-import br.puc.rio.inf.paa.djikstra.GraphInstance;
-import br.puc.rio.inf.paa.djikstra.IDijkstra;
+import br.puc.rio.inf.paa.dijkstra.GraphInstance;
+import br.puc.rio.inf.paa.dijkstra.IDijkstra;
 
-public class DijikstraAvlTreeStore implements IDijkstra{
+public class DijkstraAvlTreeStore implements IDijkstra{
 	
 	AvlTree avlTreeCost;
 	AvlTree avlTreeKey;
@@ -11,7 +11,7 @@ public class DijikstraAvlTreeStore implements IDijkstra{
 	int nodesMarked;
 	int numVertices;
 	
-	public DijikstraAvlTreeStore() {
+	public DijkstraAvlTreeStore() {
 		this.avlTreeCost = new AvlTree();
 		this.avlTreeKey = new AvlTree();
 	}
@@ -37,7 +37,7 @@ public class DijikstraAvlTreeStore implements IDijkstra{
 	}
 
 	@Override
-	public int getMin() {
+	public int extractMin() {
 		return this.avlTreeCost.getMin();
 	}
 
@@ -78,7 +78,7 @@ public class DijikstraAvlTreeStore implements IDijkstra{
 	}
 
 	@Override
-	public void mark(int vertice) {
+	public void setVisited(int vertice) {
 		this.marked[vertice] = true;
 		
 	}

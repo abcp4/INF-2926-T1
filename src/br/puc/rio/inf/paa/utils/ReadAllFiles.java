@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
-import br.puc.rio.inf.paa.djikstra.GraphInstance;
+import br.puc.rio.inf.paa.dijkstra.GraphInstance;
 
 public class ReadAllFiles {
 	

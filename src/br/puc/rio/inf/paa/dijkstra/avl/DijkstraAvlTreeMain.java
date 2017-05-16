@@ -5,16 +5,16 @@ import java.nio.charset.Charset;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import br.puc.inf.paa.djikstra.bucket.DijkstraBucketMain;
-import br.puc.rio.inf.paa.djikstra.DijkstraSolution;
-import br.puc.rio.inf.paa.djikstra.GraphInstance;
-import br.puc.rio.inf.paa.djikstra.IDijkstra;
-import br.puc.rio.inf.paa.djikstra.heap.fibonacci.DijkstraFibonacciHeap;
+import br.puc.inf.paa.dijkstra.bucket.DijkstraBucketMain;
+import br.puc.rio.inf.paa.dijkstra.DijkstraSolution;
+import br.puc.rio.inf.paa.dijkstra.GraphInstance;
+import br.puc.rio.inf.paa.dijkstra.IDijkstra;
+import br.puc.rio.inf.paa.dijkstra.heap.fibonacci.DijkstraFibonacciHeap;
 import br.puc.rio.inf.paa.utils.CsvWriter;
 import br.puc.rio.inf.paa.utils.ReadAllFiles;
 import br.puc.rio.inf.paa.utils.ReadFile;
 
-public class DjikstraAvlTreeMain {
+public class DijkstraAvlTreeMain {
 
 	public static void main(String[] args) {
 		
@@ -46,7 +46,7 @@ public class DjikstraAvlTreeMain {
 	
 		for (GraphInstance instance : instances) {
 
-			IDijkstra iDijkstra = new DijikstraAvlTreeStore();
+			IDijkstra iDijkstra = new DijkstraAvlTreeStore();
 			double temp_inicio = System.currentTimeMillis();
 			DijkstraSolution solution = null; 
 			
@@ -89,7 +89,7 @@ public class DjikstraAvlTreeMain {
 	public void testDjikstraSimple() {
 		GraphInstance instance = new ReadFile("../INF-2926/input/teste.stp").createInstance();
 
-		IDijkstra iDijkstra = new DijikstraAvlTreeStore();
+		IDijkstra iDijkstra = new DijkstraAvlTreeStore();
 		DijkstraSolution solution = instance.dijkstra(1, iDijkstra);
 
 		for (int i = 1; i < solution.costs.length; i++) {
@@ -103,7 +103,7 @@ public class DjikstraAvlTreeMain {
 
 		List<GraphInstance> instances = new ReadAllFiles().creatAllInstances();
 		int count = 0;
-		IDijkstra iDijkstra = new DijikstraAvlTreeStore();
+		IDijkstra iDijkstra = new DijkstraAvlTreeStore();
 		for (GraphInstance graphInstance : instances) {
 
 			DijkstraSolution solution = graphInstance.dijkstra(1, iDijkstra);

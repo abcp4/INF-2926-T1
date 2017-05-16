@@ -1,12 +1,12 @@
-package br.puc.inf.paa.djikstra.bucket;
+package br.puc.inf.paa.dijkstra.bucket;
 
 import java.util.LinkedList;
 
 import javax.swing.plaf.synth.SynthSeparatorUI;
 
-import br.puc.rio.inf.paa.djikstra.Adjacent;
-import br.puc.rio.inf.paa.djikstra.GraphInstance;
-import br.puc.rio.inf.paa.djikstra.IDijkstra;
+import br.puc.rio.inf.paa.dijkstra.Adjacent;
+import br.puc.rio.inf.paa.dijkstra.GraphInstance;
+import br.puc.rio.inf.paa.dijkstra.IDijkstra;
 import br.puc.rio.inf.paa.utils.CollectionsUtils;
 
 public class DijkstraBucket implements IDijkstra {
@@ -70,7 +70,7 @@ public class DijkstraBucket implements IDijkstra {
 	}
 
 	@Override
-	public int getMin() {
+	public int extractMin() {
 		
 		
 		int min = -1;
@@ -127,7 +127,7 @@ public class DijkstraBucket implements IDijkstra {
 	}
 
 	@Override
-	public void mark(int vertice) {
+	public void setVisited(int vertice) {
 		nodesMarked ++;
 	}
 

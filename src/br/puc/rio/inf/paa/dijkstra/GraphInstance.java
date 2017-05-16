@@ -1,5 +1,5 @@
 
-package br.puc.rio.inf.paa.djikstra;
+package br.puc.rio.inf.paa.dijkstra;
 
 import java.util.*;
 
@@ -18,13 +18,13 @@ public class GraphInstance {
 	public DijkstraSolution dijkstra(int vertexStart, IDijkstra dijkstra) {
 
 		dijkstra.init(this, vertexStart);
-		int minVertex = dijkstra.getMin();
+		int minVertex = dijkstra.extractMin();
 
 		 do {
 			
 			if(graph.containsKey(minVertex)){
 				
-				dijkstra.mark(minVertex);
+				dijkstra.setVisited(minVertex);
 	
 				for (int i = 0; i < graph.get(minVertex).size(); i++) {
 					Adjacent adjacent = graph.get(minVertex).get(i);
@@ -33,7 +33,7 @@ public class GraphInstance {
 				}
 			}
 			
-		   minVertex = dijkstra.getMin();
+		   minVertex = dijkstra.extractMin();
 		  
 		   
 		}while (minVertex != -1);

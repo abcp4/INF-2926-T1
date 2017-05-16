@@ -1,6 +1,6 @@
 package br.puc.rio.inf.paa.utils;
 
-import br.puc.rio.inf.paa.djikstra.GraphInstance;
+import br.puc.rio.inf.paa.dijkstra.GraphInstance;
 
 public class ReaderMain {
 

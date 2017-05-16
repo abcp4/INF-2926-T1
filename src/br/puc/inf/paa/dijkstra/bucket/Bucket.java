@@ -1,4 +1,4 @@
-package br.puc.inf.paa.djikstra.bucket;
+package br.puc.inf.paa.dijkstra.bucket;
 
 import java.util.ArrayList;
 import java.util.Collections;
