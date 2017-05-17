@@ -9,6 +9,7 @@ public class GraphInstance {
 	public String name;
 	public int numVertex;
 	public int numEdges;
+	public int maxCostEdge;
 
 	public GraphInstance(Map<Integer, List<Adjacent>> graph) {
 		this.graph = graph;

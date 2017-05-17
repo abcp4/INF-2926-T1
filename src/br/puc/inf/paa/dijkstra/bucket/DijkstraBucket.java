@@ -154,6 +154,9 @@ public class DijkstraBucket implements IDijkstra {
 	}
 	
 	
+	
+	
+	
 	public void setCosts(int from, int to, int totalDistanceToVertex){
 		if (costs[to] == bucket.MAX_WEIGHT){
 			//System.out.println("remove: " + to);

@@ -15,5 +15,6 @@ public interface IDijkstra {
 	public void setVisited(int vertice);
 	
 	public boolean isEmpty();
+	
 
 }
