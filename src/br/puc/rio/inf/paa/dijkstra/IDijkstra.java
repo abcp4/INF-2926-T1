@@ -2,11 +2,11 @@ package br.puc.rio.inf.paa.dijkstra;
 
 public interface IDijkstra {
 
-	public void init(GraphInstance graph, int start);
+	public void initialize(GraphInstance graph, int start);
 
-	public int extractMin();
+	public int getMin();
 
-	public int[] getCusto();
+	public int[] getDistanceTotal();
 
 	public int[] getPath();
 
@@ -14,6 +14,5 @@ public interface IDijkstra {
 	
 	public void setVisited(int vertice);
 	
-	public boolean isEmpty();
-
+	
 }

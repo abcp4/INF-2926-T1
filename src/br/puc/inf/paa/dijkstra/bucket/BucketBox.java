@@ -7,21 +7,19 @@ import java.util.List;
 
 import br.puc.rio.inf.paa.utils.CollectionsUtils;
 
-public class Bucket {
+public class BucketBox {
 
 	public LinkedList<LinkedList<Integer>> buckets;
-	int MAX_WEIGHT;
+	int MAX_DISTANCE;
 
-	//-XX:MaxPermSize=1024m
-	public Bucket(int numVertex, int maxCostEdge) {
+	public BucketBox(int numVertex, int maxCostEdge) {
 		buckets = new LinkedList<LinkedList<Integer>>(CollectionsUtils.setSize(numVertex*maxCostEdge + 1));
-		MAX_WEIGHT = numVertex*maxCostEdge;
+		MAX_DISTANCE = numVertex*maxCostEdge;
 	
 		
 		for (int i = 0; i < buckets.size(); i++) {
 			
-			buckets.set(i, new LinkedList<Integer>());
-		//	System.out.println(i);	
+			buckets.set(i, new LinkedList<Integer>());	
 		}
 	}
 	

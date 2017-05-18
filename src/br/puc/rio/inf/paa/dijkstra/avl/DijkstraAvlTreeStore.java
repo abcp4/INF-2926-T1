@@ -7,9 +7,9 @@ public class DijkstraAvlTreeStore implements IDijkstra{
 	
 	AvlTree avlTreeCost;
 	AvlTree avlTreeKey;
-	boolean[] marked;
-	int nodesMarked;
-	int numVertices;
+	boolean[] visited;
+	int visitedNodes;
+	int vertexTotal;
 	
 	public DijkstraAvlTreeStore() {
 		this.avlTreeCost = new AvlTree();
@@ -17,11 +17,11 @@ public class DijkstraAvlTreeStore implements IDijkstra{
 	}
 
 	@Override
-	public void init(GraphInstance graph, int start) {
+	public void initialize(GraphInstance instance, int start) {
 		
-		this.numVertices = graph.graph.size();
+		this.vertexTotal = instance.graph.size();
 		
-		for(int key:graph.graph.keySet()){
+		for(int key:instance.graph.keySet()){
 					
 			if(key != start){
 				this.avlTreeCost.insert(key, Integer.MAX_VALUE);
@@ -32,22 +32,22 @@ public class DijkstraAvlTreeStore implements IDijkstra{
 			}
 		}
 		
-		this.marked = new boolean[graph.graph.size() + 1];
+		this.visited = new boolean[instance.graph.size() + 1];
 		
 	}
 
 	@Override
-	public int extractMin() {
+	public int getMin() {
 		return this.avlTreeCost.getMin();
 	}
 
 	@Override
-	public int[] getCusto() {
-		int[] custos = new int[this.numVertices+1];
+	public int[] getDistanceTotal() {
+		int[] custos = new int[this.vertexTotal+1];
 		
 		custos[0] = -1;
 		
-		for(int i = 1; i <= this.numVertices; i++){
+		for(int i = 1; i <= this.vertexTotal; i++){
 			custos[i] = this.avlTreeKey.findKey(i);
 		}
 		
@@ -63,15 +63,14 @@ public class DijkstraAvlTreeStore implements IDijkstra{
 	@Override
 	public void relax(int from, int to, int distance) {
 		
-		if(this.avlTreeKey.findKey(from) + distance < this.avlTreeKey.findKey(to) && !this.marked[to]){
+		if(this.avlTreeKey.findKey(from) + distance < this.avlTreeKey.findKey(to) && !this.visited[to]){
 			
 			this.avlTreeCost.delete(this.avlTreeKey.findKey(to));
 			this.avlTreeCost.insert(to, this.avlTreeKey.findKey(from) + distance);
 			
 			this.avlTreeKey.findKeyAndUpdate(to, this.avlTreeKey.findKey(from) + distance);
 		}
-		
-//		System.out.println("Raiz: "+avlTreeCost.getRoot().getCost());
+	
 		avlTreeCost.printCost();
 		avlTreeCost.printBalance();
 		
@@ -79,14 +78,10 @@ public class DijkstraAvlTreeStore implements IDijkstra{
 
 	@Override
 	public void setVisited(int vertice) {
-		this.marked[vertice] = true;
+		this.visited[vertice] = true;
 		
 	}
 
-	@Override
-	public boolean isEmpty() {
-		// TODO Auto-generated method stub
-		return false;
-	}
+
 
 }

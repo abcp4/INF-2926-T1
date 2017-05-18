@@ -89,9 +89,9 @@ public class DijkstraAlphaTreeMain {
 			IDijkstra iDijkstra = new DijkstraAlphaTree();
 			DijkstraSolution solution = instance.dijkstra(1, iDijkstra);
 	
-			for (int i = 1; i < solution.costs.length; i++) {
+			for (int i = 1; i < solution.distance.length; i++) {
 				
-				System.out.println("From: " + solution.tree[i] + " To: " + i + " Custo: " + solution.costs[i]);
+				System.out.println("From: " + solution.path[i] + " To: " + i + " Custo: " + solution.distance[i]);
 			}
 	
 		}
@@ -105,10 +105,10 @@ public class DijkstraAlphaTreeMain {
 	
 				DijkstraSolution solution = graphInstance.dijkstra(1, iDijkstra);
 	
-				for (int i = 0; i < solution.costs.length; i++) {
+				for (int i = 0; i < solution.distance.length; i++) {
 					System.out.println(graphInstance.name);
 					System.out.println("N: " + graphInstance.numVertex + " x " + "M: " + graphInstance.numEdges);
-					System.out.println(  "From: " + solution.tree[i] + " To: " + i + " Custo: " + solution.costs[i]);
+					System.out.println(  "From: " + solution.path[i] + " To: " + i + " Custo: " + solution.distance[i]);
 				}
 				count++;
 	

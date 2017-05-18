@@ -25,10 +25,6 @@ public class AlphaTreeNode {
 		this.setKeys(node.getKeys());
 	}
 	
-//	public AlphaTreeNode() {
-//		// TODO Auto-generated constructor stub
-//	}
-
 	public void increraseSize(){
 		this.size++;
 	}

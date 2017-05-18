@@ -14,7 +14,7 @@ public class DijkstraVetor implements IDijkstra {
 
 
 	@Override
-	public void init(GraphInstance graphInstance, int start) {
+	public void initialize(GraphInstance graphInstance, int start) {
 
 		instance = graphInstance;
 		distance = new int[graphInstance.graph.size() + 1];
@@ -38,7 +38,7 @@ public class DijkstraVetor implements IDijkstra {
 	}
 
 	@Override
-	public int extractMin() {
+	public int getMin() {
 
 		int min = Integer.MAX_VALUE;
 		int element = -1;
@@ -71,12 +71,7 @@ public class DijkstraVetor implements IDijkstra {
 
 	}
 
-	@Override //TODO - remover esse metodo
-	public boolean isEmpty() {
-		return  visitedTotal == visited.length - 1;
-	}
-
-	public int[] getCusto() {
+	public int[] getDistanceTotal() {
 		return distance;
 	}
 

@@ -15,10 +15,11 @@ public class GraphInstance {
 		this.numVertex = graph.size();
 	}
 
+	
 	public DijkstraSolution dijkstra(int vertexStart, IDijkstra dijkstra) {
 
-		dijkstra.init(this, vertexStart);
-		int minVertex = dijkstra.extractMin();
+		dijkstra.initialize(this, vertexStart);
+		int minVertex = dijkstra.getMin();
 
 		 do {
 			
@@ -33,12 +34,12 @@ public class GraphInstance {
 				}
 			}
 			
-		   minVertex = dijkstra.extractMin();
+		   minVertex = dijkstra.getMin();
 		  
 		   
 		}while (minVertex != -1);
 
-		return new DijkstraSolution(dijkstra.getCusto(), dijkstra.getPath()); 
+		return new DijkstraSolution(dijkstra.getDistanceTotal(), dijkstra.getPath()); 
 
 	}
 
