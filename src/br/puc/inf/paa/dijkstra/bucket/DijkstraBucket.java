@@ -132,9 +132,23 @@ public class DijkstraBucket implements IDijkstra {
 	}
 	
 	
+<<<<<<< HEAD
 	public void decreaseKey(int vertex, int currentDistanceToVertex){
 		if (distance[vertex] == box.MAX_DISTANCE){
 			setVisited(vertex);
+=======
+	
+	
+	
+	public void setCosts(int from, int to, int totalDistanceToVertex){
+		if (costs[to] == bucket.MAX_WEIGHT){
+			//System.out.println("remove: " + to);
+		 //	System.out.println("size infinity1 "+ costInfinity.size());
+			
+			bucket.buckets.get(bucket.MAX_WEIGHT).remove(new Integer(to));
+			
+			//System.out.println("size infinity "+ costInfinity.size());
+>>>>>>> 0bf049f730dc2a97aa1514e95de0172a5b2b934e
 		}
 		else{
 			//Removed old costs of bucket of vertex

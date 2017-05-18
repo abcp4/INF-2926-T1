@@ -2,10 +2,12 @@ package br.puc.inf.paa.dijkstra.bucket;
 
 import java.io.IOException;
 import java.nio.charset.Charset;
+import java.sql.Time;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import br.puc.rio.inf.paa.dijkstra.Adjacent;
 import br.puc.rio.inf.paa.dijkstra.DijkstraSolution;
@@ -41,6 +43,7 @@ public class DijkstraBucketMain {
 				writer.write("Number of Vertex");
 				writer.write("Number of Edge");
 				writer.write("Average time");
+				writer.write("Theoretical complexity");
 
 				writer.endRecord();
 
@@ -51,6 +54,7 @@ public class DijkstraBucketMain {
 			for (GraphInstance instance : instances) {
 
 				IDijkstra iDijkstra = new DijkstraBucket();
+				DijkstraBucket dijkstraBucket = new DijkstraBucket();
 				double temp_inicio = System.currentTimeMillis();
 				DijkstraSolution solution = null; 
 				
@@ -65,12 +69,15 @@ public class DijkstraBucketMain {
 				
 				numInstance++;
 				
+				
 				try {
 					writer.write(instance.name);
 					writer.write(String.valueOf(instance.numVertex));
 					writer.write(String.valueOf(instance.numEdges));
 					writer.write(String.valueOf((durationEnd / count)));
+					writer.write(String.valueOf(instance.numEdges+(dijkstraBucket.maxCostEdge(instance)*instance.numVertex)));
 
+					
 					writer.endRecord();
 
 				} catch (IOException e) {
@@ -81,8 +88,8 @@ public class DijkstraBucketMain {
 				System.out.println("N: " + instance.numVertex + " x " + "M: " + instance.numEdges);
 				System.out.println("Quantidade de vezes: " + count);
 				System.out.println("Tempo medio: " +  durationEnd / count);
+				System.out.println("CT: " + instance.numEdges+(dijkstraBucket.maxCostEdge(instance)*instance.numVertex));
 				System.out.println();
-				
 				
 				count = 0;
 				durationEnd = 0;
