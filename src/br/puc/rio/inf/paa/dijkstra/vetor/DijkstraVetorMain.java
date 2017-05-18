@@ -35,6 +35,7 @@ public class DijkstraVetorMain {
 			writer.write("Number of Vertex");
 			writer.write("Number of Edge");
 			writer.write("Average time");
+			writer.write("Theoretical complexity");
 		
 			writer.endRecord();		
 
@@ -59,11 +60,14 @@ public class DijkstraVetorMain {
 
 			numInstance++;
 			try {
+				double complexity = (instance.numVertex ^ 2) + instance.numEdges;
+				
 				writer.write(instance.name);
 				writer.write(String.valueOf(instance.numVertex));
 				writer.write(String.valueOf(instance.numEdges));
 				writer.write(String.valueOf((durationEnd / count)));
-			
+				writer.write(String.valueOf(complexity));
+				
 				writer.endRecord();		
 
 			} catch (IOException e) {

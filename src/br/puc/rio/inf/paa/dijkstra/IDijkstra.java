@@ -14,11 +14,4 @@ public interface IDijkstra {
 	
 	public void setVisited(int vertice);
 	
-<<<<<<< HEAD
-	
-=======
-	public boolean isEmpty();
-	
-
->>>>>>> 0bf049f730dc2a97aa1514e95de0172a5b2b934e
 }

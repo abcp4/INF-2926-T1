@@ -13,6 +13,7 @@ import br.puc.rio.inf.paa.dijkstra.heap.fibonacci.DijkstraFibonacciHeap;
 import br.puc.rio.inf.paa.utils.CsvWriter;
 import br.puc.rio.inf.paa.utils.ReadAllFiles;
 import br.puc.rio.inf.paa.utils.ReadFile;
+import br.puc.rio.inf.paa.utils.Utils;
 
 public class DijkstraAvlTreeMain {
 
@@ -37,6 +38,7 @@ public class DijkstraAvlTreeMain {
 			writer.write("Number of Vertex");
 			writer.write("Number of Edge");
 			writer.write("Average time");
+			writer.write("Theoretical complexity");
 
 			writer.endRecord();
 
@@ -62,10 +64,15 @@ public class DijkstraAvlTreeMain {
 			numInstance++;
 			
 			try {
+				//O(V*log(V) + E*log(V))
+				double complexity = instance.numVertex *  Utils.logBase2(instance.numVertex) 
+								  + instance.numEdges * Utils.logBase2(instance.numVertex); 
+				
 				writer.write(instance.name);
 				writer.write(String.valueOf(instance.numVertex));
 				writer.write(String.valueOf(instance.numEdges));
 				writer.write(String.valueOf((durationEnd / count)));
+				writer.write(String.valueOf(complexity));
 
 				writer.endRecord();
 

@@ -5,7 +5,7 @@ import java.util.LinkedList;
 import br.puc.rio.inf.paa.dijkstra.Adjacent;
 import br.puc.rio.inf.paa.dijkstra.GraphInstance;
 import br.puc.rio.inf.paa.dijkstra.IDijkstra;
-import br.puc.rio.inf.paa.utils.CollectionsUtils;
+import br.puc.rio.inf.paa.utils.Utils;
 
 public class DijkstraBucket implements IDijkstra {
 
@@ -14,21 +14,22 @@ public class DijkstraBucket implements IDijkstra {
 	
 	int path[];
 	int distance[];
-	int pos_index;
+	int posIndex;
 	int visitedTotal = 0;
+	int maxEdge;
 
 	@Override
 	public void initialize(GraphInstance graph, int start) {
 
-		int maxEdge = maxCostEdge(graph);
+		maxEdge = findMaxEdge(graph);
 		box = new BucketBox(graph.graph.size(), maxEdge);
 		
 		distance = new int[graph.graph.size() + 1];
 		path = new int[graph.graph.size() + 1];
 
-		pos_index = 0;
+		posIndex = 0;
 
-		nodesRef = new LinkedList<LinkedList<Integer>>(CollectionsUtils.setSize(graph.graph.size() + 1));
+		nodesRef = new LinkedList<LinkedList<Integer>>(Utils.setSize(graph.graph.size() + 1));
 	
 		distance[0] = box.MAX_DISTANCE;
 		path[0] = box.MAX_DISTANCE;
@@ -67,14 +68,14 @@ public class DijkstraBucket implements IDijkstra {
 		
 		
 		int min = -1;
-		for (int i = pos_index; i < box.buckets.size(); i++) {
+		for (int i = posIndex; i < box.buckets.size(); i++) {
 				
 			if (box.buckets.get(i).size() > 0) {
 				
 				min = box.buckets.get(i).getFirst();
 				box.buckets.get(i).removeFirst();
 
-				pos_index = i;
+				posIndex = i;
 				
 				return min;
 			}
@@ -116,7 +117,7 @@ public class DijkstraBucket implements IDijkstra {
 		box.buckets.get(box.MAX_DISTANCE).remove(new Integer(vertex));
 	}
 
-	public int maxCostEdge(GraphInstance graphInstance) {
+	public int findMaxEdge(GraphInstance graphInstance) {
 		int maxCost = Integer.MIN_VALUE;
 
 		for (int vertex : graphInstance.graph.keySet()) {
@@ -132,23 +133,10 @@ public class DijkstraBucket implements IDijkstra {
 	}
 	
 	
-<<<<<<< HEAD
+
 	public void decreaseKey(int vertex, int currentDistanceToVertex){
 		if (distance[vertex] == box.MAX_DISTANCE){
 			setVisited(vertex);
-=======
-	
-	
-	
-	public void setCosts(int from, int to, int totalDistanceToVertex){
-		if (costs[to] == bucket.MAX_WEIGHT){
-			//System.out.println("remove: " + to);
-		 //	System.out.println("size infinity1 "+ costInfinity.size());
-			
-			bucket.buckets.get(bucket.MAX_WEIGHT).remove(new Integer(to));
-			
-			//System.out.println("size infinity "+ costInfinity.size());
->>>>>>> 0bf049f730dc2a97aa1514e95de0172a5b2b934e
 		}
 		else{
 			//Removed old costs of bucket of vertex
@@ -166,4 +154,6 @@ public class DijkstraBucket implements IDijkstra {
 		// TODO Auto-generated method stub
 		return distance;
 	}
+
+
 }

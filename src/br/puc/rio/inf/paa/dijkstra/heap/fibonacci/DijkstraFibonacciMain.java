@@ -11,6 +11,7 @@ import br.puc.rio.inf.paa.dijkstra.IDijkstra;
 import br.puc.rio.inf.paa.utils.CsvWriter;
 import br.puc.rio.inf.paa.utils.ReadAllFiles;
 import br.puc.rio.inf.paa.utils.ReadFile;
+import br.puc.rio.inf.paa.utils.Utils;
 
 public class DijkstraFibonacciMain {
 
@@ -34,7 +35,8 @@ public class DijkstraFibonacciMain {
 			writer.write("Number of Vertex");
 			writer.write("Number of Edge");
 			writer.write("Average time");
-
+			writer.write("Theoretical complexity");
+			
 			writer.endRecord();
 
 		} catch (IOException e) {
@@ -58,11 +60,15 @@ public class DijkstraFibonacciMain {
 			numInstance++;
 
 			try {
+				
+				double complexity = Utils.logBase2(instance.numVertex) + instance.numEdges;
+				
 				writer.write(instance.name);
 				writer.write(String.valueOf(instance.numVertex));
 				writer.write(String.valueOf(instance.numEdges));
 				writer.write(String.valueOf((durationEnd / count)));
-
+				writer.write(String.valueOf(complexity));
+				
 				writer.endRecord();
 
 			} catch (IOException e) {

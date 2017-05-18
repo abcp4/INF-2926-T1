@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
-import br.puc.rio.inf.paa.utils.CollectionsUtils;
+import br.puc.rio.inf.paa.utils.Utils;
 
 public class BucketBox {
 
@@ -13,7 +13,7 @@ public class BucketBox {
 	int MAX_DISTANCE;
 
 	public BucketBox(int numVertex, int maxCostEdge) {
-		buckets = new LinkedList<LinkedList<Integer>>(CollectionsUtils.setSize(numVertex*maxCostEdge + 1));
+		buckets = new LinkedList<LinkedList<Integer>>(Utils.setSize(numVertex*maxCostEdge + 1));
 		MAX_DISTANCE = numVertex*maxCostEdge;
 	
 		

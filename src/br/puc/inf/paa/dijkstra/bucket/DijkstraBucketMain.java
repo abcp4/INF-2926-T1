@@ -26,6 +26,7 @@ public class DijkstraBucketMain {
 		//	 new DijkstraBucketMain().testDjikstraSimple();
 			String nameCVSVetor = "nameCSVBucket.csv";
 
+			
 			CsvWriter writer = new CsvWriter(nameCVSVetor, ',', Charset.forName("ISO-8859-1"));
 
 			
@@ -71,11 +72,13 @@ public class DijkstraBucketMain {
 				
 				
 				try {
+					double complexity = instance.numEdges+(dijkstraBucket.maxEdge * instance.numVertex); 
+					
 					writer.write(instance.name);
 					writer.write(String.valueOf(instance.numVertex));
 					writer.write(String.valueOf(instance.numEdges));
 					writer.write(String.valueOf((durationEnd / count)));
-					writer.write(String.valueOf(instance.numEdges+(dijkstraBucket.maxCostEdge(instance)*instance.numVertex)));
+					writer.write(String.valueOf(complexity));
 
 					
 					writer.endRecord();
@@ -88,7 +91,7 @@ public class DijkstraBucketMain {
 				System.out.println("N: " + instance.numVertex + " x " + "M: " + instance.numEdges);
 				System.out.println("Quantidade de vezes: " + count);
 				System.out.println("Tempo medio: " +  durationEnd / count);
-				System.out.println("CT: " + instance.numEdges+(dijkstraBucket.maxCostEdge(instance)*instance.numVertex));
+				System.out.println("CT: " + instance.numEdges+(dijkstraBucket.findMaxEdge(instance)*instance.numVertex));
 				System.out.println();
 				
 				count = 0;
