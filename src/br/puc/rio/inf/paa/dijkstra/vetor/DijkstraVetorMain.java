@@ -29,6 +29,8 @@ public class DijkstraVetorMain {
 		int timeout = 5;
 		double temp_final = 0.0;
 		double durationEnd = 0.0;
+		double complexity = 0.0;
+		double averageTime = 0.0;
 		
 		try {
 			writer.write("Name Instance");
@@ -36,6 +38,7 @@ public class DijkstraVetorMain {
 			writer.write("Number of Edge");
 			writer.write("Average time");
 			writer.write("Theoretical complexity");
+			writer.write("Theoretical complexit");
 		
 			writer.endRecord();		
 
@@ -46,12 +49,12 @@ public class DijkstraVetorMain {
 		for (GraphInstance instance : instances) {
 
 			IDijkstra iDijkstra = new DijkstraVetor();
-			double temp_inicio = System.currentTimeMillis();
+			double temp_inicio = System.nanoTime();
 			DijkstraSolution solution = null;
 
 			while (durationEnd <= timeout) {
 				solution = instance.dijkstra(1, iDijkstra);
-				temp_final = System.currentTimeMillis();
+				temp_final = System.nanoTime();
 
 				durationEnd = temp_final - temp_inicio;
 
@@ -60,13 +63,15 @@ public class DijkstraVetorMain {
 
 			numInstance++;
 			try {
-				double complexity = (instance.numVertex ^ 2) + instance.numEdges;
+				complexity = (instance.numVertex ^ 2) + instance.numEdges;
 				
+				averageTime = (durationEnd/count);
 				writer.write(instance.name);
 				writer.write(String.valueOf(instance.numVertex));
 				writer.write(String.valueOf(instance.numEdges));
-				writer.write(String.valueOf((durationEnd / count)));
+				writer.write(String.valueOf(averageTime));
 				writer.write(String.valueOf(complexity));
+				writer.write(String.valueOf(complexity/averageTime));
 				
 				writer.endRecord();		
 
@@ -79,6 +84,7 @@ public class DijkstraVetorMain {
 			System.out.println("N: " + instance.numVertex + " x " + "M: " + instance.numEdges);
 			System.out.println("Quantidade de vezes: " + count);
 			System.out.println("Tempo medio: " + (durationEnd / count));
+			System.out.println("CT: " + complexity);
 			System.out.println();
 
 			count = 0;

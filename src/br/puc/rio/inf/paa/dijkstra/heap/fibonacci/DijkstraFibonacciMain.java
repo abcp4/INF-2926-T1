@@ -29,6 +29,7 @@ public class DijkstraFibonacciMain {
 		int timeout = 5;
 		double temp_final = 0.0;
 		double durationEnd = 0.0;
+		double complexity = 0.0;
 
 		try {
 			writer.write("Name Instance");
@@ -61,7 +62,7 @@ public class DijkstraFibonacciMain {
 
 			try {
 				
-				double complexity = Utils.logBase2(instance.numVertex) + instance.numEdges;
+				complexity = Utils.logBase2(instance.numVertex) + instance.numEdges;
 				
 				writer.write(instance.name);
 				writer.write(String.valueOf(instance.numVertex));
@@ -80,6 +81,7 @@ public class DijkstraFibonacciMain {
 			System.out.println("N: " + instance.numVertex + " x " + "M: " + instance.numEdges);
 			System.out.println("Quantidade de vezes: " + count);
 			System.out.println("Tempo medio: " + (durationEnd / count));
+			System.out.println("CT: " + complexity);
 			System.out.println();
 
 			count = 0;

@@ -38,6 +38,7 @@ public class DijkstraBucketMain {
 			int timeout = 5;
 			double temp_final = 0.0;
 			double durationEnd = 0.0;
+			double complexity = 0.0;
 			
 			try {
 				writer.write("Name Instance");
@@ -72,7 +73,7 @@ public class DijkstraBucketMain {
 				
 				
 				try {
-					double complexity = instance.numEdges+(dijkstraBucket.maxEdge * instance.numVertex); 
+					complexity = instance.numEdges+(dijkstraBucket.maxEdge * instance.numVertex); 
 					
 					writer.write(instance.name);
 					writer.write(String.valueOf(instance.numVertex));
@@ -91,7 +92,7 @@ public class DijkstraBucketMain {
 				System.out.println("N: " + instance.numVertex + " x " + "M: " + instance.numEdges);
 				System.out.println("Quantidade de vezes: " + count);
 				System.out.println("Tempo medio: " +  durationEnd / count);
-				System.out.println("CT: " + instance.numEdges+(dijkstraBucket.findMaxEdge(instance)*instance.numVertex));
+				System.out.println("CT: " + complexity);
 				System.out.println();
 				
 				count = 0;
