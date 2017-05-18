@@ -31,10 +31,7 @@ public class DijkstraAlphaTree implements IDijkstra{
 				this.alphaTreeKey.insert(0, key);
 			}
 		}
-		
-		alphaTreeKey.printCost();
-		alphaTreeKey.printSize();
-		
+				
 		this.visited = new boolean[instance.graph.size() + 1];
 		
 	}

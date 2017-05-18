@@ -71,8 +71,6 @@ public class DijkstraAvlTreeStore implements IDijkstra{
 			this.avlTreeKey.findKeyAndUpdate(to, this.avlTreeKey.findKey(from) + distance);
 		}
 	
-		avlTreeCost.printCost();
-		avlTreeCost.printBalance();
 		
 	}
 

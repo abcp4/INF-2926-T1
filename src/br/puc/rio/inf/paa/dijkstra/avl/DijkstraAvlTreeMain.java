@@ -90,7 +90,7 @@ public class DijkstraAvlTreeMain {
 			count = 0;
 			durationEnd = 0;
 		}
-
+		writer.close();
 	}
 
 	public void testDjikstraSimple() {
