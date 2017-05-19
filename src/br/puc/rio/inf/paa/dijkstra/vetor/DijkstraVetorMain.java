@@ -15,7 +15,7 @@ public class DijkstraVetorMain {
 
 	public static void main(String[] args) {
 
-		String nameCVSVetor = "nameCVSVetor.csv";
+		String nameCVSVetor = "E:\\nameCVSVetor.csv";
 
 		CsvWriter writer = new CsvWriter(nameCVSVetor, ',', Charset.forName("ISO-8859-1"));
 
@@ -63,13 +63,18 @@ public class DijkstraVetorMain {
 
 			numInstance++;
 			try {
-				complexity = (instance.numVertex ^ 2) + instance.numEdges;
+				complexity = (instance.numVertex * instance.numVertex) + instance.numEdges;
 				
 				averageTime = (durationEnd/count);
+				
+				averageTime = averageTime/100;
+				
 				writer.write(instance.name);
 				writer.write(String.valueOf(instance.numVertex));
 				writer.write(String.valueOf(instance.numEdges));
+				
 				writer.write(String.valueOf(averageTime));
+				
 				writer.write(String.valueOf(complexity));
 				writer.write(String.valueOf(complexity/averageTime));
 				

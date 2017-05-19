@@ -5,7 +5,7 @@ import java.util.List;
 
 public class AlphaTree {
 	
-	public static double alpha = 0.5;
+	public static double alpha = 0.7;
 	private AlphaTreeNode root;
 
 	public AlphaTree() {

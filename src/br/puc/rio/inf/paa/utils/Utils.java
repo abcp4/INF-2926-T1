@@ -16,5 +16,16 @@ public class Utils {
 		
 		return (Math.log(num)/Math.log(2));
 	}
+	
+	
+	public static void main(String args[]){
+
+		
+	}
+	
+	
+//	public static long ElapsedNanoSeconds(Stopwatch watch){
+//         return watch.ElapsedTicks * 1000000000 / Stopwatch.Frequency;
+//    }
 
 }
