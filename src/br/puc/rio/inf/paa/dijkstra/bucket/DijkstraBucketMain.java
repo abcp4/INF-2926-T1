@@ -16,7 +16,7 @@ public class DijkstraBucketMain {
 
 	public static void main(String[] args) {
 
-		String nameCVSVetor = "nameCVBucket.csv";
+		String nameCVSVetor = "nameCSVBucket.csv";
 
 		CsvWriter writer = new CsvWriter(nameCVSVetor, ',', Charset.forName("ISO-8859-1"));
 

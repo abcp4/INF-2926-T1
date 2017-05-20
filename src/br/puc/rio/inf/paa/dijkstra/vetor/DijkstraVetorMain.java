@@ -16,9 +16,9 @@ public class DijkstraVetorMain {
 
 	public static void main(String[] args) {
 
-		String nameCVSVetor = "nameCVSVetor.csv";
+		String nameCSV = "nameCSVVetor.csv";
 
-		CsvWriter writer = new CsvWriter(nameCVSVetor, ',', Charset.forName("ISO-8859-1"));
+		CsvWriter writer = new CsvWriter(nameCSV, ',', Charset.forName("ISO-8859-1"));
 
 		// new DijkstraVetorMain().testDjistraReadAllInstances();
 
