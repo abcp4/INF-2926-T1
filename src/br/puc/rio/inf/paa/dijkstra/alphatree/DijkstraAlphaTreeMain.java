@@ -62,8 +62,8 @@ public class DijkstraAlphaTreeMain {
 				
 				try {
 					//O(V*log(V) + E*log(V))
-					complexity = instance.numVertex *  Utils.logBase2(instance.numVertex) 
-									  + instance.numEdges * Utils.logBase2(instance.numVertex); 
+					complexity = instance.numVertex *  Utils.logBase2((double) instance.numVertex) 
+									  + instance.numEdges * Utils.logBase2((double) instance.numVertex); 
 					
 					writer.write(instance.name);
 					writer.write(String.valueOf(instance.numVertex));

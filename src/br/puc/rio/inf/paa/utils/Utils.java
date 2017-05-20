@@ -12,7 +12,7 @@ public class Utils {
 	}
 	
 	
-	public static double logBase2(int num){
+	public static double logBase2(double num){
 		
 		return (Math.log(num)/Math.log(2));
 	}

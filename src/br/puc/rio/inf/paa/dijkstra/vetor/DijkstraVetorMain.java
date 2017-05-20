@@ -10,12 +10,13 @@ import br.puc.rio.inf.paa.dijkstra.IDijkstra;
 import br.puc.rio.inf.paa.utils.CsvWriter;
 import br.puc.rio.inf.paa.utils.ReadAllFiles;
 import br.puc.rio.inf.paa.utils.ReadFile;
+import br.puc.rio.inf.paa.utils.Utils;
 
 public class DijkstraVetorMain {
 
 	public static void main(String[] args) {
 
-		String nameCVSVetor = "E:\\nameCVSVetor.csv";
+		String nameCVSVetor = "nameCVSVetor.csv";
 
 		CsvWriter writer = new CsvWriter(nameCVSVetor, ',', Charset.forName("ISO-8859-1"));
 
@@ -29,16 +30,19 @@ public class DijkstraVetorMain {
 		int timeout = 5;
 		double temp_final = 0.0;
 		double durationEnd = 0.0;
-		double complexity = 0.0;
-		double averageTime = 0.0;
+		double ctTime = 0.0;
+		double cpuTime = 0.0;
 		
 		try {
-			writer.write("Name Instance");
-			writer.write("Number of Vertex");
-			writer.write("Number of Edge");
-			writer.write("Average time");
-			writer.write("Theoretical complexity");
-			writer.write("Theoretical complexit");
+			writer.write("Instance");
+			writer.write("N");
+			writer.write("M");
+			writer.write("N+M");
+			writer.write("CPU");
+			writer.write("CT");
+			writer.write("CT/CPU");
+			writer.write("Log(CPU)");
+			writer.write("Log(CT/CPU)");
 		
 			writer.endRecord();		
 
@@ -63,20 +67,34 @@ public class DijkstraVetorMain {
 
 			numInstance++;
 			try {
-				complexity = (instance.numVertex * instance.numVertex) + instance.numEdges;
+				ctTime = (instance.numVertex * instance.numVertex) + instance.numEdges;
 				
-				averageTime = (durationEnd/count);
+				cpuTime = (durationEnd/count);
 				
-				averageTime = averageTime/100;
+				cpuTime = cpuTime/100;
+				
+				int nm = instance.numEdges + instance.numVertex;
 				
 				writer.write(instance.name);
+				
+				double logCPU = Utils.logBase2(cpuTime);
+				
+				double logCTCPU = Utils.logBase2(ctTime/cpuTime);
+				
 				writer.write(String.valueOf(instance.numVertex));
 				writer.write(String.valueOf(instance.numEdges));
 				
-				writer.write(String.valueOf(averageTime));
+				writer.write(String.valueOf(nm));
 				
-				writer.write(String.valueOf(complexity));
-				writer.write(String.valueOf(complexity/averageTime));
+				writer.write(String.valueOf(cpuTime));
+				
+				writer.write(String.valueOf(ctTime));
+				
+				writer.write(String.valueOf(ctTime/cpuTime));
+				
+				writer.write(String.valueOf(logCPU));
+				
+				writer.write(String.valueOf(logCTCPU));
 				
 				writer.endRecord();		
 
@@ -89,7 +107,7 @@ public class DijkstraVetorMain {
 			System.out.println("N: " + instance.numVertex + " x " + "M: " + instance.numEdges);
 			System.out.println("Quantidade de vezes: " + count);
 			System.out.println("Tempo medio: " + (durationEnd / count));
-			System.out.println("CT: " + complexity);
+			System.out.println("CT: " + ctTime);
 			System.out.println();
 
 			count = 0;
