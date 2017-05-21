@@ -10,8 +10,7 @@ import br.puc.rio.inf.paa.utils.Utils;
 public class DijkstraBucket implements IDijkstra {
 
 	BucketBox box;
-	LinkedList<LinkedList<Integer>> nodesRef;
-
+	
 	int path[];
 	int distance[];
 	int posIndex;
@@ -29,9 +28,7 @@ public class DijkstraBucket implements IDijkstra {
 
 		posIndex = 0;
 
-		nodesRef = new LinkedList<LinkedList<Integer>>(Utils.setSize(graph.graph.size() + 1));
-
-		distance[0] = box.MAX_DISTANCE;
+			distance[0] = box.MAX_DISTANCE;
 		path[0] = box.MAX_DISTANCE;
 
 		for (int vertex : graph.graph.keySet()) {
@@ -42,8 +39,7 @@ public class DijkstraBucket implements IDijkstra {
 				newNode.add(vertex);
 
 				box.add(box.MAX_DISTANCE, newNode);
-				nodesRef.add(vertex, newNode);
-
+	
 			} else {
 				distance[start] = 0;
 
@@ -54,8 +50,7 @@ public class DijkstraBucket implements IDijkstra {
 
 				path[start] = -1;
 
-				nodesRef.add(start, newNode);
-
+	
 			}
 
 		}
@@ -79,14 +74,14 @@ public class DijkstraBucket implements IDijkstra {
 
 		}
 
-		if (box.buckets.get(box.MAX_DISTANCE).size() > 0) {
+/*		if (box.buckets.get(box.MAX_DISTANCE).size() > 0) {
 
 			min = box.buckets.get(box.MAX_DISTANCE).getFirst();
 			box.buckets.get(box.MAX_DISTANCE).removeFirst();
 
 			return min;
 		}
-
+*/
 		return min;
 
 	}
