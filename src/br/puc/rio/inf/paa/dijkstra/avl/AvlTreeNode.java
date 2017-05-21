@@ -4,24 +4,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AvlTreeNode {
-	
+
 	private List<Integer> keys;
 	private int cost;
 	private int balance;
-    private int height;
+	private int height;
 	private AvlTreeNode parent;
 	private AvlTreeNode left;
 	private AvlTreeNode right;
-	
-	
+
 	public AvlTreeNode(int key, int cost, AvlTreeNode parent) {
 		this.keys = new ArrayList<Integer>();
 		this.keys.add(key);
 		this.cost = cost;
 		this.parent = parent;
 	}
-	
-	public void insertKey(int key){
+
+	public void insertKey(int key) {
 		this.keys.add(key);
 	}
 

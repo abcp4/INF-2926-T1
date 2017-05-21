@@ -16,10 +16,10 @@ public class DijkstraFibonacciHeap implements IDijkstra {
 		distance = new int[graph.graph.size() + 1];
 		nodes = new FibonacciHeap.Node[graph.graph.size() + 1];
 		path = new int[graph.graph.size() + 1];
-			
+
 		distance[0] = Integer.MAX_VALUE;
 		path[0] = Integer.MAX_VALUE;
-		
+
 		for (int vertex : graph.graph.keySet()) {
 
 			if (vertex == start) {
@@ -52,7 +52,7 @@ public class DijkstraFibonacciHeap implements IDijkstra {
 
 	@Override
 	public int[] getPath() {
-		
+
 		return path;
 	}
 
@@ -78,6 +78,5 @@ public class DijkstraFibonacciHeap implements IDijkstra {
 		}
 
 	}
-
 
 }

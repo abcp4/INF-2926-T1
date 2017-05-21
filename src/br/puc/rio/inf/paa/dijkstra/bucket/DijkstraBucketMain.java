@@ -1,6 +1,8 @@
 package br.puc.rio.inf.paa.dijkstra.bucket;
 
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.math.MathContext;
 import java.nio.charset.Charset;
 import java.util.List;
 
@@ -86,11 +88,10 @@ public class DijkstraBucketMain {
 				
 				writer.write(String.valueOf(nm));
 				
-				writer.write(String.valueOf(cpuTime));
-				
-				writer.write(String.valueOf(ctTime));
-				
-				writer.write(String.valueOf(ctTime/cpuTime));
+				writer.write(new BigDecimal(cpuTime, MathContext.DECIMAL64).toString());
+				writer.write(new BigDecimal(ctTime, MathContext.DECIMAL64).toString());
+					
+				writer.write(new BigDecimal((ctTime/cpuTime), MathContext.DECIMAL64).toString());
 				
 				writer.write(String.valueOf(logCPU));
 				
@@ -98,6 +99,10 @@ public class DijkstraBucketMain {
 				
 				writer.endRecord();		
 
+				
+				System.out.println("LOGCTCPU:" + logCTCPU);
+				
+				
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -108,7 +113,7 @@ public class DijkstraBucketMain {
 			System.out.println("Quantidade de vezes: " + count);
 			System.out.println("Tempo medio: " + (durationEnd / count));
 			System.out.println("CT: " + ctTime);
-			System.out.println();
+			
 
 			count = 0;
 			durationEnd = 0;

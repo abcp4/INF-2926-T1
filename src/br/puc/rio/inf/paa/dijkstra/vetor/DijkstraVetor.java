@@ -9,22 +9,17 @@ public class DijkstraVetor implements IDijkstra {
 	int path[];
 	boolean visited[];
 	int visitedTotal;
-	GraphInstance instance; 
-    
+	GraphInstance instance;
 
-	/*
-	 *  inicializar os vetores, com tamanho N+1. 
-	 *
-	 * */
 	@Override
 	public void initialize(GraphInstance graphInstance, int start) {
 
 		instance = graphInstance;
 		distance = new int[graphInstance.graph.size() + 1];
 		path = new int[graphInstance.graph.size() + 1];
-		
+
 		visited = new boolean[graphInstance.graph.size() + 1];
-		
+
 		distance[0] = Integer.MAX_VALUE;
 		path[0] = Integer.MAX_VALUE;
 
@@ -39,11 +34,6 @@ public class DijkstraVetor implements IDijkstra {
 		}
 
 	}
-	
-	/*
-	 *  inicializar os vetores, com tamanho N+1. 
-	 *
-	 * */
 
 	@Override
 	public int getMin() {
@@ -52,7 +42,7 @@ public class DijkstraVetor implements IDijkstra {
 		int element = -1;
 
 		for (int v : instance.graph.keySet()) {
-		
+
 			if (!(visited[v]) && min > distance[v]) {
 				min = distance[v];
 				element = v;
@@ -62,7 +52,6 @@ public class DijkstraVetor implements IDijkstra {
 		return element;
 	}
 
-	
 	@Override
 	public void relax(int vertexA, int vertexB, int distanceAB) {
 
@@ -75,7 +64,7 @@ public class DijkstraVetor implements IDijkstra {
 	@Override
 	public void setVisited(int vertice) {
 		visited[vertice] = true;
-		visitedTotal ++;
+		visitedTotal++;
 
 	}
 
@@ -94,7 +83,5 @@ public class DijkstraVetor implements IDijkstra {
 	public void setPath(int[] path) {
 		this.path = path;
 	}
-	
-	
 
 }

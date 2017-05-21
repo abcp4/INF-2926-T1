@@ -11,23 +11,23 @@ public class AvlTree {
 		this.root = null;
 	}
 
-	public int getMin(){
-		if(this.root == null){
+	public int getMin() {
+		if (this.root == null) {
 			return -1;
-		}else{
+		} else {
 			AvlTreeNode node;
 			node = this.root;
-			while(true){
-				if(node.getLeft() == null){
+			while (true) {
+				if (node.getLeft() == null) {
 					int menor = node.getKeys().get(0);
 					node.getKeys().remove(0);
-					
-					if(node.getKeys().isEmpty()){
+
+					if (node.getKeys().isEmpty()) {
 						this.delete(node.getCost());
 					}
 
 					return menor;
-				}else{
+				} else {
 					node = node.getLeft();
 				}
 			}
@@ -36,15 +36,15 @@ public class AvlTree {
 
 	public boolean insert(int key, int cost) {
 
-		//		Testa se a raiz é nula
-		if (this.root == null){
+		// Testa se a raiz é nula
+		if (this.root == null) {
 			this.root = new AvlTreeNode(key, cost, null);
-		}else {
+		} else {
 			AvlTreeNode nodeRoot = this.root;
 			AvlTreeNode parent;
 			while (true) {
-				//            	Testa se o valor a ser inserido já está na árvore
-				if (nodeRoot.getCost() == cost){
+				// Testa se o valor a ser inserido já está na árvore
+				if (nodeRoot.getCost() == cost) {
 					nodeRoot.insertKey(key);
 					return true;
 				}
@@ -68,20 +68,21 @@ public class AvlTree {
 		return true;
 	}
 
-	//	Método utilizado apenas pela árvore que armazena ordenado pela chave
-	public int findKey(int key){
+	// Método utilizado apenas pela árvore que armazena ordenado pela chave
+	public int findKey(int key) {
 
-		if(this.root == null){
+		if (this.root == null) {
 			return -1;
-		}else{
+		} else {
 			AvlTreeNode node = this.root;
-			while(true){
-				if(node == null) return -1;
-				if(node.getCost() > key){
+			while (true) {
+				if (node == null)
+					return -1;
+				if (node.getCost() > key) {
 					node = node.getLeft();
-				}else if(node.getCost() < key){
+				} else if (node.getCost() < key) {
 					node = node.getRight();
-				}else{
+				} else {
 					return node.getKeys().get(0);
 				}
 			}
@@ -89,19 +90,20 @@ public class AvlTree {
 
 	}
 
-	public void findKeyAndUpdate(int key, int cost){
+	public void findKeyAndUpdate(int key, int cost) {
 
-		if(this.root == null){
+		if (this.root == null) {
 			return;
-		}else{
+		} else {
 			AvlTreeNode node = this.root;
-			while(true){
-				if(node == null) return;
-				if(node.getCost() > key){
+			while (true) {
+				if (node == null)
+					return;
+				if (node.getCost() > key) {
 					node = node.getLeft();
-				}else if(node.getCost() < key){
+				} else if (node.getCost() < key) {
 					node = node.getRight();
-				}else{
+				} else {
 					node.getKeys().remove(0);
 					node.getKeys().add(cost);
 					return;
@@ -110,27 +112,31 @@ public class AvlTree {
 		}
 	}
 
-	private void delete(AvlTreeNode node){
-		if(node.getLeft() == null && node.getRight() == null){
-			if(node.getParent() == null) this.root = null;
-			else{
+	private void delete(AvlTreeNode node) {
+		if (node.getLeft() == null && node.getRight() == null) {
+			if (node.getParent() == null)
+				this.root = null;
+			else {
 				AvlTreeNode parent = node.getParent();
-				if(parent.getLeft() == node){
+				if (parent.getLeft() == node) {
 					parent.setLeft(null);
-				}else parent.setRight(null);
+				} else
+					parent.setRight(null);
 				this.rebalance(parent);
 			}
 			return;
 		}
-		if(node.getLeft()!=null){
+		if (node.getLeft() != null) {
 			AvlTreeNode child = node.getLeft();
-			while (child.getRight()!=null) child = child.getRight();
+			while (child.getRight() != null)
+				child = child.getRight();
 			node.setCost(child.getCost());
 			node.setKeys(child.getKeys());
 			this.delete(child);
-		}else{
+		} else {
 			AvlTreeNode child = node.getRight();
-			while (child.getLeft()!=null) child = child.getLeft();
+			while (child.getLeft() != null)
+				child = child.getLeft();
 			node.setCost(child.getCost());
 			node.setKeys(child.getKeys());
 			this.delete(child);
@@ -248,14 +254,14 @@ public class AvlTree {
 	}
 
 	private void setBalance(List<AvlTreeNode> nodes) {
-		for (AvlTreeNode node : nodes){
+		for (AvlTreeNode node : nodes) {
 			reheight(node);
 			node.setBalance(this.height(node.getRight()) - height(node.getLeft()));
 		}
 	}
 
-	private void reheight(AvlTreeNode node){
-		if(node!=null){
+	private void reheight(AvlTreeNode node) {
+		if (node != null) {
 			node.setHeight(1 + Math.max(this.height(node.getLeft()), this.height(node.getRight())));
 		}
 	}
@@ -278,7 +284,7 @@ public class AvlTree {
 			printBalance(node.getRight());
 		}
 	}
-	
+
 	public void printCost() {
 		printCost(this.root);
 		System.out.println();
@@ -291,7 +297,7 @@ public class AvlTree {
 			printCost(node.getRight());
 		}
 	}
-	
+
 	public AvlTreeNode getRoot() {
 		return root;
 	}

@@ -1,6 +1,8 @@
 package br.puc.rio.inf.paa.dijkstra.avl;
 
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.math.MathContext;
 import java.nio.charset.Charset;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -90,11 +92,10 @@ public class DijkstraAvlTreeMain {
 				
 				writer.write(String.valueOf(nm));
 				
-				writer.write(String.valueOf(cpuTime));
-				
-				writer.write(String.valueOf(ctTime));
-				
-				writer.write(String.valueOf(ctTime/cpuTime));
+				writer.write(new BigDecimal(cpuTime, MathContext.DECIMAL64).toString());
+				writer.write(new BigDecimal(ctTime, MathContext.DECIMAL64).toString());
+					
+				writer.write(new BigDecimal((ctTime/cpuTime), MathContext.DECIMAL64).toString());
 				
 				writer.write(String.valueOf(logCPU));
 				
