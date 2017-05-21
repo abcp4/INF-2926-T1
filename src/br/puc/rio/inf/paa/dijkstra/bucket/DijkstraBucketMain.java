@@ -67,7 +67,7 @@ public class DijkstraBucketMain {
 
 			numInstance++;
 			try {
-				ctTime = (instance.numVertex * instance.numVertex) + instance.numEdges;
+				ctTime = (instance.numVertex * instance.maxCostEdge) + instance.numEdges;
 				
 				cpuTime = (durationEnd/count);
 				

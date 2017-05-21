@@ -69,7 +69,7 @@ public class DijkstraFibonacciMain {
 
 			numInstance++;
 			try {
-				ctTime = (instance.numVertex * instance.numVertex) + instance.numEdges;
+				ctTime = instance.numVertex * Utils.logBase2(instance.numVertex) + instance.numEdges;
 				
 				cpuTime = (durationEnd/count);
 				

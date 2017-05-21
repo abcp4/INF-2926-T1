@@ -14,7 +14,7 @@ public class BucketBox {
 
 	public BucketBox(int numVertex, int maxCostEdge) {
 		buckets = new LinkedList<LinkedList<Integer>>(Utils.setSize(numVertex*maxCostEdge + 1));
-		MAX_DISTANCE = numVertex*maxCostEdge;
+		MAX_DISTANCE = numVertex*maxCostEdge + 1;
 	
 		
 		for (int i = 0; i < buckets.size(); i++) {

@@ -22,8 +22,6 @@ public class DijkstraAlphaTreeMain {
 
 		CsvWriter writer = new CsvWriter(nameCSV, ',', Charset.forName("ISO-8859-1"));
 
-		// new DijkstraVetorMain().testDjistraReadAllInstances();
-
 		List<GraphInstance> instances = new ReadAllFiles().creatAllInstances();
 
 		int count = 0;
@@ -69,7 +67,8 @@ public class DijkstraAlphaTreeMain {
 
 			numInstance++;
 			try {
-				ctTime = (instance.numVertex * instance.numVertex) + instance.numEdges;
+				ctTime = instance.numVertex * Utils.logBase2(instance.numVertex) +
+						 instance.numEdges * Utils.logBase2(instance.numVertex);
 				
 				cpuTime = (durationEnd/count);
 				
