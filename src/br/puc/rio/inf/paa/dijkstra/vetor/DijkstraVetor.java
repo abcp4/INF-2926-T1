@@ -12,7 +12,10 @@ public class DijkstraVetor implements IDijkstra {
 	GraphInstance instance; 
     
 
-
+	/*
+	 *  inicializar os vetores, com tamanho N+1. 
+	 *
+	 * */
 	@Override
 	public void initialize(GraphInstance graphInstance, int start) {
 
@@ -36,6 +39,11 @@ public class DijkstraVetor implements IDijkstra {
 		}
 
 	}
+	
+	/*
+	 *  inicializar os vetores, com tamanho N+1. 
+	 *
+	 * */
 
 	@Override
 	public int getMin() {
