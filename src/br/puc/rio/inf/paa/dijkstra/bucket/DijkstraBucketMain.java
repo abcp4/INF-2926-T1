@@ -1,4 +1,4 @@
-package br.puc.rio.inf.paa.dijkstra.vetor;
+package br.puc.rio.inf.paa.dijkstra.bucket;
 
 import java.io.IOException;
 import java.nio.charset.Charset;
@@ -12,13 +12,13 @@ import br.puc.rio.inf.paa.utils.ReadAllFiles;
 import br.puc.rio.inf.paa.utils.ReadFile;
 import br.puc.rio.inf.paa.utils.Utils;
 
-public class DijkstraVetorMain {
+public class DijkstraBucketMain {
 
 	public static void main(String[] args) {
 
-		String nameCSV = "nameCSVVetor.csv";
+		String nameCVSVetor = "nameCSVBucket.csv";
 
-		CsvWriter writer = new CsvWriter(nameCSV, ',', Charset.forName("ISO-8859-1"));
+		CsvWriter writer = new CsvWriter(nameCVSVetor, ',', Charset.forName("ISO-8859-1"));
 
 		// new DijkstraVetorMain().testDjistraReadAllInstances();
 
@@ -52,7 +52,7 @@ public class DijkstraVetorMain {
 		
 		for (GraphInstance instance : instances) {
 
-			IDijkstra iDijkstra = new DijkstraVetor();
+			IDijkstra iDijkstra = new DijkstraBucket();
 			double temp_inicio = System.nanoTime();
 			DijkstraSolution solution = null;
 
@@ -119,7 +119,7 @@ public class DijkstraVetorMain {
 	public void testDjikstraSimple() {
 		GraphInstance instance = new ReadFile("../INF-2926/input/teste.stp").createInstance();
 
-		IDijkstra iDijkstra = new DijkstraVetor();
+		IDijkstra iDijkstra = new DijkstraBucket();
 		DijkstraSolution solution = instance.dijkstra(1, iDijkstra);
 
 		for (int i = 1; i < solution.distance.length; i++) {
@@ -133,7 +133,7 @@ public class DijkstraVetorMain {
 
 		List<GraphInstance> instances = new ReadAllFiles().creatAllInstances();
 		int count = 0;
-		IDijkstra iDijkstra = new DijkstraVetor();
+		IDijkstra iDijkstra = new DijkstraBucket();
 		for (GraphInstance graphInstance : instances) {
 
 			DijkstraSolution solution = graphInstance.dijkstra(1, iDijkstra);
