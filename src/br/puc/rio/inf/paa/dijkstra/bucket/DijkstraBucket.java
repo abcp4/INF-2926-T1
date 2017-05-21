@@ -74,14 +74,6 @@ public class DijkstraBucket implements IDijkstra {
 
 		}
 
-/*		if (box.buckets.get(box.MAX_DISTANCE).size() > 0) {
-
-			min = box.buckets.get(box.MAX_DISTANCE).getFirst();
-			box.buckets.get(box.MAX_DISTANCE).removeFirst();
-
-			return min;
-		}
-*/
 		return min;
 
 	}
