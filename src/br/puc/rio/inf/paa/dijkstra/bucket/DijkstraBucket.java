@@ -5,7 +5,7 @@ import java.util.LinkedList;
 import br.puc.rio.inf.paa.dijkstra.Adjacent;
 import br.puc.rio.inf.paa.dijkstra.GraphInstance;
 import br.puc.rio.inf.paa.dijkstra.IDijkstra;
-import br.puc.rio.inf.paa.utils.Utils;
+
 
 public class DijkstraBucket implements IDijkstra {
 
