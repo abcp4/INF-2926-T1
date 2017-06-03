@@ -39,32 +39,61 @@ public class KnapsackUtil {
 		}
 	}
 
-	public static Item mediansOfMedians(Item[] elements, int l, int r) {
-		int _n = r - l + 1;
-		Item[] sub_elements = new Item[_n];
-		int rest = _n % 5;
-		int it = 0;
-		for (int i = l; i <= r; i++) {
-			sub_elements[it] = elements[i];
-			it++;
+	public static Item mediansOfMedians(Item[] items, int start, int end) {
+
+		int n = end - start + 1;
+		Item[] subItems = new Item[n];
+		int rest = n % 5;
+
+		int count = 0;
+
+		// inicializa o vetor de subitens
+		for (int i = start; i <= end; i++) {
+			subItems[count] = items[i];
+			count++;
 		}
-		if (r - l > 4) {
-			Item[] mediums = new Item[_n / 5 + (rest > 0 ? 1 : 0)];
+
+		// verifica se pode dividir em 5 blocos
+		// caso contrário teremos um unico bloco
+		if (end - start > 4) {
+
+			Item[] mediums = null;
+
+			// calcula o tamanho do vetor de medianas
+			if (rest > 0) {
+				mediums = new Item[(n / 5) + 1];
+			} else {
+				mediums = new Item[(n / 5)];
+			}
+
 			int j = 0;
-			int i = 0;
-			for (; i < _n - rest; i = i + 5) {
-				sort(sub_elements, i, i + 4);
-				mediums[j] = sub_elements[i + 2];
+			int i;
+
+			// pega a mediana de cada bloco
+			for (i = 0; i < n - rest; i = i + 5) {
+				sort(subItems, i, i + 4);
+				mediums[j] = subItems[i + 2];
+				System.out.println("Bloco " + i + " : "+ mediums[j]);
 				j++;
 			}
+
 			if (rest != 0) {
-				sort(sub_elements, i, _n - 1);
-				mediums[j] = sub_elements[rest / 2];
+
+				sort(subItems, i, n - 1);
+				
+				int indexMedianRestant = rest / 2;
+				
+				int startRestantBlock = n - rest + 1;
+				
+				indexMedianRestant = startRestantBlock + indexMedianRestant;
+				
+				mediums[j] = subItems[indexMedianRestant];
+				System.out.println("Bloco restante : "+ mediums[j]);
 			}
 			return mediansOfMedians(mediums, 0, mediums.length - 1);
 		} else {
-			sort(sub_elements, 0, sub_elements.length - 1);
-			return sub_elements[rest / 2];
+			sort(subItems, 0, subItems.length - 1);
+			return subItems[rest / 2];
 		}
 	}
 
@@ -103,7 +132,7 @@ public class KnapsackUtil {
 	}
 
 	public static int partition_PivoteInGivenPosition(Item[] items, int left, int right, int i) {
-		
+
 		Item aux = items[i];
 		items[i] = items[right];
 		items[right] = aux;
