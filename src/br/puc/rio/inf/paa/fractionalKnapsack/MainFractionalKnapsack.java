@@ -16,7 +16,6 @@ public class MainFractionalKnapsack {
 		
 
 		
-		
 		for (int i = 0; i < fractionalKnapsacks.size(); i++) {
 			FractionalKnapsackNlogN knapsackN = new FractionalKnapsackNlogN();
 	

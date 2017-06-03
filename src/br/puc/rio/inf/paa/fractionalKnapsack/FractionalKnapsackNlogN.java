@@ -11,7 +11,7 @@ public class FractionalKnapsackNlogN {
 
 		int n = knapsack.items.length;
 
-		KnapsackUtil.MergeSort(knapsack.items, 0, n - 1);
+		KnapsackUtil.mergeSort(knapsack.items, 0, n - 1);
 
 		double current_weight = 0;
 
@@ -25,8 +25,6 @@ public class FractionalKnapsackNlogN {
 				itemsAdd.put(knapsack.items[j], 1.0);
 
 			} else {
-
-				System.out.println((knapsack.capacity - current_weight) / knapsack.items[j].weight);
 
 				itemsAdd.put(knapsack.items[j], (knapsack.capacity - current_weight) / knapsack.items[j].weight);
 			}
