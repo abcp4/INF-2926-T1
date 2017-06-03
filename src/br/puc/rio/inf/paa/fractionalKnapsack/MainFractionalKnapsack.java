@@ -8,8 +8,7 @@ public class MainFractionalKnapsack {
 	
 	
 	public static void main(String[] args) {
-		
-		
+	
 		FractionalKnapsackReader knapsackReader = new FractionalKnapsackReader();
 		
 		List<FractionalKnapsack> fractionalKnapsacks = knapsackReader.createAllInstances();
@@ -17,13 +16,6 @@ public class MainFractionalKnapsack {
 		for (int i = 0; i < fractionalKnapsacks.size(); i++) {
 			System.out.println(fractionalKnapsacks.toString());
 		}
-		
-		
-		
-		
-		
-		
-		
 		
 	}
 	

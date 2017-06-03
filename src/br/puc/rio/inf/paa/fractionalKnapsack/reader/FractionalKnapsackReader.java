@@ -50,15 +50,10 @@ public class FractionalKnapsackReader {
 
 			for (int j = 1; j < lines.size(); j++) {
 
-				String wordsItems[] = lines.get(j).split("\\s+");
+				String wordsItems[] = lines.get(j).trim().split("\\s+");
 
 				// Creating knapsack
 				if (wordsItems.length > 1) {
-					System.out.println(wordsItems.length);
-					System.out.println(wordsItems[0]);
-					System.out.println(wordsItems[1]);
-					System.out.println(wordsItems[2]);
-					
 					
 					int idKanapsack = Integer.parseInt(wordsItems[0]);
 					int valueKnapsack = Integer.parseInt(wordsItems[1]);
@@ -66,6 +61,7 @@ public class FractionalKnapsackReader {
 
 					Item item = new Item(idKanapsack, valueKnapsack, weigthKnapsack, 0);
 					items[i] = item;
+					
 					i++;
 				} else {
 					capacityKnapsack = Double.valueOf((wordsItems[0]));

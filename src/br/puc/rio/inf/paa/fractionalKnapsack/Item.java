@@ -49,4 +49,12 @@ public class Item {
 		this.ratio = ratio;
 	}
 
+	@Override
+	public String toString() {
+		return "Item [id=" + id + ", value=" + value + ", weight=" + weight + ", ratio=" + ratio + "]\n";
+	}
+	
+	
+	
+
 }
