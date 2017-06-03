@@ -16,82 +16,89 @@ import br.puc.rio.inf.paa.fractionalKnapsack.FractionalKnapsack;
 import br.puc.rio.inf.paa.fractionalKnapsack.Item;
 
 public class FractionalKnapsackReader {
-			
-	
-	public List<FractionalKnapsack> createAllInstances(){
-		
+
+	public List<FractionalKnapsack> createAllInstances() {
+
 		List<String> fileNames = this.getAllFileNames();
-		
+
 		List<FractionalKnapsack> knapsackList = new ArrayList<FractionalKnapsack>();
-		
-		for(String fileName : fileNames){
-			
+
+		for (String fileName : fileNames) {
+
 			FractionalKnapsack instance = createInstance(fileName);
 
-		    knapsackList.add(instance);
+			knapsackList.add(instance);
 		}
-		
+
 		return knapsackList;
 	}
-	
-	public FractionalKnapsack createInstance(String fileName){
-		
-		
-		List<Item> itens = new ArrayList<Item>();
-		double capacityKnapsack = 0;
-		try (BufferedReader reader = new BufferedReader(new FileReader(new File(fileName)))) {
-		    String line;
-		  
-		    while ((line = reader.readLine()) != null) {
-		       String words[] = line.split(" ");
-		       
-		       // Creating knapsack
-		       if(words[0].equals(" ")){
-		    	   int idKanapsack = Integer.parseInt(words[1]);
-		    	   int valueKnapsack = Integer.parseInt(words[2]);
-		    	   int weigthKnapsack = Integer.parseInt(words[3]);
 
-		    	   Item item = new Item(idKanapsack, valueKnapsack, weigthKnapsack, 0);
-		    	   itens.add(item);
-		       }
-		       else{
-		    	   capacityKnapsack = Double.valueOf((words[0]));
-		       }
-		       
-		    } 
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+	public FractionalKnapsack createInstance(String fileName) {
+		Item[] items = null;
+
+		Path path = Paths.get(fileName);
+
+		double capacityKnapsack = 0;
+
+		List<String> lines;
+		try {
+			lines = Files.readAllLines(path);
+			int quantityItems = Integer.parseInt(lines.get(0));
+
+			items = new Item[quantityItems];
+			int i = 0;
+
+			for (int j = 1; j < lines.size(); j++) {
+
+				String wordsItems[] = lines.get(j).split("\\s+");
+
+				// Creating knapsack
+				if (wordsItems.length > 1) {
+					System.out.println(wordsItems.length);
+					System.out.println(wordsItems[0]);
+					System.out.println(wordsItems[1]);
+					System.out.println(wordsItems[2]);
+					
+					
+					int idKanapsack = Integer.parseInt(wordsItems[0]);
+					int valueKnapsack = Integer.parseInt(wordsItems[1]);
+					int weigthKnapsack = Integer.parseInt(wordsItems[2]);
+
+					Item item = new Item(idKanapsack, valueKnapsack, weigthKnapsack, 0);
+					items[i] = item;
+					i++;
+				} else {
+					capacityKnapsack = Double.valueOf((wordsItems[0]));
+				}
+
+			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		FractionalKnapsack instance = new FractionalKnapsack(capacityKnapsack, itens);
+
+		FractionalKnapsack instance = new FractionalKnapsack(capacityKnapsack, items);
+
 		return instance;
 	}
-	
-		
-	
-	public List<String> getAllFileNames(){
-					
+
+	public List<String> getAllFileNames() {
+
 		List<String> fileNames = new ArrayList<String>();
-			
-		try(Stream<Path> paths = Files.walk(Paths.get("../INF-2926/input-knapsack"))) {
+
+		try (Stream<Path> paths = Files.walk(Paths.get("../INF-2926/input-knapsack"))) {
 			paths.forEach(filePath -> {
 				if (Files.isRegularFile(filePath)) {
-					  fileNames.add(filePath.toString());
-			    }
+					fileNames.add(filePath.toString());
+				}
 			});
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-					
+
 		return fileNames;
-					
+
 	}
-			
-		
 
 }
