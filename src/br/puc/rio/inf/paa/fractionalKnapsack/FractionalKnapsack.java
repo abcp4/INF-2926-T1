@@ -4,11 +4,11 @@ import java.util.List;
 
 public class FractionalKnapsack {
 
-	double capacity;
-	List<Item> items;
+	public double capacity;
+	 public Item[] items;
 
 	
-	public FractionalKnapsack(double capacity, List<Item> items) {
+	public FractionalKnapsack(double capacity, Item[] items) {
 
 		this.capacity = capacity;
 		this.items = items;

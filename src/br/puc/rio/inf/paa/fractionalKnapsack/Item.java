@@ -1,5 +1,7 @@
 package br.puc.rio.inf.paa.fractionalKnapsack;
 
+import java.util.Arrays;
+
 public class Item {
 
 	int id;
@@ -7,6 +9,7 @@ public class Item {
 	int weight;
 	double ratio;
 
+	
 	public Item(int id, int value, int weight, double ratio) {
 		this.id = id;
 		this.value = value;

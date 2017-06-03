@@ -1,10 +1,12 @@
 package br.puc.rio.inf.paa.fractionalKnapsack.mergesort;
 
+import java.util.Arrays;
+
 import br.puc.rio.inf.paa.fractionalKnapsack.Item;
 
 public class KnapsackUtil {
 
-	private void MergeSort(Item[] items, int left, int right) {
+	public static void MergeSort(Item[] items, int left, int right) {
 
 		if (left < right) {
 
@@ -12,10 +14,11 @@ public class KnapsackUtil {
 			MergeSort(items, left, medio);
 			MergeSort(items, medio + 1, right);
 			Merge(items, medio, left, right);
+		
 		}
 	}
 
-	private void Merge(Item[] items, int medio, int left, int right) {
+	public static void Merge(Item[] items, int medio, int left, int right) {
 		Item[] aux = new Item[right - left + 1];
 		for (int i = left; i <= right; i++) {
 			aux[i - left] = items[i];
