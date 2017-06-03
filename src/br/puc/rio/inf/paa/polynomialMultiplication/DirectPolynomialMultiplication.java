@@ -3,11 +3,12 @@ package br.puc.rio.inf.paa.polynomialMultiplication;
 public class DirectPolynomialMultiplication implements IPolynomialMultiplication{
 	
 	private Polynomials polynomials;
+	private int[] polynomialResult;
 	
 	@Override
-	public int[] multiplication() {
+	public void multiplication() {
 		
-		int[] result = new int[2*this.polynomials.getDegree()-1];
+		int[] result = new int[2*(this.polynomials.getDegree()+1)-1];
 		
 		for(int i = 0; i < this.polynomials.getPolynomialA().length; i++){
 			for(int j = 0; j < this.polynomials.getPolynomialB().length; j++){
@@ -15,7 +16,7 @@ public class DirectPolynomialMultiplication implements IPolynomialMultiplication
 			}
 		}
 		
-		return result;
+		this.setPolynomialResult(result);
 	}
 
 	public Polynomials getPolynomials() {
@@ -24,6 +25,14 @@ public class DirectPolynomialMultiplication implements IPolynomialMultiplication
 
 	public void setPolynomials(Polynomials polynomials) {
 		this.polynomials = polynomials;
+	}
+
+	public int[] getPolynomialResult() {
+		return polynomialResult;
+	}
+
+	public void setPolynomialResult(int[] polynomialResult) {
+		this.polynomialResult = polynomialResult;
 	}
 	
 }
