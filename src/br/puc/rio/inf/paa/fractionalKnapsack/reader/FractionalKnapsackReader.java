@@ -36,7 +36,7 @@ public class FractionalKnapsackReader {
 	public FractionalKnapsack createInstance(String fileName) {
 		Item[] items = null;
 
-		Path path = Paths.get(fileName);
+		Path path = Paths.get("../INF-2926/input-knapsack/m106.in");
 
 		double capacityKnapsack = 0;
 

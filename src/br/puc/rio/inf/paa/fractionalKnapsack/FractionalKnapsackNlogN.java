@@ -6,8 +6,7 @@ import java.util.Map;
 import br.puc.rio.inf.paa.fractionalKnapsack.mergesort.KnapsackUtil;
 
 public class FractionalKnapsackNlogN {
-	
-	
+
 	public Map<Item, Double> knapsack(FractionalKnapsack knapsack) {
 
 		int n = knapsack.items.length;
@@ -20,20 +19,23 @@ public class FractionalKnapsackNlogN {
 		int j = 0;
 
 		while (current_weight < knapsack.capacity && j < n) {
+
 			if (knapsack.items[j].weight + current_weight <= knapsack.capacity) {
-				
+
 				itemsAdd.put(knapsack.items[j], 1.0);
 
 			} else {
+
+				System.out.println((knapsack.capacity - current_weight) / knapsack.items[j].weight);
 
 				itemsAdd.put(knapsack.items[j], (knapsack.capacity - current_weight) / knapsack.items[j].weight);
 			}
 
 			current_weight = current_weight + knapsack.items[j].weight;
+			j++;
 		}
 		return itemsAdd;
 
 	}
 
-	
 }
