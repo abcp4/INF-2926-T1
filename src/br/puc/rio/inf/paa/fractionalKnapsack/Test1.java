@@ -1,88 +1,24 @@
 package br.puc.rio.inf.paa.fractionalKnapsack;
 
+import br.puc.rio.inf.paa.fractionalKnapsack.mergesort.KnapsackUtil;
+
 public class Test1 {
 /*
 	*//**
 	 * Returns the ith smallest element in a subarray <code>array[p..r]</code>.
 	 *
-	 * @param array
+	 * @param items
 	 *            The array containing the subarray to be sorted.
-	 * @param p
+	 * @param startIndex
 	 *            Index of the beginning of the subarray.
-	 * @param r
+	 * @param endIndex
 	 *            Index of the end of the subarray.
 	 * @param i
 	 *            Which order statistic we want.
-	 *//*
-	public static Item select(Item[] array, int p, int r, int i) {
-		int n = r - p + 1; // number of elements in the subarray
+	 */
+	
 
-		if (n == 1)
-			return array[p]; // base case: return the only element
-		else {
-			// Divide the subarray into ceil(n / GROUP_SIZE) groups,
-			// and find the median of each group by insertion sorting
-			// the group and picking the median from the sorted list.
-			final int GROUP_SIZE = 5; // size of each group
-			int groups; // how many groups
-			if (n % GROUP_SIZE == 0)
-				groups = n / GROUP_SIZE;
-			else
-				groups = (n / GROUP_SIZE) + 1;
-
-			// Create an array of medians.
-			Item[] medians = new Item[groups];
-
-			// Fill in medians to contain the medians of the groups.
-			for (int groupStart = p, groupNumber = 0; groupStart <= r; groupStart += GROUP_SIZE, groupNumber++) {
-			
-				int thisGroupSize = Math.min(r - groupStart + 1, GROUP_SIZE);
-				
-				insertionSortSubarray(array, groupStart, thisGroupSize);
-				
-				medians[groupNumber] = array[groupStart + ((thisGroupSize - 1) / 2)];
-			}
-
-			// Recursively find the median of the medians.
-			Item theMedian = select(medians, 0, groups - 1, (groups + 1) / 2);
-
-			// We need to figure out where in the array the median of
-			// the medians is. Go through the array, comparing
-			// elements to theMedian until we find they're equal. We
-			// are guaranteed that we will find an element equal to
-			// the median, so we do not need to check for running off
-			// the end of the subarray. Because we are doing no
-			// arithmetic on the elements, it is safe to compare the
-			// elements even if they are floating-point values. Note
-			// also that running through the subarray does not
-			// increase the asymptotic running time.
-			int medianIndex = p;
-			while (theMedian.compareTo(array[medianIndex]) != 0)
-				medianIndex++;
-
-			// Partition the input array around the median of the
-			// medians.
-			exchange(array, r, medianIndex);
-			int q = partition(array, p, r);
-
-			// The low side of the partition is array[p..q-1]. Set k
-			// to the number of elements in array[p..q], so that we
-			// include the median of the medians in our count.
-			int k = q - p + 1;
-
-			if (i == k)
-				return array[q]; // ith smallest is at index q
-			else if (i < k)
-				return select(array, p, q - 1, i); // ith smallest is ith
-			// smallest in the low side
-			else
-				return select(array, q + 1, r, i - k); // ith smallest is
-														// (i-k)th
-			// smallest in high side
-		}
-	}
-
-	*//**
+	/*
 	 * Sorts a small subarray.
 	 *
 	 * @param array

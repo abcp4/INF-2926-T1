@@ -67,80 +67,82 @@ public class KnapsackUtil {
 		return null;
 	}*/
 
-	public static Item mediansOfMedians(Item[] items, int start, int end) {
+	/** Divide the subarray into ceil(n / GROUP_SIZE) groups,
+	  and find the median of each group by insertion sorting
+	 the group and picking the median from the sorted list.
+	 **/
+	public static Item medianOfMedians(Item[] items, int startIndex, int endIndex) {
 
-		int n = end - start + 1;
-
-		Item[] subItems = new Item[n];
-
-		int rest = n % 5;
-
-		int count = 0;
-
-		// inicializa o vetor de subitens
-		for (int i = start; i <= end; i++) {
-			subItems[count] = items[i];
-			count++;
-		}
-
-		// verifica se pode dividir em 5 blocos
-		// caso contrário teremos um unico bloco
-		if (end - start > 4) {
-
-			Item[] mediums = null;
-
-			// calcula o tamanho do vetor de medianas
-			if (rest > 0) {
-				mediums = new Item[(n / 5) + 1];
-			} else {
-				mediums = new Item[(n / 5)];
+		int n = endIndex - startIndex + 1; // number of elements in the subarray
+		
+		final int GROUP_SIZE = 5; // size of each group
+		int rest = n % GROUP_SIZE;
+		
+		if (endIndex - startIndex < 4){
+			sort(items, 0, items.length - 1);
+		    return items[rest / 2];
+	    }
+		else {
+		
+			int groupsQuantity; // how many groups
+			
+			if (rest == 0){
+				groupsQuantity = n / GROUP_SIZE;
+			}				
+			else{
+				groupsQuantity = (n / GROUP_SIZE) + 1;
 			}
 
-			int j = 0;
-			int i;
+			// Creating auxiliar array to find medians in each group
+			Item[] medians = new Item[groupsQuantity];
+			Item[] itemsAux = new Item[n];
+			
+			for (int i = startIndex; i <= endIndex; i++) {
+				itemsAux[i] = items[i];
+			}
+			
+			int medianIndex = 0;
+			int indexItems;
 
 			// pega a mediana de cada bloco
-			for (i = 0; i < n - rest; i = i + 5) {
-				sort(subItems, i, i + 4);
-				mediums[j] = subItems[i + 2];
-				System.out.println("Bloco " + i + " : " + mediums[j]);
-				j++;
+			for (indexItems = 0; indexItems < n - rest; indexItems = indexItems + 5) {
+				sort(itemsAux, indexItems, indexItems + 4);
+				
+				medians[medianIndex] = itemsAux[indexItems + 2];
+				medianIndex ++;
 			}
-
+			
+			
 			if (rest != 0) {
 
-				sort(subItems, i, n - 1);
+				sort(itemsAux, indexItems, n - 1);
 
-				int indexMedianRestant = rest / 2;
+				//i->  index initial of rest block
+				// (rest/2) -> median element of rest block
+				int indexMedianRestant = indexItems + (rest / 2);
 
-				int startRestantBlock = n - rest + 1;
-
-				indexMedianRestant = startRestantBlock + indexMedianRestant;
-
-				mediums[j] = subItems[indexMedianRestant];
-				System.out.println("Bloco restante : " + mediums[j]);
+				medians[medianIndex] = itemsAux[indexMedianRestant];
 			}
-			return mediansOfMedians(mediums, 0, mediums.length - 1);
-		} else {
-			sort(subItems, 0, subItems.length - 1);
-			return subItems[rest / 2];
+			return medianOfMedians(medians, 0, medians.length - 1);
+		
+			
 		}
 	}
 
-	public static void sort(Item[] objects, int left, int right) {
+	public static void sort(Item[] subitems, int left, int right) {
 		int lenght = 1;
 		if (left < right) {
 			for (int i = left + 1; i < right + 1; i++) {
-				Item aux = objects[i];
+				Item aux = subitems[i];
 				if (aux == null) {
 					break;
 				}
 				int j = i - 1;
-				while (j >= left && aux.getRatio() < objects[j].getRatio()) {
-					objects[j + 1] = objects[j];
+				while (j >= left && aux.getWeight() < subitems[j].getWeight()) {
+					subitems[j + 1] = subitems[j];
 					j--;
 				}
-				objects[j + 1] = aux;
+				subitems[j + 1] = aux;
 				lenght++;
 			}
 		}
