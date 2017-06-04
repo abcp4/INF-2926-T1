@@ -123,8 +123,10 @@ public class KnapsackUtil {
 	}
 
 	public static void sort(Item[] subitems, int left, int right) {
+	
 		int lenght = 1;
 		if (left < right) {
+			
 			for (int i = left + 1; i < right + 1; i++) {
 				Item aux = subitems[i];
 				if (aux == null) {

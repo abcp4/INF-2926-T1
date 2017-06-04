@@ -5,11 +5,11 @@ import java.util.Map;
 
 import br.puc.rio.inf.paa.fractionalKnapsack.mergesort.KnapsackUtil;
 
-public class FractionalKnapsackN {
+public class FractionalKnapsackN2 {
 
 	private Map<Item, Double> itemsAdd;
 
-	public FractionalKnapsackN() {
+	public FractionalKnapsackN2() {
 		itemsAdd = new HashMap<>();
 	}
 
@@ -20,7 +20,7 @@ public class FractionalKnapsackN {
 	}
 
 	public Map<Item, Double> knapsackRecursive(Item[] items, int left, int right, double capacity) {
-		
+
 		double pivot = 0.0;
 
 		if (right - left <= 1) {
@@ -51,9 +51,8 @@ public class FractionalKnapsackN {
 				}
 			}
 		} else {
-			System.out.println(left);
-			System.out.println(right);
-			pivot = KnapsackUtil.medianOfMedians(items, left, right).ratio;
+			
+			pivot = KnapsackPivot2(items, left, right);
 			int pos_p = KnapsackUtil.partition(items, pivot, left, right);
 
 			int j = right;
@@ -90,6 +89,16 @@ public class FractionalKnapsackN {
 
 		return itemsAdd;
 
+	}
+
+	private double KnapsackPivot2(Item[] items, int left, int right) {
+		int k = 0;
+		double ratio_f = 0;
+		for (int i = left; i <= right; i++) {
+			ratio_f += items[i].ratio;
+			k++;
+		}
+		return ratio_f / k; // returns the value of the new pivot p
 	}
 
 }

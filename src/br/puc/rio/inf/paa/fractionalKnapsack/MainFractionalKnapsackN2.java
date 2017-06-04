@@ -11,11 +11,11 @@ import br.puc.rio.inf.paa.fractionalKnapsack.reader.FractionalKnapsackReader;
 import br.puc.rio.inf.paa.utils.CsvWriter;
 import br.puc.rio.inf.paa.utils.Utils;
 
-public class MainFractionalKnapsackN {
+public class MainFractionalKnapsackN2 {
 
 	public static void main(String[] args) {
 
-		String nameCSV = "nameCSVMainFractionalKnapsackN.csv";
+		String nameCSV = "nameCSVMainFractionalKnapsackN2.csv";
 
 		CsvWriter writer = new CsvWriter(nameCSV, ',', Charset.forName("ISO-8859-1"));
 
@@ -47,7 +47,7 @@ public class MainFractionalKnapsackN {
 		}
 
 		for (int i = 0; i < fractionalKnapsacks.size(); i++) {
-			FractionalKnapsackN knapsackN = new FractionalKnapsackN();
+			FractionalKnapsackN2 knapsackN = new FractionalKnapsackN2();
 			Map<Item, Double> map = null;
 			double temp_inicio = System.nanoTime();
 
@@ -62,7 +62,7 @@ public class MainFractionalKnapsackN {
 			numInstance++;
 			try {
 
-				ctTime = fractionalKnapsacks.get(i).items.length;
+				ctTime = Math.pow(fractionalKnapsacks.get(i).items.length, 2);
 
 				cpuTime = (durationEnd / count);
 
@@ -86,20 +86,11 @@ public class MainFractionalKnapsackN {
 				e.printStackTrace();
 			}
 
-			 System.out.println("No Instance: " + numInstance);
-			// System.out.println(instance.name);
-			// System.out.println("N: " + instance.numVertex + " x " + "M: " +
-			// instance.numEdges);
-			 System.out.println("Quantidade de vezes: " + count);
-			 System.out.println("Tempo medio: " + (durationEnd / count));
-			 System.out.println("CT: " + ctTime);
-			 System.out.println();
-
 			count = 0;
 			durationEnd = 0;
 
 		}
 		writer.close();
 	}
-	
+
 }
