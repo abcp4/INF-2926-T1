@@ -39,10 +39,40 @@ public class KnapsackUtil {
 		}
 	}
 
+/*	public static Item medium(Item[] items, int start, int end) {
+
+		int n = end - start + 1;
+
+		if(n == 1) {
+			return items[start];
+		} else {
+			final int GROUP_SIZE = 5;
+			int groups;
+
+			if(n % GROUP_SIZE == 0) {
+				groups = n / GROUP_SIZE;
+			}else{
+				groups = (n / GROUP_SIZE) + 1;
+			}
+
+			Item[] medians = new Item[groups];
+		
+			for (int i = 0; i < medians.length; i++) {
+				
+			}
+		
+		
+		
+		}
+		return null;
+	}*/
+
 	public static Item mediansOfMedians(Item[] items, int start, int end) {
 
 		int n = end - start + 1;
+
 		Item[] subItems = new Item[n];
+
 		int rest = n % 5;
 
 		int count = 0;
@@ -73,22 +103,22 @@ public class KnapsackUtil {
 			for (i = 0; i < n - rest; i = i + 5) {
 				sort(subItems, i, i + 4);
 				mediums[j] = subItems[i + 2];
-				System.out.println("Bloco " + i + " : "+ mediums[j]);
+				System.out.println("Bloco " + i + " : " + mediums[j]);
 				j++;
 			}
 
 			if (rest != 0) {
 
 				sort(subItems, i, n - 1);
-				
+
 				int indexMedianRestant = rest / 2;
-				
+
 				int startRestantBlock = n - rest + 1;
-				
+
 				indexMedianRestant = startRestantBlock + indexMedianRestant;
-				
+
 				mediums[j] = subItems[indexMedianRestant];
-				System.out.println("Bloco restante : "+ mediums[j]);
+				System.out.println("Bloco restante : " + mediums[j]);
 			}
 			return mediansOfMedians(mediums, 0, mediums.length - 1);
 		} else {
