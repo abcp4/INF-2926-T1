@@ -13,7 +13,7 @@ public class MainTest {
 		Item[] items = new Item[17];
 		
 		for (int i = 0; i < items.length; i++) {
-			items[i] = new Item(i, i+1, 12, 0.0);
+			items[i] = new Item(i, 30, 6);
 		}
 		items[0].setWeight(25);
 		items[1].setWeight(21);
@@ -38,24 +38,24 @@ public class MainTest {
 		items[16].setWeight(40);
 	
 		
-		Item item = KnapsackUtil.medianOfMedians(items, 0, 16);
+		//Item item = KnapsackUtil.medianOfMedians(items, 0, 16);
 		
-		System.out.println("Median of median " + item.weight);
+//		System.out.println("Median of median " + item.weight);
 //		for (int i = 0; i < items.length; i++) {
-//		System.out.println(items[i].value);
-//		}
-		
-		
-//		FractionalKnapsack knapsack = new FractionalKnapsack(15.0, items);
+//			System.out.println(items[i].toString());
+//	}
 //		
-//		FractionalKnapsackNlogN knapsackN = new FractionalKnapsackNlogN();
-//	
-//		Map<Item, Double> map = knapsackN.knapsack(knapsack);
-//	
-//		map.entrySet().forEach( entry-> {
-//			System.out.println(entry.getKey().id + " " + entry.getValue());
-//		});
-//	
+		
+	FractionalKnapsack knapsack = new FractionalKnapsack(15.0, items);
+		
+		FractionalKnapsackN knapsackN = new FractionalKnapsackN();
+	
+		Map<Item, Double> map = knapsackN.knapsack(knapsack);
+	
+		map.entrySet().forEach( entry-> {
+			System.out.println(entry.getKey().id + " " + entry.getValue());
+		});
+	
 	}
 
 }

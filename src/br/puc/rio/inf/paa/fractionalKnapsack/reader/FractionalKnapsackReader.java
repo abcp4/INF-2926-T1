@@ -59,7 +59,7 @@ public class FractionalKnapsackReader {
 					int valueKnapsack = Integer.parseInt(wordsItems[1]);
 					int weigthKnapsack = Integer.parseInt(wordsItems[2]);
 
-					Item item = new Item(idKanapsack, valueKnapsack, weigthKnapsack, valueKnapsack/weigthKnapsack);
+					Item item = new Item(idKanapsack, valueKnapsack, weigthKnapsack);
 					items[i] = item;
 					
 					i++;
