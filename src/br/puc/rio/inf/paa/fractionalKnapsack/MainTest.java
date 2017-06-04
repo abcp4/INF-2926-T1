@@ -38,7 +38,7 @@ public class MainTest {
 		items[16].setWeight(40);
 	
 		
-		Item item = KnapsackUtil.mediansOfMedians(items, 0, 16);
+		Item item = KnapsackUtil.medianOfMedians(items, 0, 16);
 		
 		System.out.println("Median of median " + item.weight);
 //		for (int i = 0; i < items.length; i++) {
