@@ -72,10 +72,13 @@ public class KnapsackUtil {
 			// pega a mediana de cada bloco
 			for (i = 0; i < n - rest; i = i + 5) {
 				sort(subItems, i, i + 4);
+				
 				mediums[j] = subItems[i + 2];
-				System.out.println("Bloco " + i + " : "+ mediums[j]);
+				//System.out.println("Bloco " + i + " : "+ mediums[j]);
 				j++;
 			}
+			
+			
 
 			if (rest != 0) {
 
@@ -83,13 +86,19 @@ public class KnapsackUtil {
 				
 				int indexMedianRestant = rest / 2;
 				
-				int startRestantBlock = n - rest + 1;
+				int startRestantBlock = n - rest + 1; 
 				
 				indexMedianRestant = startRestantBlock + indexMedianRestant;
 				
 				mediums[j] = subItems[indexMedianRestant];
-				System.out.println("Bloco restante : "+ mediums[j]);
+				//System.out.println("Bloco restante : "+ mediums[j]);
 			}
+			
+			for (int k = 0; k < n; k++) {
+				System.out.println(subItems[k].getWeight());
+			}
+			
+			
 			return mediansOfMedians(mediums, 0, mediums.length - 1);
 		} else {
 			sort(subItems, 0, subItems.length - 1);
@@ -97,20 +106,20 @@ public class KnapsackUtil {
 		}
 	}
 
-	public static void sort(Item[] objects, int left, int right) {
+	public static void sort(Item[] subitems, int left, int right) {
 		int lenght = 1;
 		if (left < right) {
 			for (int i = left + 1; i < right + 1; i++) {
-				Item aux = objects[i];
+				Item aux = subitems[i];
 				if (aux == null) {
 					break;
 				}
 				int j = i - 1;
-				while (j >= left && aux.getRatio() < objects[j].getRatio()) {
-					objects[j + 1] = objects[j];
+				while (j >= left && aux.getWeight() < subitems[j].getWeight()) {
+					subitems[j + 1] = subitems[j];
 					j--;
 				}
-				objects[j + 1] = aux;
+				subitems[j + 1] = aux;
 				lenght++;
 			}
 		}
