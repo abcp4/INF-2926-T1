@@ -37,7 +37,7 @@ public class MainFractionalKnapsackNlogN {
 			writer.write("CT");
 			writer.write("CPU");
 			writer.write("CT/CPU");
-
+			writer.write("Log(CPU)");
 			writer.endRecord();
 
 		} catch (IOException e) {
@@ -67,7 +67,8 @@ public class MainFractionalKnapsackNlogN {
 				cpuTime = (durationEnd / count);
 
 				cpuTime = cpuTime / 100;
-
+				double logCPU = Utils.logBase2(cpuTime);
+				
 				writer.write(String.valueOf(fractionalKnapsacks.get(i).items.length));
 
 				writer.write(new BigDecimal(ctTime, MathContext.DECIMAL64).toString());
@@ -76,6 +77,8 @@ public class MainFractionalKnapsackNlogN {
 
 				writer.write(new BigDecimal((ctTime / cpuTime), MathContext.DECIMAL64).toString());
 
+				writer.write(String.valueOf(logCPU));
+				
 				writer.endRecord();
 
 			} catch (IOException e) {
