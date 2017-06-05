@@ -1,9 +1,5 @@
-package br.puc.rio.inf.paa.fractionalKnapsack.reader;
+package br.puc.rio.inf.paa.utils;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -12,20 +8,20 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
-import br.puc.rio.inf.paa.fractionalKnapsack.FractionalKnapsack;
+import br.puc.rio.inf.paa.fractionalKnapsack.FractionalKnapsackInstance;
 import br.puc.rio.inf.paa.fractionalKnapsack.Item;
 
 public class FractionalKnapsackReader {
 
-	public List<FractionalKnapsack> createAllInstances() {
+	public List<FractionalKnapsackInstance> createAllInstances() {
 
 		List<String> fileNames = this.getAllFileNames();
 
-		List<FractionalKnapsack> knapsackList = new ArrayList<FractionalKnapsack>();
+		List<FractionalKnapsackInstance> knapsackList = new ArrayList<FractionalKnapsackInstance>();
 
 		for (String fileName : fileNames) {
 
-			FractionalKnapsack instance = createInstance(fileName);
+			FractionalKnapsackInstance instance = createInstance(fileName);
 
 			knapsackList.add(instance);
 		}
@@ -33,7 +29,7 @@ public class FractionalKnapsackReader {
 		return knapsackList;
 	}
 
-	public FractionalKnapsack createInstance(String fileName) {
+	public FractionalKnapsackInstance createInstance(String fileName) {
 		Item[] items = null;
 
 		Path path = Paths.get(fileName);
@@ -54,14 +50,14 @@ public class FractionalKnapsackReader {
 
 				// Creating knapsack
 				if (wordsItems.length > 1) {
-					
+
 					int idKanapsack = Integer.parseInt(wordsItems[0]);
 					int valueKnapsack = Integer.parseInt(wordsItems[1]);
 					int weigthKnapsack = Integer.parseInt(wordsItems[2]);
 
 					Item item = new Item(idKanapsack, valueKnapsack, weigthKnapsack);
 					items[i] = item;
-					
+
 					i++;
 				} else {
 					capacityKnapsack = Double.valueOf((wordsItems[0]));
@@ -73,7 +69,7 @@ public class FractionalKnapsackReader {
 			e.printStackTrace();
 		}
 
-		FractionalKnapsack instance = new FractionalKnapsack(capacityKnapsack, items);
+		FractionalKnapsackInstance instance = new FractionalKnapsackInstance(capacityKnapsack, items);
 
 		return instance;
 	}
