@@ -88,14 +88,14 @@ public class MainFractionalKnapsackN {
 				e.printStackTrace();
 			}
 
-			 System.out.println("No Instance: " + numInstance);
+			System.out.println("No Instance: " + numInstance);
 			// System.out.println(instance.name);
 			// System.out.println("N: " + instance.numVertex + " x " + "M: " +
 			// instance.numEdges);
-			 System.out.println("Quantidade de vezes: " + count);
-			 System.out.println("Tempo medio: " + (durationEnd / count));
-			 System.out.println("CT: " + ctTime);
-			 System.out.println();
+			System.out.println("Quantidade de vezes: " + count);
+			System.out.println("Tempo medio: " + (durationEnd / count));
+			System.out.println("CT: " + ctTime);
+			System.out.println();
 
 			count = 0;
 			durationEnd = 0;
@@ -103,5 +103,5 @@ public class MainFractionalKnapsackN {
 		}
 		writer.close();
 	}
-	
+
 }

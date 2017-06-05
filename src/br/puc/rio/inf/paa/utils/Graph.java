@@ -7,24 +7,23 @@ import java.util.Map;
 
 import br.puc.rio.inf.paa.dijkstra.Adjacent;
 
-
 public class Graph {
-	
+
 	private Map<Integer, List<Adjacent>> vertices;
 	public int numEdges;
-	
-	public Graph(int numNodes){
-		
+
+	public Graph(int numNodes) {
+
 		this.vertices = new HashMap<Integer, List<Adjacent>>();
-		
-		for(int i = 1; i <= numNodes; i++){
+
+		for (int i = 1; i <= numNodes; i++) {
 			this.vertices.put(i, new ArrayList<Adjacent>());
 		}
-		
+
 	}
-	
-	public void addEdge(int source, int destination, int cost){
-		
+
+	public void addEdge(int source, int destination, int cost) {
+
 		this.vertices.get(source).add(new Adjacent(destination, cost));
 	}
 

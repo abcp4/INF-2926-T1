@@ -1,6 +1,5 @@
 package br.puc.rio.inf.paa.fractionalKnapsack;
 
-
 public class Item {
 
 	public int id;
@@ -8,12 +7,11 @@ public class Item {
 	public int weight;
 	public double ratio;
 
-	
 	public Item(int id, int value, int weight) {
 		this.id = id;
 		this.value = value;
 		this.weight = weight;
-		this.ratio = value/weight;
+		this.ratio = value / weight;
 	}
 
 	public int getId() {
@@ -52,8 +50,5 @@ public class Item {
 	public String toString() {
 		return "Item [id=" + id + ", value=" + value + ", weight=" + weight + ", ratio=" + ratio + "]\n";
 	}
-	
-	
-	
 
 }

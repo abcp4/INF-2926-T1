@@ -1,9 +1,5 @@
 package br.puc.rio.inf.paa.utils;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -54,14 +50,14 @@ public class FractionalKnapsackReader {
 
 				// Creating knapsack
 				if (wordsItems.length > 1) {
-					
+
 					int idKanapsack = Integer.parseInt(wordsItems[0]);
 					int valueKnapsack = Integer.parseInt(wordsItems[1]);
 					int weigthKnapsack = Integer.parseInt(wordsItems[2]);
 
 					Item item = new Item(idKanapsack, valueKnapsack, weigthKnapsack);
 					items[i] = item;
-					
+
 					i++;
 				} else {
 					capacityKnapsack = Double.valueOf((wordsItems[0]));

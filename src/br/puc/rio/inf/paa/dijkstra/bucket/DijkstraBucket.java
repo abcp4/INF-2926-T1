@@ -6,11 +6,10 @@ import br.puc.rio.inf.paa.dijkstra.Adjacent;
 import br.puc.rio.inf.paa.dijkstra.GraphInstance;
 import br.puc.rio.inf.paa.dijkstra.IDijkstra;
 
-
 public class DijkstraBucket implements IDijkstra {
 
 	BucketBox box;
-	
+
 	int path[];
 	int distance[];
 	int posIndex;
@@ -28,7 +27,7 @@ public class DijkstraBucket implements IDijkstra {
 
 		posIndex = 0;
 
-			distance[0] = box.MAX_DISTANCE;
+		distance[0] = box.MAX_DISTANCE;
 		path[0] = box.MAX_DISTANCE;
 
 		for (int vertex : graph.graph.keySet()) {
@@ -39,7 +38,7 @@ public class DijkstraBucket implements IDijkstra {
 				newNode.add(vertex);
 
 				box.add(box.MAX_DISTANCE, newNode);
-	
+
 			} else {
 				distance[start] = 0;
 
@@ -50,7 +49,6 @@ public class DijkstraBucket implements IDijkstra {
 
 				path[start] = -1;
 
-	
 			}
 
 		}

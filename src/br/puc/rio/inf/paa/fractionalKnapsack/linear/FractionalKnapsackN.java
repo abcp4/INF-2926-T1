@@ -22,7 +22,7 @@ public class FractionalKnapsackN {
 	}
 
 	public Map<Item, Double> knapsackRecursive(Item[] items, int left, int right, double capacity) {
-		
+
 		double pivot = 0.0;
 
 		if (right - left <= 1) {

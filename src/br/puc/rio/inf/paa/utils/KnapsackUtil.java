@@ -1,7 +1,5 @@
 package br.puc.rio.inf.paa.utils;
 
-import java.util.Arrays;
-
 import br.puc.rio.inf.paa.fractionalKnapsack.Item;
 
 public class KnapsackUtil {
@@ -39,33 +37,6 @@ public class KnapsackUtil {
 		}
 	}
 
-	/*
-	 * public static Item medium(Item[] items, int start, int end) {
-	 * 
-	 * int n = end - start + 1;
-	 * 
-	 * if(n == 1) { return items[start]; } else { final int GROUP_SIZE = 5; int
-	 * groups;
-	 * 
-	 * if(n % GROUP_SIZE == 0) { groups = n / GROUP_SIZE; }else{ groups = (n /
-	 * GROUP_SIZE) + 1; }
-	 * 
-	 * Item[] medians = new Item[groups];
-	 * 
-	 * for (int i = 0; i < medians.length; i++) {
-	 * 
-	 * }
-	 * 
-	 * 
-	 * 
-	 * } return null; }
-	 */
-
-	/**
-	 * Divide the subarray into ceil(n / GROUP_SIZE) groups, and find the median
-	 * of each group by insertion sorting the group and picking the median from
-	 * the sorted list.
-	 **/
 	public static Item medianOfMedians(Item[] items, int startIndex, int endIndex) {
 
 		int n = endIndex - startIndex + 1; // number of elements in the subarray
@@ -123,10 +94,10 @@ public class KnapsackUtil {
 	}
 
 	public static void sort(Item[] subitems, int left, int right) {
-	
+
 		int lenght = 1;
 		if (left < right) {
-			
+
 			for (int i = left + 1; i < right + 1; i++) {
 				Item aux = subitems[i];
 				if (aux == null) {
