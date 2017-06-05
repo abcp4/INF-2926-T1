@@ -3,7 +3,7 @@ package br.puc.rio.inf.paa.polynomialMultiplication;
 public class FFTPolynomialMultiplication implements IPolynomialMultiplication{
 
 	private Polynomials polynomials;
-	private Integer[] result;
+	private int[] result;
 
 	@Override
 	public void multiplication() {
@@ -23,27 +23,32 @@ public class FFTPolynomialMultiplication implements IPolynomialMultiplication{
 		for(int i = 0; i < m; i++){
 			fc[i] = fa[i].times(fb[i]);
 		}
-		
-		Complex[] pc = this.DFT(fc, fc.length, InverseOmega);
-		
-		Complex c;
-		for(int i = 0; i < m; i++){
-			c = pc[i];
-			int x;
-			if(c.im() < 0)
-                x = (int) Math.floor(c.im());
-            else
-                x = (int) Math.ceil(c.im());
-            System.out.println(new Complex(c.re()/m,x/m));
-		}
 
+		Complex[] pc = this.DFT(fc, fc.length, InverseOmega);
+
+		this.result = new int[pc.length];
+
+		for(int i = 0; i < m; i++){
+			double c = pc[i].re()/m;
+			if(c < 0){
+				if(Math.abs(c % 1) > 0.5){
+					this.result[i] = (int) Math.floor(c);
+				}else{
+					this.result[i] = (int) Math.ceil(c);
+				}
+			}else{
+				if(c % 1 > 0.5){
+					this.result[i] = (int) Math.ceil(c);
+				}else{
+					this.result[i] = (int) Math.floor(c);
+				}
+			}
+		}
 	}
 
 	@Override
-	public Complex[] getResult() {
-		// TODO Auto-generated method stub
-//		return this.result;
-		return null;
+	public int[] getResult() {
+		return result;
 	}
 
 	private Complex[] DFT(Complex[] a, int n, Complex[] omega){
@@ -54,27 +59,17 @@ public class FFTPolynomialMultiplication implements IPolynomialMultiplication{
 
 		Complex[] aEven = this.getEvenIndexes(a);
 		Complex[] aOdd = this.getOddIndexes(a);
-		
-		
+
+
 
 		Complex[] omegaSquare = new Complex[n/2];
 
 		for(int i = 0; i < n/2; i++){
 			omegaSquare[i] = omega[i].times(omega[i]);
 		}
-		
-//		for(Complex c:omegaSquare){
-//			System.out.println(c);
-//		}
-//		System.out.println();
 
 		Complex[] f0 = this.DFT(aEven, n/2, omegaSquare);
 		Complex[] f1 = this.DFT(aOdd, n/2, omegaSquare);
-		
-//		for(Complex c:f0){
-//			System.out.println(c);
-//		}
-//		System.out.println();
 
 		y = new Complex[n];
 
@@ -130,7 +125,7 @@ public class FFTPolynomialMultiplication implements IPolynomialMultiplication{
 		}
 		return complexs;
 	}
-	
+
 	private Complex[] calculateInverseOmega(int length){
 		Complex[] complexs = new Complex[length];
 		for(int i = 0; i < length; i++){

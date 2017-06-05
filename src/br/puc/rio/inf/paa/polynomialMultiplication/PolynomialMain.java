@@ -16,23 +16,14 @@ public class PolynomialMain {
 		multiplication2.setPolynomials(polynomials);
 		multiplication2.multiplication();
 		
-//		for(Complex c:multiplication1.getResult()){
-//			System.out.print(c+" ");
-//		}
+		for(int n:multiplication1.getResult()){
+			System.out.print(n+" ");
+		}
 		System.out.println();
 		
 		for(int n:multiplication2.getResult()){
 			System.out.print(n+" ");
 		}
-			
-
-		
-//		String a = " -12 12";
-//		for(String s:a.split(" ")){
-//			System.out.println(s);
-//		}
-		
-		
 	}
 
 }
