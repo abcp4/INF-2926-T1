@@ -36,6 +36,7 @@ public class Item {
 
 	public void setWeight(int weight) {
 		this.weight = weight;
+		this.ratio = value/weight; //TODO - lembrar de tirar isso
 	}
 
 	public double getRatio() {
