@@ -53,20 +53,21 @@ public class FractionalKnapsackN {
 				}
 			}
 		} else {
-			System.out.println(left);
-			System.out.println(right);
+		
 			pivot = KnapsackUtil.medianOfMedians(items, left, right).ratio;
 			int pos_p = KnapsackUtil.partition(items, pivot, left, right);
 
 			int j = right;
 
 			double current_weight = 0.0;
+			System.out.println("j: " + j);
 
 			while (j > pos_p && capacity > current_weight + items[j].weight) {
 
 				current_weight = current_weight + items[j].weight;
 				j--;
 			}
+			System.out.println("j: " + j);
 
 			if (j > pos_p) {
 				knapsackRecursive(items, pos_p + 1, right, capacity);

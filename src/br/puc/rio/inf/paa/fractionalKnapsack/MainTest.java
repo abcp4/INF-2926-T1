@@ -3,6 +3,7 @@ package br.puc.rio.inf.paa.fractionalKnapsack;
 import java.util.Map;
 
 import br.puc.rio.inf.paa.fractionalKnapsack.linear.FractionalKnapsackN;
+import br.puc.rio.inf.paa.fractionalKnapsack.nlogn.FractionalKnapsackNlogN;
 
 public class MainTest {
 
@@ -42,11 +43,13 @@ public class MainTest {
 		// }
 		//
 
-		FractionalKnapsackInstance knapsack = new FractionalKnapsackInstance(15.0, items);
+		FractionalKnapsackInstance knapsack = new FractionalKnapsackInstance(40.0, items);
 
-		FractionalKnapsackN knapsackN = new FractionalKnapsackN();
+		//FractionalKnapsackNlogN knap = new FractionalKnapsackNlogN();
+		FractionalKnapsackN knap = new FractionalKnapsackN();
+		//FractionalKnapsackN2 knap = new FractionalKnapsackN2();
 
-		Map<Item, Double> map = knapsackN.knapsack(knapsack);
+		Map<Item, Double> map = knap.knapsack(knapsack);
 
 		map.entrySet().forEach(entry -> {
 			System.out.println(entry.getKey().id + " " + entry.getValue());
