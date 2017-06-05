@@ -1,4 +1,4 @@
-package br.puc.rio.inf.paa.fractionalKnapsack.reader;
+package br.puc.rio.inf.paa.utils;
 
 import java.io.BufferedReader;
 import java.io.File;

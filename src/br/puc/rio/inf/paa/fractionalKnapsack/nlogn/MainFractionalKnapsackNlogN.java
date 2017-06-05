@@ -9,8 +9,8 @@ import java.util.Map;
 
 import br.puc.rio.inf.paa.fractionalKnapsack.FractionalKnapsackInstance;
 import br.puc.rio.inf.paa.fractionalKnapsack.Item;
-import br.puc.rio.inf.paa.fractionalKnapsack.reader.FractionalKnapsackReader;
 import br.puc.rio.inf.paa.utils.CsvWriter;
+import br.puc.rio.inf.paa.utils.FractionalKnapsackReader;
 import br.puc.rio.inf.paa.utils.Utils;
 
 public class MainFractionalKnapsackNlogN {
