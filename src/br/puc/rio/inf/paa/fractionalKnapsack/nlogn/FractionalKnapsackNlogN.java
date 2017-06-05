@@ -14,6 +14,10 @@ public class FractionalKnapsackNlogN {
 		int n = knapsack.items.length;
 
 		KnapsackUtil.mergeSort(knapsack.items, 0, n - 1);
+		
+		for (int i = 0; i < knapsack.items.length; i++) {
+			System.out.println(knapsack.items[i].toString());
+		}
    
 		double current_weight = 0;
 

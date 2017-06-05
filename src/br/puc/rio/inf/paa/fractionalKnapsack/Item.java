@@ -3,8 +3,8 @@ package br.puc.rio.inf.paa.fractionalKnapsack;
 public class Item {
 
 	public int id;
-	public int value;
-	public int weight;
+	public double value;
+	public double weight;
 	public double ratio;
 
 	public Item(int id, int value, int weight) {
@@ -22,19 +22,19 @@ public class Item {
 		this.id = id;
 	}
 
-	public int getValue() {
+	public double getValue() {
 		return value;
 	}
 
-	public void setValue(int value) {
+	public void setValue(double value) {
 		this.value = value;
 	}
 
-	public int getWeight() {
+	public double getWeight() {
 		return weight;
 	}
 
-	public void setWeight(int weight) {
+	public void setWeight(double weight) {
 		this.weight = weight;
 		this.ratio = value/weight; //TODO - lembrar de tirar isso
 	}

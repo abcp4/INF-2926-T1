@@ -37,18 +37,25 @@ public class FractionalKnapsackN {
 				// get items to knapsack
 				while (right >= left) {
 
-					if (items[right].weight + currentWeight < capacity) {
+					if (items[right].weight + currentWeight <= capacity) {
 						itemsAdd.put(items[right], 1.0);
 						//capacity = capacity - items[right].weight;
 						
 						currentWeight = currentWeight + items[right].weight;
-						System.out.println(items[right].weight + " " + currentWeight);
+						//System.out.println(items[right].weight + " " + currentWeight);
 						
 
 					} else {
+						if((currentWeight/items[right].weight) + currentWeight < capacity){
+							itemsAdd.put(items[right], (currentWeight / items[right].weight));
+							currentWeight = currentWeight + (currentWeight/items[right].weight);
+						}else{
+							
+							double spaceHired = capacity - currentWeight;
+							itemsAdd.put(items[right], (currentWeight / items[right].weight) - spaceHired);
+							currentWeight = currentWeight + ((currentWeight/items[right].weight) - spaceHired);
+						}
 						
-						itemsAdd.put(items[right], (currentWeight / items[right].weight));
-						currentWeight = currentWeight + (currentWeight/items[right].weight);
 						
 						//capacity = capacity - (currentWeight / items[right].weight);
 						//System.out.println(items[right].weight + " " + currentWeight);
@@ -69,7 +76,7 @@ public class FractionalKnapsackN {
 
 			double cw = 0.0;
 
-			while (j > pos_p && capacity - currentWeight >= cw + items[j].weight) {
+			while (j > pos_p && capacity - currentWeight > cw + items[j].weight) {
 
 				cw = cw + items[j].weight;
 				j--;
@@ -91,7 +98,7 @@ public class FractionalKnapsackN {
 					
 					currentWeight = currentWeight + items[pos_p].weight;
 					
-					System.out.println(items[pos_p] + " " + currentWeight);
+				//	System.out.println(items[pos_p] + " " + currentWeight);
 					//capacity = capacity - items[pos_p].weight;
 					
 					knapsackRecursive(items, left, pos_p - 1, capacity, currentWeight);
@@ -103,7 +110,7 @@ public class FractionalKnapsackN {
 					
 					
 					//System.out.println(items[pos_p] + " " + currentWeight);
-					knapsackRecursive(items, left, pos_p - 1, capacity, currentWeight);
+					//knapsackRecursive(items, left, pos_p - 1, capacity, currentWeight);
 				}
 
 			}
