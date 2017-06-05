@@ -53,7 +53,7 @@ public class MainTest {
 
 		
 		FractionalKnapsackN knapsackN = new FractionalKnapsackN();
-
+		//FractionalKnapsackNlogN knapsackN = new FractionalKnapsackNlogN();
 		Map<Item, Double> map = knapsackN.knapsack(knapsack);
 		map.entrySet().forEach(entry -> {
 			System.out.println(entry.getKey().id + " " + entry.getValue());
