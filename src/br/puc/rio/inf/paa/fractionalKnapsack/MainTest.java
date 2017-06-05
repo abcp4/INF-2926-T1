@@ -3,7 +3,9 @@ package br.puc.rio.inf.paa.fractionalKnapsack;
 import java.util.Map;
 
 import br.puc.rio.inf.paa.fractionalKnapsack.linear.FractionalKnapsackN;
+import br.puc.rio.inf.paa.fractionalKnapsack.n2.FractionalKnapsackN2;
 import br.puc.rio.inf.paa.fractionalKnapsack.nlogn.FractionalKnapsackNlogN;
+import br.puc.rio.inf.paa.utils.KnapsackUtil;
 
 public class MainTest {
 
@@ -14,9 +16,9 @@ public class MainTest {
 		for (int i = 0; i < items.length; i++) {
 			items[i] = new Item(i, 30, 6);
 		}
-		items[0].setWeight(25);
-		items[1].setWeight(21);
-		items[2].setWeight(98); // 76
+		items[0].setWeight(5);
+		items[1].setWeight(5);
+		items[2].setWeight(10); // 76
 		items[3].setWeight(100);
 		items[4].setWeight(76);
 
@@ -37,20 +39,22 @@ public class MainTest {
 
 		// Item item = KnapsackUtil.medianOfMedians(items, 0, 16);
 
-		// System.out.println("Median of median " + item.weight);
-		// for (int i = 0; i < items.length; i++) {
-		// System.out.println(items[i].toString());
-		// }
-		//
+		
 
-		FractionalKnapsackInstance knapsack = new FractionalKnapsackInstance(40.0, items);
+		
+		FractionalKnapsackInstance knapsack = new FractionalKnapsackInstance(15.0, items);
 
-		//FractionalKnapsackNlogN knap = new FractionalKnapsackNlogN();
-		FractionalKnapsackN knap = new FractionalKnapsackN();
-		//FractionalKnapsackN2 knap = new FractionalKnapsackN2();
 
-		Map<Item, Double> map = knap.knapsack(knapsack);
+//		KnapsackUtil.mergeSort(knapsack.items, 0, items.length - 1);
+//		 for (int i = 0; i < items.length; i++) {
+//		 System.out.println(knapsack.items[i].toString());
+//		 
+//		 }
 
+		
+		FractionalKnapsackN knapsackN = new FractionalKnapsackN();
+
+		Map<Item, Double> map = knapsackN.knapsack(knapsack);
 		map.entrySet().forEach(entry -> {
 			System.out.println(entry.getKey().id + " " + entry.getValue());
 		});
@@ -58,3 +62,4 @@ public class MainTest {
 	}
 
 }
+
