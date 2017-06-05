@@ -4,6 +4,6 @@ public interface IPolynomialMultiplication {
 	
 	void multiplication();
 	
-	int[] getResult();
+	Object[] getResult();
 	
 }

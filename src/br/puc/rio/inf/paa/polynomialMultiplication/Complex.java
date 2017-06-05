@@ -127,8 +127,17 @@ public class Complex {
 	public Complex tan() {
 		return sin().divides(cos());
 	}
-
-
+	
+	public Complex power(double x) {
+	    double modulus = Math.sqrt(re*re + im*im);
+	    double arg = Math.atan2(im,re);
+	    double log_re = Math.log(modulus);
+	    double log_im = arg;
+	    double x_log_re = x * log_re;
+	    double x_log_im = x * log_im;
+	    double modulus_ans = Math.exp(x_log_re);
+	    return new Complex(modulus_ans*Math.cos(x_log_im), modulus_ans*Math.sin(x_log_im));
+	 }
 
 	// a static version of plus
 	public static Complex plus(Complex a, Complex b) {

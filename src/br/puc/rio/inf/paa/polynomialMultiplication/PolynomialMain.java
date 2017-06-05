@@ -8,25 +8,22 @@ public class PolynomialMain {
 		
 		Polynomials polynomials = new PolynomialMultiplicationReader().readFile("../INF-2926/input-polynomial-multiplication/instancia_03.dat");
 		
-		FFTPolynomialsMultiplication multiplication = new FFTPolynomialsMultiplication();
-		multiplication.setPolynomials(polynomials);
-		multiplication.multiplication();
+		FFTPolynomialMultiplication multiplication1 = new FFTPolynomialMultiplication();
+		multiplication1.setPolynomials(polynomials);
+		multiplication1.multiplication();
 		
+		DirectPolynomialMultiplication multiplication2 = new DirectPolynomialMultiplication();
+		multiplication2.setPolynomials(polynomials);
+		multiplication2.multiplication();
 		
-//		System.out.println("Polinômio A:");
-//		for(int n:polynomials.getPolynomialA()){
-//			System.out.print(n+" ");
+//		for(Complex c:multiplication1.getResult()){
+//			System.out.print(c+" ");
 //		}
-//		System.out.println();
-//		System.out.println("Polinômio B:");
-//		for(int n:polynomials.getPolynomialB()){
-//			System.out.print(n+" ");
-//		}
-//		System.out.println();
-//		
-//		for(int n:multiplication.getResult()){
-//			System.out.print(n+" ");
-//		}
+		System.out.println();
+		
+		for(int n:multiplication2.getResult()){
+			System.out.print(n+" ");
+		}
 			
 
 		
