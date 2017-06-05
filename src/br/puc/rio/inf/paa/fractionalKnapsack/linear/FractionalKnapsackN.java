@@ -21,7 +21,8 @@ public class FractionalKnapsackN {
 
 	}
 
-	public Map<Item, Double> knapsackRecursive(Item[] items, int left, int right, double capacity, double currentWeight) {
+	public Map<Item, Double> knapsackRecursive(Item[] items, int left, int right, double capacity,
+			double currentWeight) {
 
 		if (right - left <= 1) {
 
@@ -39,19 +40,21 @@ public class FractionalKnapsackN {
 
 					if (items[right].weight + currentWeight < capacity) {
 						itemsAdd.put(items[right], 1.0);
-						//capacity = capacity - items[right].weight;
-						
+						// capacity = capacity - items[right].weight;
+
 						currentWeight = currentWeight + items[right].weight;
-						System.out.println(items[right].weight + " " + currentWeight);
-						
+						// System.out.println(items[right].weight + " " +
+						// currentWeight);
 
 					} else {
-						
+
 						itemsAdd.put(items[right], (currentWeight / items[right].weight));
-						currentWeight = currentWeight + (currentWeight/items[right].weight);
-						
-						//capacity = capacity - (currentWeight / items[right].weight);
-						//System.out.println(items[right].weight + " " + currentWeight);
+						currentWeight = currentWeight + (currentWeight / items[right].weight);
+
+						// capacity = capacity - (currentWeight /
+						// items[right].weight);
+						// System.out.println(items[right].weight + " " +
+						// currentWeight);
 						break;
 					}
 
@@ -82,27 +85,26 @@ public class FractionalKnapsackN {
 				for (int i = right; i > pos_p; i--) {
 					itemsAdd.put(items[i], 1.0);
 				}
-				//capacity = capacity - cw;
+				// capacity = capacity - cw;
 				currentWeight = currentWeight + cw;
 
 				if (items[pos_p].weight + currentWeight <= capacity) {
-					
+
 					itemsAdd.put(items[pos_p], 1.0);
-					
+
 					currentWeight = currentWeight + items[pos_p].weight;
-					
+
 					System.out.println(items[pos_p] + " " + currentWeight);
-					//capacity = capacity - items[pos_p].weight;
-					
+					// capacity = capacity - items[pos_p].weight;
+
 					knapsackRecursive(items, left, pos_p - 1, capacity, currentWeight);
 
 				} else {
 					itemsAdd.put(items[pos_p], currentWeight / items[pos_p].weight);
-					
+
 					currentWeight = currentWeight + (currentWeight / items[pos_p].weight);
-					
-					
-					//System.out.println(items[pos_p] + " " + currentWeight);
+
+					// System.out.println(items[pos_p] + " " + currentWeight);
 					knapsackRecursive(items, left, pos_p - 1, capacity, currentWeight);
 				}
 
