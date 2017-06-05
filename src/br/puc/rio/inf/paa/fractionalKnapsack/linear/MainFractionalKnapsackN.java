@@ -1,4 +1,4 @@
-package br.puc.rio.inf.paa.fractionalKnapsack;
+package br.puc.rio.inf.paa.fractionalKnapsack.linear;
 
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -7,21 +7,23 @@ import java.nio.charset.Charset;
 import java.util.List;
 import java.util.Map;
 
+import br.puc.rio.inf.paa.fractionalKnapsack.FractionalKnapsackInstance;
+import br.puc.rio.inf.paa.fractionalKnapsack.Item;
 import br.puc.rio.inf.paa.fractionalKnapsack.reader.FractionalKnapsackReader;
 import br.puc.rio.inf.paa.utils.CsvWriter;
 import br.puc.rio.inf.paa.utils.Utils;
 
-public class MainFractionalKnapsackN2 {
+public class MainFractionalKnapsackN {
 
 	public static void main(String[] args) {
 
-		String nameCSV = "nameCSVMainFractionalKnapsackN2.csv";
+		String nameCSV = "nameCSVMainFractionalKnapsackN.csv";
 
 		CsvWriter writer = new CsvWriter(nameCSV, ',', Charset.forName("ISO-8859-1"));
 
 		FractionalKnapsackReader knapsackReader = new FractionalKnapsackReader();
 
-		List<FractionalKnapsack> fractionalKnapsacks = knapsackReader.createAllInstances();
+		List<FractionalKnapsackInstance> fractionalKnapsacks = knapsackReader.createAllInstances();
 
 		int count = 0;
 		int numInstance = 0;
@@ -47,7 +49,7 @@ public class MainFractionalKnapsackN2 {
 		}
 
 		for (int i = 0; i < fractionalKnapsacks.size(); i++) {
-			FractionalKnapsackN2 knapsackN = new FractionalKnapsackN2();
+			FractionalKnapsackN knapsackN = new FractionalKnapsackN();
 			Map<Item, Double> map = null;
 			double temp_inicio = System.nanoTime();
 
@@ -62,7 +64,7 @@ public class MainFractionalKnapsackN2 {
 			numInstance++;
 			try {
 
-				ctTime = Math.pow(fractionalKnapsacks.get(i).items.length, 2);
+				ctTime = fractionalKnapsacks.get(i).items.length;
 
 				cpuTime = (durationEnd / count);
 
@@ -86,11 +88,20 @@ public class MainFractionalKnapsackN2 {
 				e.printStackTrace();
 			}
 
+			 System.out.println("No Instance: " + numInstance);
+			// System.out.println(instance.name);
+			// System.out.println("N: " + instance.numVertex + " x " + "M: " +
+			// instance.numEdges);
+			 System.out.println("Quantidade de vezes: " + count);
+			 System.out.println("Tempo medio: " + (durationEnd / count));
+			 System.out.println("CT: " + ctTime);
+			 System.out.println();
+
 			count = 0;
 			durationEnd = 0;
 
 		}
 		writer.close();
 	}
-
+	
 }

@@ -3,13 +3,13 @@ package br.puc.rio.inf.paa.fractionalKnapsack;
 import java.util.Arrays;
 import java.util.List;
 
-public class FractionalKnapsack {
+public class FractionalKnapsackInstance {
 
 	public double capacity;
 	 public Item[] items;
 
 	
-	public FractionalKnapsack(double capacity, Item[] items) {
+	public FractionalKnapsackInstance(double capacity, Item[] items) {
 
 		this.capacity = capacity;
 		this.items = items;

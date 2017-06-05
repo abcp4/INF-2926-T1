@@ -1,13 +1,12 @@
 package br.puc.rio.inf.paa.fractionalKnapsack;
 
-import java.util.Arrays;
 
 public class Item {
 
-	int id;
-	int value;
-	int weight;
-	double ratio;
+	public int id;
+	public int value;
+	public int weight;
+	public double ratio;
 
 	
 	public Item(int id, int value, int weight) {

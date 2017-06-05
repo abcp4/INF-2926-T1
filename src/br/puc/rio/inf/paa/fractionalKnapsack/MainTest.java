@@ -2,7 +2,8 @@ package br.puc.rio.inf.paa.fractionalKnapsack;
 
 import java.util.Map;
 
-import br.puc.rio.inf.paa.fractionalKnapsack.mergesort.KnapsackUtil;
+import br.puc.rio.inf.paa.fractionalKnapsack.linear.FractionalKnapsackN;
+import br.puc.rio.inf.paa.utils.KnapsackUtil;
 
 
 public class MainTest {
@@ -46,7 +47,7 @@ public class MainTest {
 //	}
 //		
 		
-	FractionalKnapsack knapsack = new FractionalKnapsack(15.0, items);
+	FractionalKnapsackInstance knapsack = new FractionalKnapsackInstance(15.0, items);
 		
 		FractionalKnapsackN knapsackN = new FractionalKnapsackN();
 	

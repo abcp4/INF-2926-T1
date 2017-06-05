@@ -1,4 +1,4 @@
-package br.puc.rio.inf.paa.fractionalKnapsack.mergesort;
+package br.puc.rio.inf.paa.utils;
 
 import java.util.Arrays;
 

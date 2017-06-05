@@ -12,20 +12,20 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
-import br.puc.rio.inf.paa.fractionalKnapsack.FractionalKnapsack;
+import br.puc.rio.inf.paa.fractionalKnapsack.FractionalKnapsackInstance;
 import br.puc.rio.inf.paa.fractionalKnapsack.Item;
 
 public class FractionalKnapsackReader {
 
-	public List<FractionalKnapsack> createAllInstances() {
+	public List<FractionalKnapsackInstance> createAllInstances() {
 
 		List<String> fileNames = this.getAllFileNames();
 
-		List<FractionalKnapsack> knapsackList = new ArrayList<FractionalKnapsack>();
+		List<FractionalKnapsackInstance> knapsackList = new ArrayList<FractionalKnapsackInstance>();
 
 		for (String fileName : fileNames) {
 
-			FractionalKnapsack instance = createInstance(fileName);
+			FractionalKnapsackInstance instance = createInstance(fileName);
 
 			knapsackList.add(instance);
 		}
@@ -33,7 +33,7 @@ public class FractionalKnapsackReader {
 		return knapsackList;
 	}
 
-	public FractionalKnapsack createInstance(String fileName) {
+	public FractionalKnapsackInstance createInstance(String fileName) {
 		Item[] items = null;
 
 		Path path = Paths.get(fileName);
@@ -73,7 +73,7 @@ public class FractionalKnapsackReader {
 			e.printStackTrace();
 		}
 
-		FractionalKnapsack instance = new FractionalKnapsack(capacityKnapsack, items);
+		FractionalKnapsackInstance instance = new FractionalKnapsackInstance(capacityKnapsack, items);
 
 		return instance;
 	}

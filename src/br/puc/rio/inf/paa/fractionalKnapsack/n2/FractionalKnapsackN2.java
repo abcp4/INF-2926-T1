@@ -1,9 +1,11 @@
-package br.puc.rio.inf.paa.fractionalKnapsack;
+package br.puc.rio.inf.paa.fractionalKnapsack.n2;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import br.puc.rio.inf.paa.fractionalKnapsack.mergesort.KnapsackUtil;
+import br.puc.rio.inf.paa.fractionalKnapsack.FractionalKnapsackInstance;
+import br.puc.rio.inf.paa.fractionalKnapsack.Item;
+import br.puc.rio.inf.paa.utils.KnapsackUtil;
 
 public class FractionalKnapsackN2 {
 
@@ -13,7 +15,7 @@ public class FractionalKnapsackN2 {
 		itemsAdd = new HashMap<>();
 	}
 
-	public Map<Item, Double> knapsack(FractionalKnapsack knapsack) {
+	public Map<Item, Double> knapsack(FractionalKnapsackInstance knapsack) {
 
 		return knapsackRecursive(knapsack.items, 0, knapsack.items.length - 1, knapsack.capacity);
 
@@ -51,8 +53,8 @@ public class FractionalKnapsackN2 {
 				}
 			}
 		} else {
-			
-			pivot = KnapsackPivot2(items, left, right);
+
+			pivot = getPivot(items, left, right);
 			int pos_p = KnapsackUtil.partition(items, pivot, left, right);
 
 			int j = right;
@@ -91,7 +93,7 @@ public class FractionalKnapsackN2 {
 
 	}
 
-	private double KnapsackPivot2(Item[] items, int left, int right) {
+	private double getPivot(Item[] items, int left, int right) {
 		int k = 0;
 		double ratio_f = 0;
 		for (int i = left; i <= right; i++) {
