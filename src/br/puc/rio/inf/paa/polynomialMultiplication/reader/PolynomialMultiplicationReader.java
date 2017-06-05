@@ -68,7 +68,6 @@ public class PolynomialMultiplicationReader {
 		    while ((line = reader.readLine()) != null) {
 		       String words[] = line.split(" ");
 		       if(words.length == 1 && waitingDegree){ // Indica o grau do polinômio
-		    	   System.out.println(words[0]);
 		    	   degree = Integer.parseInt(words[0]);
 		    	   polynomialA = new int[degree+1];
 		    	   polynomialB = new int[degree+1];

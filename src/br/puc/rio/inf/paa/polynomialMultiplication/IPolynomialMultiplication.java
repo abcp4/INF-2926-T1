@@ -2,6 +2,8 @@ package br.puc.rio.inf.paa.polynomialMultiplication;
 
 public interface IPolynomialMultiplication {
 	
-	void multiplication();	
+	void multiplication();
+	
+	int[] getResult();
 	
 }

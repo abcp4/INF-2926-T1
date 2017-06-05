@@ -18,6 +18,11 @@ public class DirectPolynomialMultiplication implements IPolynomialMultiplication
 		
 		this.setPolynomialResult(result);
 	}
+	
+	@Override
+	public int[] getResult() {
+		return polynomialResult;
+	}
 
 	public Polynomials getPolynomials() {
 		return polynomials;
@@ -25,10 +30,6 @@ public class DirectPolynomialMultiplication implements IPolynomialMultiplication
 
 	public void setPolynomials(Polynomials polynomials) {
 		this.polynomials = polynomials;
-	}
-
-	public int[] getPolynomialResult() {
-		return polynomialResult;
 	}
 
 	public void setPolynomialResult(int[] polynomialResult) {
