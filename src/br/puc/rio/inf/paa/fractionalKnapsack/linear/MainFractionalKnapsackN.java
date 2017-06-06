@@ -51,7 +51,10 @@ public class MainFractionalKnapsackN {
 		for (int i = 0; i < fractionalKnapsacks.size(); i++) {
 			
 			Map<Item, Double> map = null;
+<<<<<<< HEAD
 			
+=======
+>>>>>>> 9dbc89d0635ce97a0417b7c74a92efec0395052c
 			double temp_inicio = System.currentTimeMillis();
 
 			while (durationEnd <= timeout) {

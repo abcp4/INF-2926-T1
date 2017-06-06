@@ -41,10 +41,22 @@ public class FractionalKnapsackN {
 
 					if (capacity > items[right].weight) {
 						itemsAdd.put(items[right], 1.0);
+<<<<<<< HEAD
 						capacity = capacity - items[right].weight;
 					} else {
 						itemsAdd.put(items[right], capacity / (items[right].weight));
 						capacity = capacity - (capacity / (items[right].weight));
+=======
+					
+						currentWeight = currentWeight + items[right].weight;
+						
+			
+					} else {
+						//Colocar na mochila <=  peso disponivel / peso do objeto
+						itemsAdd.put(items[right], ((capacity - currentWeight) / items[right].weight));
+						currentWeight = currentWeight + ((capacity - currentWeight) / items[right].weight);
+					
+>>>>>>> 9dbc89d0635ce97a0417b7c74a92efec0395052c
 						break;
 					}
 
@@ -77,6 +89,7 @@ public class FractionalKnapsackN {
 				for (int i = right; i > pos_p; i--) {
 					itemsAdd.put(items[i], 1.0);
 				}
+<<<<<<< HEAD
 				capacity = capacity - current_weight;
 
 				if (capacity > items[pos_p].weight) {
@@ -86,6 +99,27 @@ public class FractionalKnapsackN {
 
 				} else {
 					itemsAdd.put(items[pos_p], capacity / items[pos_p].weight);
+=======
+				// capacity = capacity - cw;
+				currentWeight = currentWeight + cw;
+
+				if (items[pos_p].weight + currentWeight <= capacity) {
+
+					itemsAdd.put(items[pos_p], 1.0);
+
+					currentWeight = currentWeight + items[pos_p].weight;
+
+				
+					knapsackRecursive(items, left, pos_p - 1, capacity, currentWeight);
+
+				} else {
+					itemsAdd.put(items[pos_p], ((capacity - currentWeight) / items[pos_p].weight));
+					currentWeight = currentWeight + ((capacity - currentWeight) / items[pos_p].weight);
+					
+
+			
+				}
+>>>>>>> 9dbc89d0635ce97a0417b7c74a92efec0395052c
 
 				}
 			}
