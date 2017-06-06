@@ -16,6 +16,10 @@ public class PolynomialMain {
 		multiplication2.setPolynomials(polynomials);
 		multiplication2.multiplication();
 		
+		DACPolynomialMultiplication multiplication3 = new DACPolynomialMultiplication();
+		multiplication3.setPolynomials(polynomials);
+		multiplication3.multiplication();
+		
 		for(int n:multiplication1.getResult()){
 			System.out.print(n+" ");
 		}
@@ -24,6 +28,12 @@ public class PolynomialMain {
 		for(int n:multiplication2.getResult()){
 			System.out.print(n+" ");
 		}
+		System.out.println();
+		
+		for(int n:multiplication3.getResult()){
+			System.out.print(n+" ");
+		}
+		System.out.println();
 	}
 
 }
