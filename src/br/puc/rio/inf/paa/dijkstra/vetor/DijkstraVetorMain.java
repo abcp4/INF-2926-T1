@@ -6,8 +6,6 @@ import java.math.MathContext;
 import java.nio.charset.Charset;
 import java.util.List;
 
-import javax.swing.plaf.basic.BasicInternalFrameTitlePane.MaximizeAction;
-
 import br.puc.rio.inf.paa.dijkstra.DijkstraSolution;
 import br.puc.rio.inf.paa.dijkstra.GraphInstance;
 import br.puc.rio.inf.paa.dijkstra.IDijkstra;
@@ -36,7 +34,7 @@ public class DijkstraVetorMain {
 		double durationEnd = 0.0;
 		double ctTime = 0.0;
 		double cpuTime = 0.0;
-		
+
 		try {
 			writer.write("Instance");
 			writer.write("N");
@@ -47,13 +45,13 @@ public class DijkstraVetorMain {
 			writer.write("CT/CPU");
 			writer.write("Log(CPU)");
 			writer.write("Log(CT/CPU)");
-		
-			writer.endRecord();		
+
+			writer.endRecord();
 
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+
 		for (GraphInstance instance : instances) {
 
 			IDijkstra iDijkstra = new DijkstraVetor();
@@ -72,39 +70,39 @@ public class DijkstraVetorMain {
 			numInstance++;
 			try {
 				ctTime = (instance.numVertex * instance.numVertex) + instance.numEdges;
-				
-				cpuTime = (durationEnd/count);
-				
-				cpuTime = cpuTime/100;
-				
+
+				cpuTime = (durationEnd / count);
+
+				cpuTime = cpuTime / 100;
+
 				int nm = instance.numEdges + instance.numVertex;
-				
+
 				writer.write(instance.name);
-				
+
 				double logCPU = Utils.logBase2(cpuTime);
-				
-				double logCTCPU = Utils.logBase2(ctTime/cpuTime);
-				
+
+				double logCTCPU = Utils.logBase2(ctTime / cpuTime);
+
 				writer.write(String.valueOf(instance.numVertex));
 				writer.write(String.valueOf(instance.numEdges));
-				
+
 				writer.write(String.valueOf(nm));
-				
+
 				writer.write(new BigDecimal(cpuTime, MathContext.DECIMAL64).toString());
 				writer.write(new BigDecimal(ctTime, MathContext.DECIMAL64).toString());
-					
-				writer.write(new BigDecimal((ctTime/cpuTime), MathContext.DECIMAL64).toString());
-				
+
+				writer.write(new BigDecimal((ctTime / cpuTime), MathContext.DECIMAL64).toString());
+
 				writer.write(String.valueOf(logCPU));
-				
+
 				writer.write(String.valueOf(logCTCPU));
-				
-				writer.endRecord();		
+
+				writer.endRecord();
 
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			
+
 			System.out.println("No Instance: " + numInstance);
 			System.out.println(instance.name);
 			System.out.println("N: " + instance.numVertex + " x " + "M: " + instance.numEdges);

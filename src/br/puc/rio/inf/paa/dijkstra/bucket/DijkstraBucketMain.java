@@ -22,8 +22,6 @@ public class DijkstraBucketMain {
 
 		CsvWriter writer = new CsvWriter(nameCVSVetor, ',', Charset.forName("ISO-8859-1"));
 
-		// new DijkstraVetorMain().testDjistraReadAllInstances();
-
 		List<GraphInstance> instances = new ReadAllFiles().creatAllInstances();
 
 		int count = 0;
@@ -34,7 +32,7 @@ public class DijkstraBucketMain {
 		double durationEnd = 0.0;
 		double ctTime = 0.0;
 		double cpuTime = 0.0;
-		
+
 		try {
 			writer.write("Instance");
 			writer.write("N");
@@ -45,13 +43,13 @@ public class DijkstraBucketMain {
 			writer.write("CT/CPU");
 			writer.write("Log(CPU)");
 			writer.write("Log(CT/CPU)");
-		
-			writer.endRecord();		
+
+			writer.endRecord();
 
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+
 		for (GraphInstance instance : instances) {
 
 			IDijkstra iDijkstra = new DijkstraBucket();
@@ -70,50 +68,47 @@ public class DijkstraBucketMain {
 			numInstance++;
 			try {
 				ctTime = (instance.numVertex * instance.maxCostEdge) + instance.numEdges;
-				
-				cpuTime = (durationEnd/count);
-				
-				cpuTime = cpuTime/100;
-				
+
+				cpuTime = (durationEnd / count);
+
+				cpuTime = cpuTime / 100;
+
 				int nm = instance.numEdges + instance.numVertex;
-				
+
 				writer.write(instance.name);
-				
+
 				double logCPU = Utils.logBase2(cpuTime);
-				
-				double logCTCPU = Utils.logBase2(ctTime/cpuTime);
-				
+
+				double logCTCPU = Utils.logBase2(ctTime / cpuTime);
+
 				writer.write(String.valueOf(instance.numVertex));
 				writer.write(String.valueOf(instance.numEdges));
-				
+
 				writer.write(String.valueOf(nm));
-				
+
 				writer.write(new BigDecimal(cpuTime, MathContext.DECIMAL64).toString());
 				writer.write(new BigDecimal(ctTime, MathContext.DECIMAL64).toString());
-					
-				writer.write(new BigDecimal((ctTime/cpuTime), MathContext.DECIMAL64).toString());
-				
-				writer.write(String.valueOf(logCPU));
-				
-				writer.write(String.valueOf(logCTCPU));
-				
-				writer.endRecord();		
 
-				
+				writer.write(new BigDecimal((ctTime / cpuTime), MathContext.DECIMAL64).toString());
+
+				writer.write(String.valueOf(logCPU));
+
+				writer.write(String.valueOf(logCTCPU));
+
+				writer.endRecord();
+
 				System.out.println("LOGCTCPU:" + logCTCPU);
-				
-				
+
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			
+
 			System.out.println("No Instance: " + numInstance);
 			System.out.println(instance.name);
 			System.out.println("N: " + instance.numVertex + " x " + "M: " + instance.numEdges);
 			System.out.println("Quantidade de vezes: " + count);
 			System.out.println("Tempo medio: " + (durationEnd / count));
 			System.out.println("CT: " + ctTime);
-			
 
 			count = 0;
 			durationEnd = 0;
