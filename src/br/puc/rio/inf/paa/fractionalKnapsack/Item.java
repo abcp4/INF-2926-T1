@@ -7,7 +7,7 @@ public class Item {
 	public double weight;
 	public double ratio;
 
-	public Item(int id, int value, int weight) {
+	public Item(int id, double value, double weight) {
 		this.id = id;
 		this.value = value;
 		this.weight = weight;

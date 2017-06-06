@@ -17,13 +17,12 @@ public class FractionalKnapsackN2 {
 
 	public Map<Item, Double> knapsack(FractionalKnapsackInstance knapsack) {
 
-		return knapsackRecursive(knapsack.items, 0, knapsack.items.length - 1, knapsack.capacity);
+		return knapsackRecursive(knapsack.items, 0, knapsack.items.length - 1, knapsack.capacity, 0);
 
 	}
 
-	public Map<Item, Double> knapsackRecursive(Item[] items, int left, int right, double capacity) {
+	public Map<Item, Double> knapsackRecursive(Item[] items, int left, int right, double capacity,  double currentWeight) {
 
-		double pivot = 0.0;
 
 		if (right - left <= 1) {
 
@@ -39,12 +38,17 @@ public class FractionalKnapsackN2 {
 				// get items to knapsack
 				while (right >= left) {
 
-					if (capacity > items[right].weight) {
+					if (items[right].weight + currentWeight <= capacity) {
 						itemsAdd.put(items[right], 1.0);
-						capacity = capacity - items[right].weight;
+					
+						currentWeight = currentWeight + items[right].weight;
+						
+			
 					} else {
-						itemsAdd.put(items[right], capacity / (items[right].weight));
-						capacity = capacity - (capacity / (items[right].weight));
+						//Colocar na mochila <=  peso disponivel / peso do objeto
+						itemsAdd.put(items[right], ((capacity - currentWeight) / items[right].weight));
+						currentWeight = currentWeight + ((capacity - currentWeight) / items[right].weight);
+					
 						break;
 					}
 
@@ -54,35 +58,45 @@ public class FractionalKnapsackN2 {
 			}
 		} else {
 
+			double pivot = 0.0;
+
 			pivot = getPivot(items, left, right);
 			int pos_p = KnapsackUtil.partition(items, pivot, left, right);
-
 			int j = right;
 
-			double current_weight = 0.0;
+			double cw = 0.0;
 
-			while (j > pos_p && capacity > current_weight + items[j].weight) {
+			while (j > pos_p && capacity - currentWeight > cw + items[j].weight) {
 
-				current_weight = current_weight + items[j].weight;
+				cw = cw + items[j].weight;
 				j--;
 			}
 
 			if (j > pos_p) {
-				knapsackRecursive(items, pos_p + 1, right, capacity);
+				knapsackRecursive(items, pos_p + 1, right, capacity, currentWeight);
 			} else {
 
 				for (int i = right; i > pos_p; i--) {
 					itemsAdd.put(items[i], 1.0);
 				}
-				capacity = capacity - current_weight;
+				// capacity = capacity - cw;
+				currentWeight = currentWeight + cw;
 
-				if (capacity > items[pos_p].weight) {
+				if (items[pos_p].weight + currentWeight <= capacity) {
+
 					itemsAdd.put(items[pos_p], 1.0);
-					knapsackRecursive(items, left, pos_p - 1, capacity - items[pos_p].weight);
+
+					currentWeight = currentWeight + items[pos_p].weight;
+
+				
+					knapsackRecursive(items, left, pos_p - 1, capacity, currentWeight);
 
 				} else {
-					itemsAdd.put(items[pos_p], capacity / items[pos_p].weight);
+					itemsAdd.put(items[pos_p], ((capacity - currentWeight) / items[pos_p].weight));
+					currentWeight = currentWeight + ((capacity - currentWeight) / items[pos_p].weight);
+					
 
+			
 				}
 
 			}
@@ -93,6 +107,8 @@ public class FractionalKnapsackN2 {
 
 	}
 
+	
+
 	private double getPivot(Item[] items, int left, int right) {
 		int k = 0;
 		double ratio_f = 0;
@@ -100,7 +116,7 @@ public class FractionalKnapsackN2 {
 			ratio_f += items[i].ratio;
 			k++;
 		}
-		return ratio_f / k; // returns the value of the new pivot p
+		return ratio_f / k;
 	}
 
 }
