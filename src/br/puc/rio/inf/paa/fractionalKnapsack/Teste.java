@@ -48,23 +48,31 @@ public class Teste {
 
 			double sumWeight = 0;
 
-			for (int i = start; i <= post_p; i++) {
+			for (int i = end; i > post_p; i--) {
 				sumWeight = sumWeight + items[i].weight;
 			}
 
 			if (sumWeight > capacity) {
 
-				knapsackRecursive(items, post_p + 1, end, capacity);
+				knapsackRecursive(items, start, post_p - 1, capacity);
 
 			} else {
 
-				for (int i = start; i <= post_p; i++) {
+				for (int i = end; i > post_p; i--) {
 					itemsAdd.put(items[i], items[i].weight);
 				}
-
 				capacity = capacity - sumWeight;
-
-				knapsackRecursive(items, post_p + 1, end, capacity - sumWeight);
+				
+                if( items[post_p].weight <= capacity){
+                	itemsAdd.put(items[post_p], items[post_p].weight);	
+                	capacity = capacity - sumWeight;
+                }
+                else{
+                	itemsAdd.put(items[post_p], capacity/items[post_p].weight);	
+                }
+                
+				
+                knapsackRecursive(items, start, post_p - 1, capacity - sumWeight);
 			}
 
 		}

@@ -72,11 +72,11 @@ public class MainFractionalKnapsackNlogN {
 
 				writer.write(String.valueOf(fractionalKnapsacks.get(i).items.length));
 
-				writer.write(new BigDecimal(ctTime, MathContext.DECIMAL64).toString());
+				writer.write(String.valueOf(ctTime));
 
-				writer.write(new BigDecimal(cpuTime, MathContext.DECIMAL64).toString());
+				writer.write(String.valueOf(cpuTime));
 
-				writer.write(new BigDecimal((ctTime / cpuTime), MathContext.DECIMAL64).toString());
+				writer.write(String.valueOf(ctTime / cpuTime));
 
 				writer.write(String.valueOf(logCPU));
 
