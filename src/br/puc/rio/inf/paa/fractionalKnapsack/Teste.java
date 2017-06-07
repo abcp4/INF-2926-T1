@@ -28,7 +28,7 @@ public class Teste {
 			if (items[start].weight > capacity) {
 
 				itemsAdd.put(items[start], capacity / items[start].weight);
-				capacity = capacity - (capacity / items[start].weight);
+				// capacity = capacity - (capacity / items[start].weight);
 
 			} else {
 
@@ -41,6 +41,7 @@ public class Teste {
 
 			// calcula-se media do valor/peso e particiona-se ao redor desse
 			// valor
+
 			double pivot = KnapsackUtil.mediansOfMedians(items, start, end).ratio;
 
 			// particionamento os maiores na primeira metade
@@ -48,21 +49,21 @@ public class Teste {
 
 			double sumWeight = 0;
 
-			for (int i = start; i <= post_p; i++) {
+			for (int i = start; i < post_p; i++) {
 				sumWeight = sumWeight + items[i].weight;
 			}
 
 			if (sumWeight > capacity) {
 
-				knapsackRecursive(items, post_p + 1, end, capacity);
+				knapsackRecursive(items, start, post_p, capacity);
 
 			} else {
 
-				for (int i = start; i <= post_p; i++) {
+				for (int i = start; i < post_p; i++) {
 					itemsAdd.put(items[i], items[i].weight);
 				}
 
-				capacity = capacity - sumWeight;
+				// capacity = capacity - sumWeight;
 
 				knapsackRecursive(items, post_p + 1, end, capacity - sumWeight);
 			}
@@ -71,31 +72,6 @@ public class Teste {
 
 		return itemsAdd;
 
-	}
-
-	public int inverse_partitionByValue(Item[] items, double averageValueWt) {
-
-		double sameValue = 0;
-		int i = 0;
-
-		for (int j = 0; j < items.length; j++) {
-			if (Math.abs(items[j].ratio - averageValueWt) <= .5e-9) {
-				if (sameValue % 2 == 0) {
-					Item temp = items[i];
-					items[i] = items[j];
-					items[j] = temp;
-					i += 1;
-				}
-				sameValue += 1;
-
-			} else if (items[j].ratio > averageValueWt) {
-				Item temp = items[i];
-				items[i] = items[j];
-				items[j] = temp;
-				i += 1;
-			}
-		}
-		return i;
 	}
 
 }
