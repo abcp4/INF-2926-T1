@@ -22,20 +22,16 @@ public class Teste {
 
 	public Map<Item, Double> knapsackRecursive(Item[] items, int start, int end, double capacity) {
 
-		if (start > end) {
-			return null;
-
-		}
 		// condicao de parada
 		if (start == end) {
 
-			if (items[start].weight >= capacity) {
-			
+			if (items[start].weight > capacity) {
+
 				itemsAdd.put(items[start], capacity / items[start].weight);
-				 capacity = capacity - items[start].weight;
-				
+				capacity = capacity - (capacity / items[start].weight);
+
 			} else {
-				
+
 				itemsAdd.put(items[start], items[start].weight);
 			}
 
@@ -43,7 +39,6 @@ public class Teste {
 
 		} else {
 
-		
 			// calcula-se media do valor/peso e particiona-se ao redor desse
 			// valor
 			double pivot = KnapsackUtil.mediansOfMedians(items, start, end).ratio;
@@ -53,21 +48,23 @@ public class Teste {
 
 			double sumWeight = 0;
 
-			
-			for (int i = 0; i <= post_p; i++) {
+			for (int i = start; i <= post_p; i++) {
 				sumWeight = sumWeight + items[i].weight;
 			}
 
 			if (sumWeight > capacity) {
-			
-				knapsackRecursive(items, start, post_p, capacity);
-			
+
+				knapsackRecursive(items, post_p + 1, end, capacity);
+
 			} else {
-				for (int i = start; i < post_p; i++) {
+
+				for (int i = start; i <= post_p; i++) {
 					itemsAdd.put(items[i], items[i].weight);
 				}
+
 				capacity = capacity - sumWeight;
-				knapsackRecursive(items, post_p, end, capacity - sumWeight);
+
+				knapsackRecursive(items, post_p + 1, end, capacity - sumWeight);
 			}
 
 		}
