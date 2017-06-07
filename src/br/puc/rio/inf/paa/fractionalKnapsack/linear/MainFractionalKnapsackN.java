@@ -49,11 +49,12 @@ public class MainFractionalKnapsackN {
 		}
 
 		for (int i = 0; i < fractionalKnapsacks.size(); i++) {
-			FractionalKnapsackN knapsackN = new FractionalKnapsackN();
+			
 			Map<Item, Double> map = null;
 			double temp_inicio = System.currentTimeMillis();
 
 			while (durationEnd <= timeout) {
+				FractionalKnapsackN knapsackN = new FractionalKnapsackN();
 				map = knapsackN.knapsack(fractionalKnapsacks.get(i));
 
 				temp_final = System.currentTimeMillis();
@@ -68,7 +69,6 @@ public class MainFractionalKnapsackN {
 
 				cpuTime = (durationEnd / count);
 
-				cpuTime = cpuTime / 100;
 
 				double logCPU = Utils.logBase2(cpuTime);
 

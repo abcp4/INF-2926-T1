@@ -17,11 +17,14 @@ public class FractionalKnapsackN {
 
 	public Map<Item, Double> knapsack(FractionalKnapsackInstance knapsack) {
 
-		return knapsackRecursive(knapsack.items, 0, knapsack.items.length - 1, knapsack.capacity, 0);
+		return knapsackRecursive(knapsack.items, 0, knapsack.items.length - 1, knapsack.capacity);
 
 	}
 
-	public Map<Item, Double> knapsackRecursive(Item[] items, int left, int right, double capacity, double currentWeight) {
+	public Map<Item, Double> knapsackRecursive(Item[] items, int left, int right, double capacity) {
+
+		// System.out.println("pos_p + 1 = " + left + "| right = " + right + "|
+		// capacity = " + capacity );
 
 		if (right - left <= 1) {
 
@@ -37,17 +40,11 @@ public class FractionalKnapsackN {
 				// get items to knapsack
 				while (right >= left) {
 
-					if (items[right].weight + currentWeight <= capacity) {
-						itemsAdd.put(items[right], 1.0);
-					
-						currentWeight = currentWeight + items[right].weight;
-						
-			
+					if (capacity > items[right].weight) {
+						itemsAdd.put(items[right], items[right].weight);
+						capacity = capacity - items[right].weight;
 					} else {
-						//Colocar na mochila <=  peso disponivel / peso do objeto
-						itemsAdd.put(items[right], ((capacity - currentWeight) / items[right].weight));
-						currentWeight = currentWeight + ((capacity - currentWeight) / items[right].weight);
-					
+						itemsAdd.put(items[right], capacity / (items[right].weight));
 						break;
 					}
 
@@ -55,47 +52,45 @@ public class FractionalKnapsackN {
 
 				}
 			}
+
 		} else {
 
-			double pivot = 0.0;
-
-			pivot = KnapsackUtil.medianOfMedians(items, left, right).ratio;
+			double pivot = KnapsackUtil.mediansOfMedians(items, left, right).ratio;
 			int pos_p = KnapsackUtil.partition(items, pivot, left, right);
+
 			int j = right;
 
-			double cw = 0.0;
+			double current_weight = 0.0;
 
-			while (j > pos_p && capacity - currentWeight > cw + items[j].weight) {
+			while (j > pos_p && capacity > current_weight + items[j].weight) {
 
-				cw = cw + items[j].weight;
+				current_weight = current_weight + items[j].weight;
 				j--;
 			}
 
 			if (j > pos_p) {
-				knapsackRecursive(items, pos_p + 1, right, capacity, currentWeight);
+				// System.out.println("pos_p + 1 = " + pos_p + 1 + "| right = "
+				// + right + "| capacity = " + capacity );
+				try {
+					knapsackRecursive(items, pos_p + 1, right, capacity);
+				} catch (StackOverflowError ex) {
+					System.out.println("##### STACKOVERFLOW ####### pos_p + 1 = " + pos_p + 1 + "| right = " + right
+							+ "| capacity = " + capacity);
+				}
 			} else {
 
 				for (int i = right; i > pos_p; i--) {
-					itemsAdd.put(items[i], 1.0);
+					itemsAdd.put(items[i], items[i].weight);
 				}
-				// capacity = capacity - cw;
-				currentWeight = currentWeight + cw;
+				capacity = capacity - current_weight;
 
-				if (items[pos_p].weight + currentWeight <= capacity) {
-
-					itemsAdd.put(items[pos_p], 1.0);
-
-					currentWeight = currentWeight + items[pos_p].weight;
-
-				
-					knapsackRecursive(items, left, pos_p - 1, capacity, currentWeight);
+				if (capacity > items[pos_p].weight) {
+					itemsAdd.put(items[pos_p], items[pos_p].weight);
+					knapsackRecursive(items, left, pos_p - 1, capacity - items[pos_p].weight);
 
 				} else {
-					itemsAdd.put(items[pos_p], ((capacity - currentWeight) / items[pos_p].weight));
-					currentWeight = currentWeight + ((capacity - currentWeight) / items[pos_p].weight);
-					
+					itemsAdd.put(items[pos_p], capacity / items[pos_p].weight);
 
-			
 				}
 
 			}

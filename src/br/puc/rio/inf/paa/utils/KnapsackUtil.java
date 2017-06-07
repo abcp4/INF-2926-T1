@@ -37,62 +37,95 @@ public class KnapsackUtil {
 		}
 	}
 
-	public static Item medianOfMedians(Item[] items, int startIndex, int endIndex) {
-
-		int n = endIndex - startIndex + 1; // number of elements in the subarray
-
-		final int GROUP_SIZE = 5; // size of each group
-		int rest = n % GROUP_SIZE;
-
-		if (endIndex - startIndex < 4) {
-			mergeSort(items, 0, items.length - 1);
-			return items[rest / 2];
-		} else {
-
-			int groupsQuantity; // how many groups
-
-			if (rest == 0) {
-				groupsQuantity = n / GROUP_SIZE;
-			} else {
-				groupsQuantity = (n / GROUP_SIZE) + 1;
-			}
-
-			// Creating auxiliar array to find medians in each group
-			Item[] medians = new Item[groupsQuantity];
-			Item[] itemsAux = new Item[n];
-			int count = 0;
-
-			for (int i = startIndex; i <= endIndex; i++) {
-				itemsAux[count] = items[i];
-				count++;
-			}
-
-			int medianIndex = 0;
-			int indexItems;
-
-			// pega a mediana de cada bloco
-			for (indexItems = 0; indexItems < n - rest; indexItems = indexItems + 5) {
-				mergeSort(itemsAux, indexItems, indexItems + 4);
-
-				medians[medianIndex] = itemsAux[indexItems + 2];
-				medianIndex++;
-			}
-
-			if (rest != 0) {
-
-				mergeSort(itemsAux, indexItems, n - 1);
-
-				// i-> index initial of rest block
-				// (rest/2) -> median element of rest block
-				int indexMedianRestant = indexItems + (rest / 2);
-
-				medians[medianIndex] = itemsAux[indexMedianRestant];
-			}
-			return medianOfMedians(medians, 0, medians.length - 1);
-
+	public static Item mediansOfMedians(Item[] elements, int l, int r) {
+		int _n = r - l + 1;
+		Item[] sub_elements = new Item[_n];
+		int rest = _n % 5;
+		int it = 0;
+		for (int i = l; i <= r; i++) {
+			sub_elements[it] = elements[i];
+			it++;
 		}
-
+		if (r - l > 4) {
+			Item[] mediums = new Item[_n / 5 + (rest > 0 ? 1 : 0)];
+			int j = 0;
+			int i = 0;
+			for (; i < _n - rest; i = i + 5) // Cut the block in five by five
+			{
+				sort(sub_elements, i, i + 4);
+				mediums[j] = sub_elements[i + 2]; // Extract the median foreach
+													// block
+				j++;
+			}
+			if (rest != 0) {
+				sort(sub_elements, i, _n - 1);
+				mediums[j] = sub_elements[rest / 2];
+			}
+			return mediansOfMedians(mediums, 0, mediums.length - 1);
+			// Search the median of the
+			// medians for the array of medians
+		} else {
+			sort(sub_elements, 0, sub_elements.length - 1); // order the block
+			return sub_elements[rest / 2];
+		}
 	}
+
+	// public static Item medianOfMedians(Item[] items, int startIndex, int
+	// endIndex) {
+	//
+	// int n = endIndex - startIndex + 1; // number of elements in the subarray
+	// Item[] subItems = new Item[n];
+	// int rest = n%5;
+	// int count = 0;
+	//
+	// for (int i = startIndex; i <= endIndex; i++) {
+	// subItems[count] = items[i];
+	// count++;
+	// }
+	//
+	// if(startIndex - endIndex > 4){
+	//
+	// int groupsQuantity; // how many groups
+	// int GROUP_SIZE = 5;
+	//
+	// if (rest == 0) {
+	// groupsQuantity = n / GROUP_SIZE;
+	// } else {
+	// groupsQuantity = (n / GROUP_SIZE) + 1;
+	// }
+	//
+	// // Creating auxiliar array to find medians in each group
+	// Item[] medians = new Item[groupsQuantity];
+	//
+	//
+	// int j = 0;
+	// int i;
+	//
+	// // pega a mediana de cada bloco
+	// for (i = 0; i < n - rest; i = i + 5) {
+	// sort(subItems, i, i + 4);
+	//
+	// medians[j] = subItems[i + 2];
+	// j++;
+	// }
+	//
+	// if (rest != 0) {
+	//
+	// sort(subItems, i, n - 1);
+	//
+	// // i-> index initial of rest block
+	// // (rest/2) -> median element of rest block
+	// int indexMedianRestant = (rest / 2);
+	//
+	// medians[j] = subItems[indexMedianRestant];
+	// }
+	// return medianOfMedians(medians, 0, medians.length - 1);
+	// }
+	// else {
+	// sort(items, 0, items.length - 1);
+	// return items[rest / 2];
+	// }
+	// }
 
 	public static void sort(Item[] subitems, int left, int right) {
 

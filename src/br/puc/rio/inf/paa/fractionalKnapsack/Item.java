@@ -46,6 +46,16 @@ public class Item {
 	public void setRatio(double ratio) {
 		this.ratio = ratio;
 	}
+	
+	@Override
+	public int hashCode() {
+		return id;
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		return this.id == ((Item)obj).id;
+	}
 
 	@Override
 	public String toString() {

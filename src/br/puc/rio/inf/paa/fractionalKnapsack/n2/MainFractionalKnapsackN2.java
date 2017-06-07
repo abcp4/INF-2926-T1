@@ -28,7 +28,7 @@ public class MainFractionalKnapsackN2 {
 		int count = 0;
 		int numInstance = 0;
 
-		int timeout = 5;
+		double timeout = 5000;
 		double temp_final = 0.0;
 		double durationEnd = 0.0;
 		double ctTime = 0.0;
@@ -49,15 +49,16 @@ public class MainFractionalKnapsackN2 {
 		}
 
 		for (int i = 0; i < fractionalKnapsacks.size(); i++) {
-			FractionalKnapsackN2 knapsackN = new FractionalKnapsackN2();
 			Map<Item, Double> map = null;
-			double temp_inicio = System.nanoTime();
+			double temp_inicio = System.currentTimeMillis();
 
 			while (durationEnd <= timeout) {
+				FractionalKnapsackN2 knapsackN = new FractionalKnapsackN2();
+				
 				map = knapsackN.knapsack(fractionalKnapsacks.get(i));
 
-				temp_final = System.nanoTime();
-				durationEnd = temp_final - temp_inicio;
+				temp_final = System.currentTimeMillis();
+					durationEnd = temp_final - temp_inicio;
 				count++;
 			}
 
@@ -68,7 +69,6 @@ public class MainFractionalKnapsackN2 {
 
 				cpuTime = (durationEnd / count);
 
-				cpuTime = cpuTime / 100;
 
 				double logCPU = Utils.logBase2(cpuTime);
 

@@ -64,7 +64,7 @@ public class MainTest {
 		
 
 		
-		FractionalKnapsackInstance knapsack = new FractionalKnapsackInstance(16.0, items);
+		FractionalKnapsackInstance knapsack = new FractionalKnapsackInstance(15.0, items);
 
 
 //		KnapsackUtil.mergeSort(knapsack.items, 0, items.length - 1);
@@ -74,8 +74,8 @@ public class MainTest {
 //		 }
 
 		
-		//FractionalKnapsackN knapsackN = new FractionalKnapsackN();
 		FractionalKnapsackN knapsackN = new FractionalKnapsackN();
+		//Teste knapsackN = new Teste();
 		Map<Item, Double> map = knapsackN.knapsack(knapsack);
 		map.entrySet().forEach(entry -> {
 			System.out.println(entry.getKey().id + " " + entry.getValue());
