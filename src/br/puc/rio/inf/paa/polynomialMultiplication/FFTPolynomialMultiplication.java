@@ -1,5 +1,7 @@
 package br.puc.rio.inf.paa.polynomialMultiplication;
 
+import br.puc.rio.inf.paa.utils.Utils;
+
 public class FFTPolynomialMultiplication implements IPolynomialMultiplication{
 
 	private Polynomials polynomials;
@@ -9,11 +11,28 @@ public class FFTPolynomialMultiplication implements IPolynomialMultiplication{
 	public void multiplication() {
 
 		int m = polynomials.getPolynomialA().length*2;
-		Complex[] pa = this.intToComplex(polynomials.getPolynomialA());
-		Complex[] pb = this.intToComplex(polynomials.getPolynomialB());
+		
+//		Craindo os vetores de números complexos, baseados nos vetores de inteiros,
+//		de tamanho 2(n+1)
+		Complex[] pa = new Complex[m];
+		Complex[] pb = new Complex[m];
+		for(int i = 0; i < m; i++){
+			if(i < m/2){
+				pa[i] = new Complex(polynomials.getPolynomialA()[i], 0);
+				pb[i] = new Complex(polynomials.getPolynomialB()[i], 0);
+			}else{
+				pa[i] = new Complex(0, 0);
+				pb[i] = new Complex(0, 0);
+			}
+		}
 
-		Complex[] omega = calculateOmega(m);
-		Complex[] InverseOmega = calculateInverseOmega(m);
+		Complex[] omega = new Complex[m];;
+		Complex[] inverseOmega = new Complex[m];;
+		
+		for(int i = 0; i < m; i++){
+			omega[i] = new Complex(Math.cos((2*i*Math.PI)/m),Math.sin((2*i*Math.PI)/m));
+			inverseOmega[i] = new Complex(Math.cos((2*i*Math.PI)/m),-Math.sin((2*i*Math.PI)/m));
+		}
 
 		Complex[] fa = this.DFT(pa, pa.length, omega);
 		Complex[] fb = this.DFT(pb, pb.length, omega);
@@ -24,10 +43,11 @@ public class FFTPolynomialMultiplication implements IPolynomialMultiplication{
 			fc[i] = fa[i].times(fb[i]);
 		}
 
-		Complex[] pc = this.DFT(fc, fc.length, InverseOmega);
+		Complex[] pc = this.DFT(fc, fc.length, inverseOmega);
 
 		this.result = new int[pc.length];
 
+//		Arredondando a parte real dos números complexos da solução
 		for(int i = 0; i < m; i++){
 			double c = pc[i].re()/m;
 			if(c < 0){
@@ -57,10 +77,17 @@ public class FFTPolynomialMultiplication implements IPolynomialMultiplication{
 			return a;
 		}
 
-		Complex[] aEven = this.getEvenIndexes(a);
-		Complex[] aOdd = this.getOddIndexes(a);
-
-
+		Complex[] aEven = new Complex[n/2];
+		Complex[] aOdd = new Complex[n/2];
+		
+		int indexEven = 0, indexOdd = 0;
+		for(int i = 0; i < n; i++){
+			if(i % 2 == 0){
+				aEven[indexEven++] = a[i];
+			}else{
+				aOdd[indexOdd++] = a[i];
+			}
+		}
 
 		Complex[] omegaSquare = new Complex[n/2];
 
@@ -140,6 +167,11 @@ public class FFTPolynomialMultiplication implements IPolynomialMultiplication{
 
 	public void setPolynomials(Polynomials polynomials) {
 		this.polynomials = polynomials;
+	}
+
+	@Override
+	public double getCTime() {
+		return polynomials.getDegree() * Utils.logBase2(polynomials.getDegree());
 	}
 
 

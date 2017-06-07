@@ -1,5 +1,7 @@
 package br.puc.rio.inf.paa.polynomialMultiplication;
 
+import br.puc.rio.inf.paa.utils.Utils;
+
 public class DACPolynomialMultiplication implements IPolynomialMultiplication{
 
 	private Polynomials polynomials;
@@ -83,6 +85,11 @@ public class DACPolynomialMultiplication implements IPolynomialMultiplication{
 
 	public void setPolynomials(Polynomials polynomials) {
 		this.polynomials = polynomials;
+	}
+
+	@Override
+	public double getCTime() {
+		return Math.pow(polynomials.getDegree(), Utils.logBase2(3));
 	}
 
 }

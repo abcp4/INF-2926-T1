@@ -35,5 +35,10 @@ public class DirectPolynomialMultiplication implements IPolynomialMultiplication
 	public void setPolynomialResult(int[] polynomialResult) {
 		this.polynomialResult = polynomialResult;
 	}
+
+	@Override
+	public double getCTime() {
+		return Math.pow(polynomials.getDegree(), 2);
+	}
 	
 }

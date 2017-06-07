@@ -6,4 +6,6 @@ public interface IPolynomialMultiplication {
 	
 	int[] getResult();
 	
+	double getCTime();
+	
 }
