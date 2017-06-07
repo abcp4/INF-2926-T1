@@ -7,6 +7,8 @@ import br.puc.rio.inf.paa.fractionalKnapsack.n2.FractionalKnapsackN2;
 import br.puc.rio.inf.paa.fractionalKnapsack.nlogn.FractionalKnapsackNlogN;
 import br.puc.rio.inf.paa.utils.KnapsackUtil;
 
+
+
 public class MainTest {
 
 	public static void main(String[] args) {
