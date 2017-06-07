@@ -45,11 +45,8 @@ public class KnapsackUtil {
 		int rest = n % GROUP_SIZE;
 
 		if (endIndex - startIndex < 4) {
-<<<<<<< HEAD
+
 			sort(items, 0, items.length - 1);
-=======
-			mergeSort(items, 0, items.length - 1);
->>>>>>> 9dbc89d0635ce97a0417b7c74a92efec0395052c
 			return items[rest / 2];
 		} else {
 
@@ -76,11 +73,7 @@ public class KnapsackUtil {
 
 			// pega a mediana de cada bloco
 			for (indexItems = 0; indexItems < n - rest; indexItems = indexItems + 5) {
-<<<<<<< HEAD
 				sort(itemsAux, indexItems, indexItems + 4);
-=======
-				mergeSort(itemsAux, indexItems, indexItems + 4);
->>>>>>> 9dbc89d0635ce97a0417b7c74a92efec0395052c
 
 				medians[medianIndex] = itemsAux[indexItems + 2];
 				medianIndex++;
@@ -88,11 +81,9 @@ public class KnapsackUtil {
 
 			if (rest != 0) {
 
-<<<<<<< HEAD
+
 				sort(itemsAux, indexItems, n - 1);
-=======
-				mergeSort(itemsAux, indexItems, n - 1);
->>>>>>> 9dbc89d0635ce97a0417b7c74a92efec0395052c
+
 
 				// i-> index initial of rest block
 				// (rest/2) -> median element of rest block
@@ -100,6 +91,9 @@ public class KnapsackUtil {
 
 				medians[medianIndex] = itemsAux[indexMedianRestant];
 			}
+			
+
+			
 			return medianOfMedians(medians, 0, medians.length - 1);
 
 		}
