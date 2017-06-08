@@ -125,9 +125,10 @@ public class Teste {
 		//
 
 		Item medianOfMedians = medianOfMedians(medians, medians.length / 2, 0, medians.length - 1);
-
-		return medianOfMedians;
+		
 		int indexPivo = partition(items, medianOfMedians.id - 1); // get
+		
+		
 		// index
 		// pivo
 		// int p = indexPivo + 1;
@@ -140,7 +141,7 @@ public class Teste {
 		// } else {
 		// return kthValue(items, k - p, indexPivo + 1, end);
 		// }
-		// // return kthValue(items, k, start, indexPivo);
+		return medianOfMedians(items, k, start, indexPivo);
 
 	}
 
@@ -154,7 +155,7 @@ public class Teste {
 		items[indexPivo] = items[items.length - 1];
 		items[items.length - 1] = itemAux;
 
-		for (int j = 0; j < items.length; j++) {
+		for (int j = i + 1; j < items.length; j++) {
 
 			if (items[j].ratio < itemAux.ratio) {
 				temp = items[i];
@@ -162,7 +163,8 @@ public class Teste {
 				items[j] = temp;
 				i += 1;
 
-			} else if (items[j].ratio == itemAux.ratio) {
+			}
+			else if (items[j].ratio == itemAux.ratio) {
 				if (sameValue % 2 == 0) {
 					temp = items[i];
 					items[i] = items[j];
@@ -172,6 +174,13 @@ public class Teste {
 				}
 				sameValue += 1;
 			}
+			else{
+				temp = items[j];
+				items[j] = items[i];
+				items[i] = temp;
+				i += 1;	
+			}
+
 
 		}
 
