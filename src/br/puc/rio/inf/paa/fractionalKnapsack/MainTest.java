@@ -18,7 +18,7 @@ public class MainTest {
 		}
 
 		items[0].setWeight(5);
-		items[1].setWeight(5);
+		items[1].setWeight(7);
 		items[2].setWeight(10); // 76
 		items[3].setWeight(76);
 		items[4].setWeight(100);
@@ -26,7 +26,7 @@ public class MainTest {
 		items[5].setWeight(22);
 		items[6].setWeight(43);
 		items[7].setWeight(60);// 60
-		// items[8].setWeight(89);
+		// items[8].setWeight(10);
 		// items[9].setWeight(87);
 		//
 		// items[10].setWeight(23);
@@ -72,17 +72,16 @@ public class MainTest {
 		// FractionalKnapsackN knapsackN = new FractionalKnapsackN();
 		Teste knapsackN = new Teste();
 
-		// Item item = knapsackN.kthValue(items, items.length / 2, 0,
-		// items.length - 1);
+		Item item = knapsackN.medianOfMedians(items, items.length / 2, 0, items.length - 1);
 
-		// int index = knapsackN.partition(items, 6);
-		// System.out.println(index);
+		// int index = knapsackN.partition(items, 0, items.length - 1, 6);
+		System.out.println("median of medians:" + item.toString());
 
 		//
-		Map<Item, Double> map = knapsackN.knapsack(knapsack);
-		map.entrySet().forEach(entry -> {
-			System.out.println(entry.getKey().id + " " + entry.getValue());
-		});
+		// Map<Item, Double> map = knapsackN.knapsack(knapsack);
+		// map.entrySet().forEach(entry -> {
+		// System.out.println(entry.getKey().id + " " + entry.getValue());
+		// });
 
 	}
 }

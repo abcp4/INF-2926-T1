@@ -26,6 +26,7 @@ public class KnapsackUtil {
 		for (int k = left; k <= right; k++) {
 
 			if (i <= (right - left) / 2 && j < aux.length) {
+	
 				items[k] = ((aux[i].getRatio() >= aux[j].getRatio()) ? aux[i++] : aux[j++]);
 			} else {
 				if (j >= aux.length) {
