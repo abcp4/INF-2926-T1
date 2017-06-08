@@ -127,23 +127,24 @@ public class KnapsackUtil {
 	// }
 	// }
 
+
+	
 	public static void sort(Item[] subitems, int left, int right) {
 
-		int lenght = 1;
 		if (left < right) {
 
-			for (int i = left + 1; i < right + 1; i++) {
+			for (int i = left + 1; i <= right; i++) {
 				Item aux = subitems[i];
-				if (aux == null) {
-					break;
-				}
+
 				int j = i - 1;
+
 				while (j >= left && aux.getRatio() < subitems[j].getRatio()) {
 					subitems[j + 1] = subitems[j];
 					j--;
 				}
+
 				subitems[j + 1] = aux;
-				lenght++;
+
 			}
 		}
 	}
