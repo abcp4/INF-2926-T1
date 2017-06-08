@@ -15,9 +15,7 @@ public class Teste {
 	}
 
 	public Map<Item, Double> knapsack(FractionalKnapsackInstance knapsack) {
-
 		return knapsackRecursive(knapsack.items, 0, knapsack.items.length - 1, knapsack.capacity);
-
 	}
 
 	public Map<Item, Double> knapsackRecursive(Item[] items, int start, int end, double capacity) {
@@ -28,7 +26,7 @@ public class Teste {
 			if (items[start].weight > capacity) {
 
 				itemsAdd.put(items[start], capacity / items[start].weight);
-				capacity = capacity - (capacity / items[start].weight);
+				// capacity = capacity - (capacity / items[start].weight);
 
 			} else {
 
@@ -41,69 +39,148 @@ public class Teste {
 
 			// calcula-se media do valor/peso e particiona-se ao redor desse
 			// valor
-			double pivot = KnapsackUtil.mediansOfMedians(items, start, end).ratio;
+			int middle = items.length/2;
+			Item pivo = kthValue(items, middle ,  start, end);
 
 			// particionamento os maiores na primeira metade
-			int post_p = KnapsackUtil.partition(items, pivot, start, end);
+			int post_p = partition(items, pivo.id -1);
 
 			double sumWeight = 0;
 
-			for (int i = end; i > post_p; i--) {
+			for (int i = 0; i < middle; i++) {
 				sumWeight = sumWeight + items[i].weight;
 			}
 
 			if (sumWeight > capacity) {
 
-				knapsackRecursive(items, start, post_p - 1, capacity);
-
+				knapsackRecursive(items, 0, middle, capacity);
+				
 			} else {
 
-				for (int i = end; i > post_p; i--) {
+				for (int i = 0; i < middle; i++) {
 					itemsAdd.put(items[i], items[i].weight);
 				}
-				capacity = capacity - sumWeight;
+			//	capacity = capacity - sumWeight;
 				
-                if( items[post_p].weight <= capacity){
-                	itemsAdd.put(items[post_p], items[post_p].weight);	
-                	capacity = capacity - sumWeight;
-                }
-                else{
-                	itemsAdd.put(items[post_p], capacity/items[post_p].weight);	
-                }
+//                if( items[post_p].weight <= capacity){
+//                	itemsAdd.put(items[post_p], items[post_p].weight);	
+//                	capacity = capacity - sumWeight;
+//                }
+//                else{
+//                	itemsAdd.put(items[post_p], capacity/items[post_p].weight);	
+//                }
                 
 				
-                knapsackRecursive(items, start, post_p - 1, capacity - sumWeight);
+                knapsackRecursive(items, middle, end, capacity - sumWeight);
+
 			}
+			
+			
 
 		}
 
 		return itemsAdd;
 
 	}
-
-	public int inverse_partitionByValue(Item[] items, double averageValueWt) {
-
-		double sameValue = 0;
-		int i = 0;
-
-		for (int j = 0; j < items.length; j++) {
-			if (Math.abs(items[j].ratio - averageValueWt) <= .5e-9) {
-				if (sameValue % 2 == 0) {
-					Item temp = items[i];
-					items[i] = items[j];
-					items[j] = temp;
-					i += 1;
-				}
-				sameValue += 1;
-
-			} else if (items[j].ratio > averageValueWt) {
-				Item temp = items[i];
-				items[i] = items[j];
-				items[j] = temp;
-				i += 1;
-			}
+	
+	private Item kthValue(Item[] items,int k, int start, int end) {
+		// TODO Auto-generated method stub
+		int size = items.length;
+		if(items.length < 5){
+			//ordena items	
+			KnapsackUtil.sort(items, start, end);
+			return items[k-1];
+			
 		}
-		return i;
+		int groupsQuantity = 0;
+		int rest = size % 5;
+		if (rest == 0) {
+			groupsQuantity = size / 5;
+		} else {
+			groupsQuantity = (size / 5) + 1;
+		}
+
+		// Creating auxiliar array to find medians in each group
+		Item[] medians = new Item[groupsQuantity];
+		
+		//int indexItems;
+		int medianIndex = 0; 
+		int i ;
+		for(i =0; i< items.length - rest; i = i+5 ){
+			KnapsackUtil.sort(items, i, i + 4);
+			medians[medianIndex] = items[(i+5)/2];
+			medianIndex++;
+		}
+//		for (indexItems = 0; indexItems < size - rest; indexItems = indexItems + 5) {
+//			KnapsackUtil.sort(items, indexItems, indexItems + 4);
+//
+//			medians[medianIndex] = items[indexItems + 2];
+//			medianIndex++;
+//		}
+//		
+		if (rest != 0) {
+			KnapsackUtil.sort(items, i, end);
+			int indexMedianRestant = i + (rest / 2);
+
+			medians[medianIndex] = items[indexMedianRestant];
+		}
+		
+		Item pivo = kthValue(medians, medians.length/2, 0, medians.length - 1);
+		int indexPivo = partition(items, pivo.id -1); //get index pivo
+		int p = indexPivo + 1;
+		
+		if(k == p){
+			return items[indexPivo];
+		}
+		if(k < p){
+			return kthValue(items, k, 0, indexPivo);
+		}
+		else{
+			return kthValue(items, k-p, indexPivo + 1, end);
+		}
+		//return kthValue(items, k, start, indexPivo);
+	
 	}
+	private int partition(Item[] items, int indexPivo) {
+	// TODO Auto-generated method stub
+	
+	int sameValue = 0;
+	int i = 0;
+	Item temp = null;
+	
+	Item itemAux = items[indexPivo];
+	items[indexPivo] = items[items.length -1];
+	items[items.length -1 ]= itemAux;
+	
+	
+	for(int j = 0; j < items.length; j++){
+		if (items[j].ratio < itemAux.ratio){
+			 temp = items[i];
+			 items[i] = items[j];
+			 items[j] = temp;
+			  i += 1;
+		}
+		else
+			if(items[j].ratio == itemAux.ratio){
+				 if(sameValue%2 == 0){
+	                temp = items[i];
+	                items[i] = items[j];
+	                items[j] = temp;
+	                i += 1; 
+	               sameValue += 1;
+				 }
+			}
+           
+	}
+         
+
+    // por pivot no devido lugar
+    temp = items[i];
+    items[i] = itemAux;
+    int size = items.length -1;
+    items[size] = temp;
+	
+	return i;
+}
 
 }

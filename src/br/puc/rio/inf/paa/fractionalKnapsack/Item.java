@@ -47,16 +47,7 @@ public class Item {
 		this.ratio = ratio;
 	}
 	
-	@Override
-	public int hashCode() {
-		return id;
-	}
 	
-	@Override
-	public boolean equals(Object obj) {
-		return this.id == ((Item)obj).id;
-	}
-
 	@Override
 	public String toString() {
 		return "Item [id=" + id + ", value=" + value + ", weight=" + weight + ", ratio=" + ratio + "]\n";

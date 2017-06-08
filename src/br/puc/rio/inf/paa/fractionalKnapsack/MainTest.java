@@ -16,7 +16,7 @@ public class MainTest {
 		Item[] items = new Item[17];
 
 		for (int i = 0; i < items.length; i++) {
-			items[i] = new Item(i, 30, 6);
+			items[i] = new Item(i + 1, 30, 6);
 		}
 		
 		items[0].setWeight(5);
