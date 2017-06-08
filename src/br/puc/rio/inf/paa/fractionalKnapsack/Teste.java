@@ -41,8 +41,9 @@ public class Teste {
 
 			// calcula-se media do valor/peso e particiona-se ao redor desse
 			// valor
+			int meio = (start + end) / 2;
 
-			double pivot = KnapsackUtil.mediansOfMedians(items, start, end).ratio;
+			double pivot = getPivot(items, start, end);
 
 			// particionamento os maiores na primeira metade
 			int post_p = KnapsackUtil.partition(items, pivot, start, end);
@@ -65,7 +66,7 @@ public class Teste {
 
 				// capacity = capacity - sumWeight;
 
-				knapsackRecursive(items, post_p + 1, end, capacity - sumWeight);
+				knapsackRecursive(items, post_p, end, capacity - sumWeight);
 			}
 
 		}
@@ -73,5 +74,63 @@ public class Teste {
 		return itemsAdd;
 
 	}
+
+	private double getPivot(Item[] items, int left, int right) {
+		int k = 0;
+		double ratio_f = 0;
+		for (int i = left; i <= right; i++) {
+			ratio_f += items[i].ratio;
+			k++;
+		}
+		return (ratio_f / k);
+	}
+
+//	private Item kthValue(Item[] items, int k, int start, int end) {
+//		// TODO Auto-generated method stub
+//		int size = items.length;
+//		if (items.length < 5) {
+//			// ordena items
+//			return items[size / 2];
+//
+//		}
+//		int groupsQuantity = 0;
+//		int rest = size % 5;
+//		if (rest == 0) {
+//			groupsQuantity = size / 5;
+//		} else {
+//			groupsQuantity = (size / 5) + 1;
+//		}
+//
+//		// Creating auxiliar array to find medians in each group
+//		Item[] medians = new Item[groupsQuantity];
+//
+//		int indexItems;
+//		int medianIndex = 0;
+//		for (indexItems = 0; indexItems < rest; indexItems = indexItems + 5) {
+//			// sort(itemsAux, indexItems, indexItems + 4);
+//
+//			medians[medianIndex] = items[indexItems + 2];
+//			medianIndex++;
+//		}
+//
+//		if (rest != 0) {
+//			// sort(itemsAux, indexItems, n - 1);
+//			int indexMedianRestant = indexItems + (rest / 2);
+//
+//			medians[medianIndex] = items[indexMedianRestant];
+//		}
+//
+//		Item pivo = kthValue(medians, medians.length / 2, 0, medians.length - 1);
+//	//	int indexPivo = partition(items, pivo); // get index pivo
+//		int p = indexPivo + 1;
+//
+//		if (k == p) {
+//			return pivo;
+//		} else if (k > p) {
+//			return kthValue(items, k - p, p, end);
+//		}
+//		return kthValue(items, k, start, indexPivo);
+//
+//	}
 
 }
