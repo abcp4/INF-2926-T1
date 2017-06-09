@@ -38,35 +38,35 @@ public class Teste {
 
 			// calcula-se media do valor/peso e particiona-se ao redor desse
 			// valor
-			int middle = (items.length - 1) / 2;
+			int middle = (end - start) / 2;
 			Item pivo = medianOfMedians(items, middle, start, end);
-			System.out.println(pivo.toString());
-			//AQUIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
 
-			// particionamento os maiores na primeira metade
+			// System.out.println(pivo.toString());
 
-			int post_p = partition(items, start, end, pivo.id);
+			int post_p = partition(items, start, end, pivo.id - 1);
 
 			double sumWeight = 0;
 
-			for (int i = 0; i < middle; i++) {
+			for (int i = end; i >= middle; i --) {
 				sumWeight = sumWeight + items[i].weight;
+		//		System.out.println(items[i].toString());
 			}
-
-			// se nao cabe tudo, repete-se algoritmo na metade mais valiosa
+			
+			
 			if (sumWeight > capacity) {
 
-				knapsackRecursive(items, 0, middle, capacity);
+				knapsackRecursive(items, middle + 1, end, capacity);
 
 				// se cabe tudo, poe metade mais valiosa na mochila e repete-se
 				// algoritmo na
 				// metade menos valiosa
-			} else {
-
-				for (int i = 0; i < middle; i++) {
+			}
+			else{
+				
+				for (int i = end; i >= middle; i --) {
 					itemsAdd.put(items[i], items[i].weight);
 				}
-				// capacity = capacity - sumWeight;
+				 capacity = capacity - sumWeight;
 
 				// if( items[post_p].weight <= capacity){
 				// itemsAdd.put(items[post_p], items[post_p].weight);
@@ -76,13 +76,51 @@ public class Teste {
 				// itemsAdd.put(items[post_p], capacity/items[post_p].weight);
 				// }
 
-				knapsackRecursive(items, middle, end, capacity - sumWeight);
-
+				knapsackRecursive(items, 0, middle -1 , capacity);
+				
 			}
-
 		}
-
+		
 		return itemsAdd;
+
+		// // particionamento os maiores na primeira metade
+
+		// double sumWeight = 0;
+		//
+		// for (int i = 0; i < middle; i++) {
+		// sumWeight = sumWeight + items[i].weight;
+		// }
+		//
+		// // se nao cabe tudo, repete-se algoritmo na metade mais valiosa
+		// if (sumWeight > capacity) {
+		//
+		// knapsackRecursive(items, 0, middle, capacity);
+		//
+		// // se cabe tudo, poe metade mais valiosa na mochila e repete-se
+		// // algoritmo na
+		// // metade menos valiosa
+		// } else {
+		//
+		// for (int i = 0; i < middle; i++) {
+		// itemsAdd.put(items[i], items[i].weight);
+		// }
+		// // capacity = capacity - sumWeight;
+		//
+		// // if( items[post_p].weight <= capacity){
+		// // itemsAdd.put(items[post_p], items[post_p].weight);
+		// // capacity = capacity - sumWeight;
+		// // }
+		// // else{
+		// // itemsAdd.put(items[post_p], capacity/items[post_p].weight);
+		// // }
+		//
+		// knapsackRecursive(items, middle, end, capacity - sumWeight);
+		//
+		// }
+		//
+		// }
+		//
+		// return itemsAdd;
 
 	}
 
@@ -96,7 +134,7 @@ public class Teste {
 		}
 
 		if (subItems.length <= 5) {
-			sort(subItems, start, subItems.length - 1);
+			KnapsackUtil.mergeSort(subItems, start, subItems.length - 1);
 			return subItems[k];
 		}
 
@@ -116,19 +154,25 @@ public class Teste {
 
 		for (i = 0; i < subItems.length - rest; i = i + 5) {
 
-			sort(subItems, i, i + 4);
-			medians[medianIndex] = subItems[(subItems.length - 1) / 2];
+			KnapsackUtil.mergeSort(subItems, i, i + 4);
+
+			medians[medianIndex] = subItems[(i + 5) / 2];
+			// System.out.println("mediana: " +
+			// medians[medianIndex].toString());
 			medianIndex++;
 		}
 
 		if (rest != 0) {
 
-			sort(subItems, i, subItems.length - 1);
-			int indexMedianRestant = i + (rest / 2);
+			KnapsackUtil.mergeSort(subItems, i, subItems.length - 1);
 
+			int indexMedianRestant = i + (rest / 2);
 			medians[medianIndex] = subItems[indexMedianRestant];
+			// System.out.println("mediana: " +
+			// medians[medianIndex].toString());
 
 		}
+
 		return medianOfMedians(medians, (medians.length - 1) / 2, 0, medians.length - 1);
 	}
 
@@ -157,8 +201,9 @@ public class Teste {
 		for (int i = left; i < right; i++) {
 			Item aux = subitems[i];
 
-			for (int j = i - 1; j >= 0 && subitems[j].ratio > aux.ratio; j--) {
-				subitems[j + 1] = subitems[j];
+			for (int j = i + 1; j >= 0 && subitems[j].ratio > aux.ratio; j++) {
+
+				subitems[i] = subitems[j];
 				subitems[j] = aux;
 			}
 		}
