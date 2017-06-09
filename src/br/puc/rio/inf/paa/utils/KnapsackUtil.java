@@ -129,6 +129,15 @@ public class KnapsackUtil {
 	// }
 
 
+	public static int getPivot(Item[] items, int left, int right) {
+		int k = 0;
+		double ratio_f = 0;
+		for (int i = left; i <= right; i++) {
+			ratio_f += items[i].ratio;
+			k++;
+		}
+		return (int)(ratio_f / k);
+	}
 	
 	public static void sort(Item[] subitems, int left, int right) {
 
