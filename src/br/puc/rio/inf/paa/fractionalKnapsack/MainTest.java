@@ -104,7 +104,7 @@ public class MainTest {
 		// }
 
 		// FractionalKnapsackN knapsackN = new FractionalKnapsackN();
-		Teste knapsackN = new Teste();
+	//	Teste knapsackN = new Teste();
 		//FractionalKnapsackNlogN knapsackNlogN = new FractionalKnapsackNlogN();
 		//Item item = knapsackN.medianOfMedians(items, (items.length - 1) / 2, 0, items.length - 1);
 		
@@ -112,7 +112,7 @@ public class MainTest {
 
 		// int index = knapsackN.partition(items, 0, items.length - 1, 6);
 		// System.out.println("median of medians:" + item.toString());
-
+		FractionalKnapsackNlogN knapsackN = new FractionalKnapsackNlogN();
 		 Map<Item, Double> map = knapsackN.knapsack(knapsack);
 		 
 		double soma = 0;
