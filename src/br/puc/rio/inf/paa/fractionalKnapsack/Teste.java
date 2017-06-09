@@ -20,7 +20,6 @@ public class Teste {
 
 	public Map<Item, Double> knapsackRecursive(Item[] items, int start, int end, double capacity) {
 
-		// condicao de parada
 		if (start == end) {
 
 			if (items[start].weight > capacity) {
@@ -39,11 +38,14 @@ public class Teste {
 
 			// calcula-se media do valor/peso e particiona-se ao redor desse
 			// valor
-			int middle = items.length / 2;
+			int middle = (items.length - 1) / 2;
 			Item pivo = medianOfMedians(items, middle, start, end);
+			System.out.println(pivo.toString());
+			//AQUIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
 
 			// particionamento os maiores na primeira metade
-			int post_p = partition(items, pivo.id - 1);
+
+			int post_p = partition(items, start, end, pivo.id);
 
 			double sumWeight = 0;
 
@@ -51,10 +53,14 @@ public class Teste {
 				sumWeight = sumWeight + items[i].weight;
 			}
 
+			// se nao cabe tudo, repete-se algoritmo na metade mais valiosa
 			if (sumWeight > capacity) {
 
 				knapsackRecursive(items, 0, middle, capacity);
 
+				// se cabe tudo, poe metade mais valiosa na mochila e repete-se
+				// algoritmo na
+				// metade menos valiosa
 			} else {
 
 				for (int i = 0; i < middle; i++) {
@@ -81,14 +87,17 @@ public class Teste {
 	}
 
 	public Item medianOfMedians(Item[] items, int k, int start, int end) {
-		// TODO Auto-generated method stub
+
 		int size = items.length;
 
-		if (items.length < 5) {
-			// ordena items
-			KnapsackUtil.mergeSort(items, start, end);
-			return items[k];
+		Item[] subItems = new Item[size];
+		for (int i = start; i < items.length; i++) {
+			subItems[i] = items[i];
+		}
 
+		if (subItems.length <= 5) {
+			sort(subItems, start, subItems.length - 1);
+			return subItems[k];
 		}
 
 		int groupsQuantity = 0;
@@ -100,97 +109,60 @@ public class Teste {
 			groupsQuantity = (size / 5) + 1;
 		}
 
-		System.out.println("grupos: " + groupsQuantity);
-		// Creating auxiliar array to find medians in each group
 		Item[] medians = new Item[groupsQuantity];
 
-		// int indexItems;
 		int medianIndex = 0;
 		int i;
-		for (i = 0; i < items.length - rest; i = i + 5) {
-			KnapsackUtil.mergeSort(items, i, i + 4);
-			medians[medianIndex] = items[(i + 4) / 2];
-			System.out.println("mediaaaaaaa: " + medians[medianIndex]);
+
+		for (i = 0; i < subItems.length - rest; i = i + 5) {
+
+			sort(subItems, i, i + 4);
+			medians[medianIndex] = subItems[(subItems.length - 1) / 2];
 			medianIndex++;
 		}
 
 		if (rest != 0) {
 
-			KnapsackUtil.mergeSort(items, i, end);
+			sort(subItems, i, subItems.length - 1);
 			int indexMedianRestant = i + (rest / 2);
 
-			medians[medianIndex] = items[indexMedianRestant];
-			System.out.println("mediaaaaaaa: " + medians[medianIndex]);
+			medians[medianIndex] = subItems[indexMedianRestant];
+
 		}
-		//
-
-		Item medianOfMedians = medianOfMedians(medians, medians.length / 2, 0, medians.length - 1);
-		
-		int indexPivo = partition(items, medianOfMedians.id - 1); // get
-		
-		
-		// index
-		// pivo
-		// int p = indexPivo + 1;
-		//
-		// if (k == p) {
-		// return items[indexPivo];
-		// }
-		// if (k < p) {
-		// return kthValue(items, k, 0, indexPivo);
-		// } else {
-		// return kthValue(items, k - p, indexPivo + 1, end);
-		// }
-		return medianOfMedians(items, k, start, indexPivo);
-
+		return medianOfMedians(medians, (medians.length - 1) / 2, 0, medians.length - 1);
 	}
 
-	public int partition(Item[] items, int indexPivo) {
-
-		int sameValue = 0;
-		int i = 0;
-		Item temp = null;
-
-		Item itemAux = items[indexPivo];
-		items[indexPivo] = items[items.length - 1];
-		items[items.length - 1] = itemAux;
-
-		for (int j = i + 1; j < items.length; j++) {
-
-			if (items[j].ratio < itemAux.ratio) {
-				temp = items[i];
-				items[i] = items[j];
-				items[j] = temp;
-				i += 1;
-
+	public int partition(Item[] array, int left, int right, int pivotIndex) {
+		Item pivotValue = array[pivotIndex];
+		swap(array, pivotIndex, right); // move pivot to end
+		int storeIndex = left;
+		for (int i = left; i < right; i++) {
+			if (array[i].ratio < pivotValue.ratio) {
+				swap(array, storeIndex, i);
+				storeIndex++;
 			}
-			else if (items[j].ratio == itemAux.ratio) {
-				if (sameValue % 2 == 0) {
-					temp = items[i];
-					items[i] = items[j];
-					items[j] = temp;
-					i += 1;
+		}
+		swap(array, right, storeIndex); // Move pivot to its final place
+		return storeIndex;
+	}
 
-				}
-				sameValue += 1;
+	private void swap(Item[] array, int a, int b) {
+		Item tmp = array[a];
+		array[a] = array[b];
+		array[b] = tmp;
+	}
+
+	public static void sort(Item[] subitems, int left, int right) {
+
+		for (int i = left; i < right; i++) {
+			Item aux = subitems[i];
+
+			for (int j = i - 1; j >= 0 && subitems[j].ratio > aux.ratio; j--) {
+				subitems[j + 1] = subitems[j];
+				subitems[j] = aux;
 			}
-			else{
-				temp = items[j];
-				items[j] = items[i];
-				items[i] = temp;
-				i += 1;	
-			}
-
-
 		}
 
-		// por pivot no devido lugar
-		temp = items[i];
-		items[i] = itemAux;
-		int size = items.length - 1;
-		items[size] = temp;
-
-		return i;
 	}
 
 }
