@@ -20,7 +20,6 @@ public class Teste {
 
 	public Map<Item, Double> knapsackRecursive(Item[] items, int start, int end, double capacity) {
 
-		// condicao de parada
 		if (start == end) {
 
 			if (items[start].weight > capacity) {
@@ -39,11 +38,14 @@ public class Teste {
 
 			// calcula-se media do valor/peso e particiona-se ao redor desse
 			// valor
-			int middle = items.length / 2;
+			int middle = (items.length - 1) / 2;
 			Item pivo = medianOfMedians(items, middle, start, end);
+			System.out.println(pivo.toString());
+			//AQUIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
 
 			// particionamento os maiores na primeira metade
-			// int post_p = partition(items, pivo.id - 1);
+
+			int post_p = partition(items, start, end, pivo.id);
 
 			double sumWeight = 0;
 
@@ -51,10 +53,14 @@ public class Teste {
 				sumWeight = sumWeight + items[i].weight;
 			}
 
+			// se nao cabe tudo, repete-se algoritmo na metade mais valiosa
 			if (sumWeight > capacity) {
 
 				knapsackRecursive(items, 0, middle, capacity);
 
+				// se cabe tudo, poe metade mais valiosa na mochila e repete-se
+				// algoritmo na
+				// metade menos valiosa
 			} else {
 
 				for (int i = 0; i < middle; i++) {
@@ -87,11 +93,10 @@ public class Teste {
 		Item[] subItems = new Item[size];
 		for (int i = start; i < items.length; i++) {
 			subItems[i] = items[i];
-			System.out.println(subItems[i]);
 		}
 
-		if (subItems.length < 5) {
-			KnapsackUtil.mergeSort(subItems, start, end);
+		if (subItems.length <= 5) {
+			sort(subItems, start, subItems.length - 1);
 			return subItems[k];
 		}
 
@@ -104,48 +109,27 @@ public class Teste {
 			groupsQuantity = (size / 5) + 1;
 		}
 
-		System.out.println("grupos: " + groupsQuantity);
-
 		Item[] medians = new Item[groupsQuantity];
 
 		int medianIndex = 0;
 		int i;
+
 		for (i = 0; i < subItems.length - rest; i = i + 5) {
 
-			KnapsackUtil.mergeSort(subItems, i, i + 4);
-			medians[medianIndex] = subItems[(i + 4) / 2];
-			System.out.println("mediaaaaaaa: " + medians[medianIndex]);
+			sort(subItems, i, i + 4);
+			medians[medianIndex] = subItems[(subItems.length - 1) / 2];
 			medianIndex++;
 		}
 
 		if (rest != 0) {
 
-			KnapsackUtil.mergeSort(subItems, i, end);
+			sort(subItems, i, subItems.length - 1);
 			int indexMedianRestant = i + (rest / 2);
 
 			medians[medianIndex] = subItems[indexMedianRestant];
-			System.out.println("mediaaaaaaa: " + medians[medianIndex]);
+
 		}
-
-		Item medianOfMedians = medianOfMedians(medians, medians.length / 2, 0, medians.length - 1);
-
-		int indexPivo = partition(items, 0, items.length - 1, medianOfMedians.id - 1);
-
-		int p = indexPivo + 1;
-
-		if (k == p) {
-			System.out.println("k == p");
-			return items[indexPivo];
-		}
-		if (k < p) {
-			System.out.println("k< p");
-
-			return medianOfMedians(items, k, start, indexPivo);
-		} else {
-			System.out.println("k> p");
-			return medianOfMedians(items, k - p, indexPivo + 1, end);
-		}
-
+		return medianOfMedians(medians, (medians.length - 1) / 2, 0, medians.length - 1);
 	}
 
 	public int partition(Item[] array, int left, int right, int pivotIndex) {
@@ -166,6 +150,19 @@ public class Teste {
 		Item tmp = array[a];
 		array[a] = array[b];
 		array[b] = tmp;
+	}
+
+	public static void sort(Item[] subitems, int left, int right) {
+
+		for (int i = left; i < right; i++) {
+			Item aux = subitems[i];
+
+			for (int j = i - 1; j >= 0 && subitems[j].ratio > aux.ratio; j--) {
+				subitems[j + 1] = subitems[j];
+				subitems[j] = aux;
+			}
+		}
+
 	}
 
 }

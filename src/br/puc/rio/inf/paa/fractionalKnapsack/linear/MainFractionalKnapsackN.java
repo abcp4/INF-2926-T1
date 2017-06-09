@@ -12,7 +12,7 @@ import br.puc.rio.inf.paa.fractionalKnapsack.Item;
 import br.puc.rio.inf.paa.utils.CsvWriter;
 import br.puc.rio.inf.paa.utils.FractionalKnapsackReader;
 import br.puc.rio.inf.paa.utils.Utils;
-
+	
 public class MainFractionalKnapsackN {
 
 	public static void main(String[] args) {
