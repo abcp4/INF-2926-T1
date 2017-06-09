@@ -9,6 +9,7 @@ import java.util.Map;
 
 import br.puc.rio.inf.paa.fractionalKnapsack.FractionalKnapsackInstance;
 import br.puc.rio.inf.paa.fractionalKnapsack.Item;
+import br.puc.rio.inf.paa.fractionalKnapsack.Teste;
 import br.puc.rio.inf.paa.utils.CsvWriter;
 import br.puc.rio.inf.paa.utils.FractionalKnapsackReader;
 import br.puc.rio.inf.paa.utils.Utils;
@@ -54,7 +55,7 @@ public class MainFractionalKnapsackN {
 			double temp_inicio = System.currentTimeMillis();
 
 			while (durationEnd <= timeout) {
-				FractionalKnapsackN knapsackN = new FractionalKnapsackN();
+				Teste knapsackN = new Teste();
 				map = knapsackN.knapsack(fractionalKnapsacks.get(i));
 
 				temp_final = System.currentTimeMillis();

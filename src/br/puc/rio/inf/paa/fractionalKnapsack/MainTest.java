@@ -1,6 +1,8 @@
 package br.puc.rio.inf.paa.fractionalKnapsack;
 
+import java.util.Iterator;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import br.puc.rio.inf.paa.fractionalKnapsack.linear.FractionalKnapsackN;
 import br.puc.rio.inf.paa.fractionalKnapsack.n2.FractionalKnapsackN2;
@@ -103,7 +105,7 @@ public class MainTest {
 
 		// FractionalKnapsackN knapsackN = new FractionalKnapsackN();
 		Teste knapsackN = new Teste();
-
+		//FractionalKnapsackNlogN knapsackNlogN = new FractionalKnapsackNlogN();
 		//Item item = knapsackN.medianOfMedians(items, (items.length - 1) / 2, 0, items.length - 1);
 		
 	  //KnapsackUtil.mergeSort(items, 1, 5 -1);
@@ -112,9 +114,24 @@ public class MainTest {
 		// System.out.println("median of medians:" + item.toString());
 
 		 Map<Item, Double> map = knapsackN.knapsack(knapsack);
-		 map.entrySet().forEach(entry -> {
-		 System.out.println(entry.getKey().id + " " + entry.getValue());
-		 });
+		 
+		double soma = 0;
+		
+	    for (Entry<Item, Double> entry: map.entrySet()) {
+	    	System.out.println(entry.getKey().id + " " + entry.getValue());
+	    	soma = soma + entry.getValue();
+			
+		}
+		System.out.println("SOMA: " + soma);
+//		map.entrySet()
+//		 map.entrySet().forEach(entry -> {
+//		 System.out.println(entry.getKey().id + " " + entry.getValue());
+//		 
+//		   soma = soma +  entry.getValue();
+//		 });
+		 
+		 
+		 
 		
 
 	}

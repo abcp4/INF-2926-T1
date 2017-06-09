@@ -25,7 +25,7 @@ public class FractionalKnapsackNlogN {
 
 			if (knapsack.items[j].weight + current_weight <= knapsack.capacity) {
 
-				itemsAdd.put(knapsack.items[j], 1.0);
+				itemsAdd.put(knapsack.items[j],knapsack.items[j].weight );
 
 				current_weight = current_weight + knapsack.items[j].weight;
 
