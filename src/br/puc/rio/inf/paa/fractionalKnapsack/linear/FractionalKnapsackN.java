@@ -1,34 +1,46 @@
-package br.puc.rio.inf.paa.fractionalKnapsack;
+package br.puc.rio.inf.paa.fractionalKnapsack.linear;
 
+import java.util.ArrayList;
 import java.util.HashMap;
-
+import java.util.List;
 import java.util.Map;
 
+import br.puc.rio.inf.paa.fractionalKnapsack.FractionalKnapsack;
+import br.puc.rio.inf.paa.fractionalKnapsack.Item;
+import br.puc.rio.inf.paa.fractionalKnapsack.ItemRepository;
 import br.puc.rio.inf.paa.utils.KnapsackUtil;
 
 public class FractionalKnapsackN {
+	
 
-	private Map<Item, Double> itemsAdd;
-
-	public FractionalKnapsackN() {
-		itemsAdd = new HashMap<Item, Double>();
+	List<Item> selectedItems; 
+	
+	public FractionalKnapsack knapsack(ItemRepository repository, FractionalKnapsack knapsack) {
+	
+		selectedItems = new ArrayList<>();
+		knapsack.selectedItems = knapsackRecursive(repository.items, 0, repository.items.length - 1, knapsack.capacity);
+		return knapsack;
+	
 	}
 
-	public Map<Item, Double> knapsack(FractionalKnapsackInstance knapsack) {
-		return knapsackRecursive(knapsack.items, 0, knapsack.items.length - 1, knapsack.capacity);
-	}
-
-	public Map<Item, Double> knapsackRecursive(Item[] items, int start, int end, double capacity) {
+	public List<Item> knapsackRecursive(Item[] items, int start, int end, double currentCapacity) {
 
 		if (start == end) {
-			if (items[start].weight > capacity) {
-				itemsAdd.put(items[start], capacity / items[start].weight);
-
+			if (items[start].weight > currentCapacity) {
+				//itemsAdd.put(items[start], capacity / items[start].weight);
+				items[start].selectedWeight = currentCapacity/items[start].weight;
+				selectedItems.add(items[start]);
+				
+				currentCapacity = currentCapacity - items[start].selectedWeight;
 			} else {
-				itemsAdd.put(items[start], items[start].weight);
+				//itemsAdd.put(items[start], items[start].weight);
+				items[start].selectedWeight = items[start].weight;
+				selectedItems.add(items[start]);
+				
+				currentCapacity = currentCapacity - items[start].selectedWeight;
 			}
 
-			return itemsAdd;
+			return selectedItems;
 
 		} else {
 			// calcula-se media do valor/peso e particiona-se ao redor desse
@@ -46,32 +58,42 @@ public class FractionalKnapsackN {
 			for (int i = start; i < post_p; i++) {
 				sumWeight = sumWeight + items[i].weight;
 			}
-			if (sumWeight > capacity) {
+			if (sumWeight > currentCapacity) {
 
-				knapsackRecursive(items, start, post_p -1, capacity);
+				knapsackRecursive(items, start, post_p -1, currentCapacity);
 
 				// se cabe tudo, poe metade mais valiosa na mochila e repete-se
 				// algoritmo na
 				// metade menos valiosa
 			} else {
 				for (int i = start; i < post_p; i++) {
-					itemsAdd.put(items[i], items[i].weight);
+					//itemsAdd.put(items[i], items[i].weight);
+					items[i].selectedWeight = items[i].weight;
+					selectedItems.add(items[i]);
 				}
 
-				capacity = capacity - sumWeight;
+				currentCapacity = currentCapacity - sumWeight;
 
-				if (items[post_p].weight <= capacity) {
-					itemsAdd.put(items[post_p], items[post_p].weight);
+				if (items[post_p].weight <= currentCapacity) {
+					//itemsAdd.put(items[post_p], items[post_p].weight);
+					items[post_p].selectedWeight = items[post_p].weight;
+					selectedItems.add(items[post_p]);
+					
+					currentCapacity = currentCapacity - items[post_p].selectedWeight;
 				} else {
 
-					itemsAdd.put(items[post_p], capacity / items[post_p].weight);
-					knapsackRecursive(items, post_p + 1, end, capacity);
+					//itemsAdd.put(items[post_p], capacity / items[post_p].weight);
+					items[post_p].selectedWeight = currentCapacity/items[post_p].weight;
+					selectedItems.add(items[post_p]);
+					
+					currentCapacity = currentCapacity - items[post_p].selectedWeight;
+					knapsackRecursive(items, post_p + 1, end, currentCapacity);
 				}
 
 			}
 		}
 
-		return itemsAdd;
+		return selectedItems;
 
 	}
 

@@ -7,7 +7,9 @@ import java.nio.charset.Charset;
 import java.util.List;
 import java.util.Map;
 
-import br.puc.rio.inf.paa.fractionalKnapsack.FractionalKnapsackInstance;
+import br.puc.rio.inf.paa.fractionalKnapsack.ItemRepository;
+import br.puc.rio.inf.paa.fractionalKnapsack.ProblemFractionalKnapsack;
+import br.puc.rio.inf.paa.fractionalKnapsack.FractionalKnapsack;
 import br.puc.rio.inf.paa.fractionalKnapsack.Item;
 import br.puc.rio.inf.paa.utils.CsvWriter;
 import br.puc.rio.inf.paa.utils.FractionalKnapsackReader;
@@ -23,7 +25,7 @@ public class MainFractionalKnapsackNlogN {
 
 		FractionalKnapsackReader knapsackReader = new FractionalKnapsackReader();
 
-		List<FractionalKnapsackInstance> fractionalKnapsacks = knapsackReader.createAllInstances();
+		List<ProblemFractionalKnapsack> problemKnapsackList = knapsackReader.createAllInstances();
 
 		int count = 0;
 		int numInstance = 0;
@@ -46,14 +48,15 @@ public class MainFractionalKnapsackNlogN {
 			e.printStackTrace();
 		}
 
-		for (int i = 0; i < fractionalKnapsacks.size(); i++) {
-			Map<Item, Double> map = null;
+		for (int i = 0; i < problemKnapsackList.size(); i++) {
+			
 			double temp_inicio = System.currentTimeMillis();
 
 			while (durationEnd <= timeout) {
 				FractionalKnapsackNlogN knapsackN = new FractionalKnapsackNlogN();
 				
-				map = knapsackN.knapsack(fractionalKnapsacks.get(i));
+				FractionalKnapsack knapsack = knapsackN.knapsack(problemKnapsackList.get(i).repository,
+																 problemKnapsackList.get(i).knaspack);
 				temp_final = System.currentTimeMillis();
 				durationEnd = temp_final - temp_inicio;
 				count++;
@@ -62,15 +65,15 @@ public class MainFractionalKnapsackNlogN {
 			numInstance++;
 			try {
 
-				ctTime = fractionalKnapsacks.get(i).items.length
-						* Utils.logBase2(fractionalKnapsacks.get(i).items.length);
+				ctTime = problemKnapsackList.get(i).repository.items.length
+						* Utils.logBase2(problemKnapsackList.get(i).repository.items.length);
 
 				cpuTime = (durationEnd / count);
 
 				//cpuTime = cpuTime / 100;
 				double logCPU = Utils.logBase2(cpuTime);
 
-				writer.write(String.valueOf(fractionalKnapsacks.get(i).items.length));
+				writer.write(String.valueOf(problemKnapsackList.get(i).repository.items.length));
 
 				writer.write(String.valueOf(ctTime));
 

@@ -7,9 +7,10 @@ import java.nio.charset.Charset;
 import java.util.List;
 import java.util.Map;
 
-import br.puc.rio.inf.paa.fractionalKnapsack.FractionalKnapsackInstance;
+import br.puc.rio.inf.paa.fractionalKnapsack.ItemRepository;
+import br.puc.rio.inf.paa.fractionalKnapsack.ProblemFractionalKnapsack;
+import br.puc.rio.inf.paa.fractionalKnapsack.FractionalKnapsack;
 import br.puc.rio.inf.paa.fractionalKnapsack.Item;
-import br.puc.rio.inf.paa.fractionalKnapsack.FractionalKnapsackN2;
 import br.puc.rio.inf.paa.utils.CsvWriter;
 import br.puc.rio.inf.paa.utils.FractionalKnapsackReader;
 import br.puc.rio.inf.paa.utils.Utils;
@@ -24,7 +25,7 @@ public class MainFractionalKnapsackN2 {
 
 		FractionalKnapsackReader knapsackReader = new FractionalKnapsackReader();
 
-		List<FractionalKnapsackInstance> fractionalKnapsacks = knapsackReader.createAllInstances();
+		List<ProblemFractionalKnapsack> fractionalKnapsacks = knapsackReader.createAllInstances();
 
 		int count = 0;
 		int numInstance = 0;
@@ -50,13 +51,14 @@ public class MainFractionalKnapsackN2 {
 		}
 
 		for (int i = 0; i < fractionalKnapsacks.size(); i++) {
-			Map<Item, Double> map = null;
+			
 			double temp_inicio = System.currentTimeMillis();
 
 			while (durationEnd <= timeout) {
 				FractionalKnapsackN2 knapsackN = new FractionalKnapsackN2();
 				
-				map = knapsackN.knapsack(fractionalKnapsacks.get(i));
+				FractionalKnapsack knapsack = knapsackN.knapsack(fractionalKnapsacks.get(i).repository,
+																 fractionalKnapsacks.get(i).knaspack);
 
 				temp_final = System.currentTimeMillis();
 					durationEnd = temp_final - temp_inicio;
@@ -66,14 +68,14 @@ public class MainFractionalKnapsackN2 {
 			numInstance++;
 			try {
 
-				ctTime = Math.pow(fractionalKnapsacks.get(i).items.length, 2);
+				ctTime = Math.pow(fractionalKnapsacks.get(i).repository.items.length, 2);
 
 				cpuTime = (durationEnd / count);
 
 
 				double logCPU = Utils.logBase2(cpuTime);
 
-				writer.write(String.valueOf(fractionalKnapsacks.get(i).items.length));
+				writer.write(String.valueOf(fractionalKnapsacks.get(i).repository.items.length));
 
 				writer.write(String.valueOf(ctTime));
 

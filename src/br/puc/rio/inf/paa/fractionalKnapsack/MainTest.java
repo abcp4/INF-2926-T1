@@ -3,6 +3,9 @@ package br.puc.rio.inf.paa.fractionalKnapsack;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import br.puc.rio.inf.paa.fractionalKnapsack.linear.FractionalKnapsackN;
+import br.puc.rio.inf.paa.fractionalKnapsack.n2.FractionalKnapsackN2;
+
 public class MainTest {
 
 	public static void main(String[] args) {
@@ -22,15 +25,17 @@ public class MainTest {
 		items[6].setWeight(60);
 		items[7].setWeight(22);
 
-		FractionalKnapsackInstance knapsack = new FractionalKnapsackInstance(15.0, items);		
-		FractionalKnapsackN2 knapsackN = new FractionalKnapsackN2();
-		Map<Item, Double> map = knapsackN.knapsack(knapsack);
+		ItemRepository repository = new ItemRepository(items);
+		FractionalKnapsack knapsack = new FractionalKnapsack(15.0);
+		
+		FractionalKnapsackN knapsackN = new FractionalKnapsackN();
+		knapsack = knapsackN.knapsack(repository, knapsack);
 		 
 		double soma = 0;
 		
-	    for (Entry<Item, Double> entry: map.entrySet()) {
-	    	System.out.println(entry.getKey().id + " " + entry.getValue());
-	    	soma = soma + entry.getValue();
+	    for (Item selectedItem : knapsack.selectedItems) {
+	    	System.out.println(selectedItem.id + " " + selectedItem.selectedWeight);
+	    	soma = soma + selectedItem.selectedWeight;
 			
 		}
 		System.out.println("SOMA: " + soma);

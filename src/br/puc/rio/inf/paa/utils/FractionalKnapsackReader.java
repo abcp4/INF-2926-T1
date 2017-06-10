@@ -8,28 +8,30 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
-import br.puc.rio.inf.paa.fractionalKnapsack.FractionalKnapsackInstance;
+import br.puc.rio.inf.paa.fractionalKnapsack.ItemRepository;
+import br.puc.rio.inf.paa.fractionalKnapsack.ProblemFractionalKnapsack;
+import br.puc.rio.inf.paa.fractionalKnapsack.FractionalKnapsack;
 import br.puc.rio.inf.paa.fractionalKnapsack.Item;
 
 public class FractionalKnapsackReader {
 
-	public List<FractionalKnapsackInstance> createAllInstances() {
+	public List<ProblemFractionalKnapsack> createAllInstances() {
 
 		List<String> fileNames = this.getAllFileNames();
 
-		List<FractionalKnapsackInstance> knapsackList = new ArrayList<FractionalKnapsackInstance>();
+		List<ProblemFractionalKnapsack> problemKnapsackList = new ArrayList<ProblemFractionalKnapsack>();
 
 		for (String fileName : fileNames) {
 
-			FractionalKnapsackInstance instance = createInstance(fileName);
+			ProblemFractionalKnapsack instance = createInstance(fileName);
 
-			knapsackList.add(instance);
+			problemKnapsackList.add(instance);
 		}
 
-		return knapsackList;
+		return problemKnapsackList;
 	}
 
-	public FractionalKnapsackInstance createInstance(String fileName) {
+	public ProblemFractionalKnapsack createInstance(String fileName) {
 		Item[] items = null;
 
 		Path path = Paths.get(fileName);
@@ -69,9 +71,11 @@ public class FractionalKnapsackReader {
 			e.printStackTrace();
 		}
 
-		FractionalKnapsackInstance instance = new FractionalKnapsackInstance(capacityKnapsack, items);
-
-		return instance;
+		ItemRepository repository = new ItemRepository(items);
+		FractionalKnapsack knapsack = new FractionalKnapsack(capacityKnapsack);
+		
+		ProblemFractionalKnapsack problemInstance = new ProblemFractionalKnapsack(repository, knapsack); 
+		return problemInstance;
 	}
 
 	public List<String> getAllFileNames() {

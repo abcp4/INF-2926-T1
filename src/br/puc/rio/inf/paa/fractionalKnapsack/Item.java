@@ -6,6 +6,7 @@ public class Item {
 	public double value;
 	public double weight;
 	public double ratio;
+	public double selectedWeight;
 
 	public Item(int id, double value, double weight) {
 		this.id = id;
