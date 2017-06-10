@@ -9,7 +9,7 @@ import java.util.Map;
 
 import br.puc.rio.inf.paa.fractionalKnapsack.FractionalKnapsackInstance;
 import br.puc.rio.inf.paa.fractionalKnapsack.Item;
-import br.puc.rio.inf.paa.fractionalKnapsack.Teste;
+import br.puc.rio.inf.paa.fractionalKnapsack.FractionalKnapsackN;
 import br.puc.rio.inf.paa.utils.CsvWriter;
 import br.puc.rio.inf.paa.utils.FractionalKnapsackReader;
 import br.puc.rio.inf.paa.utils.Utils;
@@ -55,7 +55,7 @@ public class MainFractionalKnapsackN {
 			double temp_inicio = System.currentTimeMillis();
 
 			while (durationEnd <= timeout) {
-				Teste knapsackN = new Teste();
+				FractionalKnapsackN knapsackN = new FractionalKnapsackN();
 				map = knapsackN.knapsack(fractionalKnapsacks.get(i));
 
 				temp_final = System.currentTimeMillis();
@@ -90,9 +90,6 @@ public class MainFractionalKnapsackN {
 			}
 
 			System.out.println("No Instance: " + numInstance);
-			// System.out.println(instance.name);
-			// System.out.println("N: " + instance.numVertex + " x " + "M: " +
-			// instance.numEdges);
 			System.out.println("Quantidade de vezes: " + count);
 			System.out.println("Tempo medio: " + (durationEnd / count));
 			System.out.println("CT: " + ctTime);

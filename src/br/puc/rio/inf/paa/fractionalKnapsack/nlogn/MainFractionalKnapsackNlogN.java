@@ -87,9 +87,6 @@ public class MainFractionalKnapsackNlogN {
 			}
 
 			System.out.println("No Instance: " + numInstance);
-			// System.out.println(instance.name);
-			// System.out.println("N: " + instance.numVertex + " x " + "M: " +
-			// instance.numEdges);
 			System.out.println("Quantidade de vezes: " + count);
 			System.out.println("Tempo medio: " + (durationEnd / count));
 			System.out.println("CT: " + ctTime);
@@ -101,15 +98,4 @@ public class MainFractionalKnapsackNlogN {
 		}
 		writer.close();
 	}
-	// System.out.println("#####################" + "INSTANCIA - " + i);
-	// System.out.println("##" + "CAPACIDADE - " +
-	// fractionalKnapsacks.get(i).capacity);
-
-	// map.entrySet().forEach( entry-> {
-	// System.out.println(entry.getKey().id + " " + entry.getValue());
-	// });
-	// break;
-	// }
-	//
-	// }
 }
