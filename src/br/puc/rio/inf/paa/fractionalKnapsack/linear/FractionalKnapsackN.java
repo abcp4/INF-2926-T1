@@ -101,15 +101,10 @@ public class FractionalKnapsackN {
 
 		int size = items.length;
 
-		Item[] subItems = new Item[size];
-		for (int i = start; i < items.length; i++) {
-			subItems[i] = items[i];
-		}
-
 		if (end - start <= 5) {
 			
-			KnapsackUtil.mergeSort(subItems, start, subItems.length - 1);
-			return subItems[k];
+			KnapsackUtil.mergeSort(items, start, end);
+			return items[k];
 		}
 
 		int groupsQuantity = 0;
@@ -126,19 +121,19 @@ public class FractionalKnapsackN {
 		int medianIndex = 0;
 		int i;
 
-		for (i = 0; i < subItems.length - rest; i = i + 5) {
+		for (i = 0; i < items.length - rest; i = i + 5) {
 
-			KnapsackUtil.mergeSort(subItems, i, i + 4);
+			KnapsackUtil.mergeSort(items, i, i + 4);
 
-			medians[medianIndex] = subItems[(i + 5) / 2];
+			medians[medianIndex] = items[(i + 5) / 2];
 			medianIndex++;
 		}
 
 		if (rest != 0) {
-			KnapsackUtil.mergeSort(subItems, i, subItems.length - 1);
+			KnapsackUtil.mergeSort(items, i, items.length - 1);
 
 			int indexMedianRestant = i + (rest / 2);
-			medians[medianIndex] = subItems[indexMedianRestant];
+			medians[medianIndex] = items[indexMedianRestant];
 		}
 
 		return medianOfMedians(medians, (medians.length - 1) / 2, 0, medians.length - 1);
@@ -154,19 +149,19 @@ public class FractionalKnapsackN {
 		return -1;
 	}
 
-	public int partition(Item[] array, int left, int right, int pivotIndex) {
+	public int partition(Item[] items, int left, int right, int pivotIndex) {
 		
-		Item pivotValue = array[pivotIndex];
-		swap(array, pivotIndex, right); // move pivot to end
+		Item pivotValue = items[pivotIndex];
+		swap(items, pivotIndex, right); // move pivot to end
 		int storeIndex = left;
 		
-		for (int i = left; i < right; i++) {
-			if (array[i].ratio > pivotValue.ratio) {
-				swap(array, storeIndex, i);
+		for (int i = left + 1; i < right; i++) {
+			if (items[i].ratio > pivotValue.ratio) {
+				swap(items, storeIndex, i);
 				storeIndex++;
 			}
 		}
-		swap(array, right, storeIndex); // Move pivot to its final place
+		swap(items, right, storeIndex); // Move pivot to its final place
 		return storeIndex;
 	}
 
